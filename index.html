@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LevelUp.jp — ゲーム攻略・同人ゲームレビュー</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Noto+Sans+JP:wght@300;400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0a0c10;
+      --surface: #10141c;
+      --border:  #1e2535;
+      --gold:    #c9a84c;
+      --gold2:   #f0d080;
+      --blue:    #4a8fff;
+      --text:    #cdd6e8;
+      --muted:   #5a6580;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* scanline texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,.08) 2px,
+        rgba(0,0,0,.08) 4px
+      );
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* ── HEADER ── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(10,12,16,.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      animation: fadeDown .5s ease both;
+    }
+
+    .logo {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.3rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-decoration: none;
+      color: var(--gold);
+      text-shadow: 0 0 20px rgba(201,168,76,.4);
+    }
+    .logo span { color: var(--text); }
+
+    nav { display: flex; gap: 2rem; align-items: center; }
+    nav a {
+      font-size: .78rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 500;
+    }
+    nav a:hover { color: var(--gold); }
+    nav a.active { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      padding: 6rem 4rem 5rem;
+      overflow: hidden;
+      animation: fadeUp .7s .1s ease both;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 70% 50%, rgba(74,143,255,.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(201,168,76,.06) 0%, transparent 50%);
+    }
+
+    .hero-inner {
+      position: relative;
+      max-width: 700px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .75rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-title {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: .04em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title .hl { color: var(--gold); }
+
+    .hero-desc {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--muted);
+      max-width: 50ch;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      background: var(--gold);
+      color: #000;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .85rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: .75rem 2rem;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+      transition: background .2s, transform .15s;
+    }
+    .hero-cta:hover { background: var(--gold2); transform: translateY(-2px); }
+
+    /* decorative hex grid */
+    .hero-deco {
+      position: absolute;
+      right: -80px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: .06;
+      width: 500px;
+      height: 500px;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 3rem 4rem 1.5rem;
+    }
+    .section-head h2 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .72rem;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+    }
+    .section-head::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── CARDS GRID ── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      animation: fadeUp .8s .3s ease both;
+    }
+
+    .card {
+      background: var(--surface);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+      transition: background .2s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+    .card:hover { background: #141820; }
+
+    .card-cat {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .68rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--blue);
+      font-weight: 500;
+    }
+    .card-cat.doujin { color: var(--gold); }
+
+    .card-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-bottom: .4rem;
+    }
+
+    .card-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      line-height: 1.3;
+      color: #e8eef8;
+    }
+
+    .card-excerpt {
+      font-size: .82rem;
+      line-height: 1.8;
+      color: var(--muted);
+      flex: 1;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: .8rem;
+      border-top: 1px solid var(--border);
+    }
+    .card-date {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .68rem;
+      letter-spacing: .1em;
+      color: var(--muted);
+    }
+    .card-read {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .7rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ── RANKING STRIP ── */
+    .ranking {
+      padding: 3rem 4rem;
+      animation: fadeUp .8s .4s ease both;
+    }
+    .ranking-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .rank-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      transition: border-color .2s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+    .rank-item:hover { border-color: var(--gold); }
+    .rank-num {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--border);
+      line-height: 1;
+    }
+    .rank-item:nth-child(1) .rank-num { color: var(--gold); }
+    .rank-item:nth-child(2) .rank-num { color: #a0a0b0; }
+    .rank-item:nth-child(3) .rank-num { color: #8b6a3a; }
+    .rank-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .9rem;
+      font-weight: 700;
+      color: #d0d8e8;
+      line-height: 1.3;
+    }
+    .rank-tag {
+      font-size: .65rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-logo {
+      font-family: 'Orbitron', monospace;
+      font-size: .9rem;
+      font-weight: 900;
+      color: var(--gold);
+      opacity: .5;
+    }
+    .footer-copy {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .72rem;
+      letter-spacing: .1em;
+      color: var(--muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      header { padding: 1rem 1.5rem; }
+      .hero { padding: 4rem 1.5rem 3rem; }
+      .cards { grid-template-columns: 1fr; }
+      .ranking-grid { grid-template-columns: repeat(2, 1fr); }
+      .section-head, .ranking, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .hero-deco { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">LEVEL<span>UP</span>.jp</a>
+  <nav>
+    <a href="#" class="active">TOP</a>
+    <a href="#">有名ゲーム</a>
+    <a href="#">同人ゲームレビュー</a>
+    <a href="#">おすすめランキング</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <svg class="hero-deco" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="hex" x="0" y="0" width="60" height="52" patternUnits="userSpaceOnUse">
+        <polygon points="30,2 58,17 58,47 30,62 2,47 2,17" fill="none" stroke="#4a8fff" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="500" height="500" fill="url(#hex)"/>
+  </svg>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Game Guide &amp; Review</p>
+    <h1 class="hero-title">
+      勝ちたいなら、<br>
+      <span class="hl">情報から</span><br>
+      始めろ。
+    </h1>
+    <p class="hero-desc">
+      LoL・OW2などの有名タイトル攻略から、DLsite同人ゲームのレビューまで。次のレベルへ上がるための情報を届けます。
+    </p>
+    <a class="hero-cta" href="lol-beginner.html">▶ LoL初心者ガイドを読む</a>
+  </div>
+</section>
+
+<div class="section-head"><h2>最新記事</h2></div>
+
+<section class="cards">
+  <a class="card" href="lol-beginner.html">
+    <span class="card-cat">League of Legends</span>
+    <div class="card-thumb">
+      <svg width="100%" height="100%" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+        <rect width="320" height="180" fill="#0a0c10"/>
+        <polygon points="160,20 280,90 280,160 160,160 40,160 40,90" fill="none" stroke="#c9a84c" stroke-width="1" opacity=".3"/>
+        <circle cx="160" cy="90" r="50" fill="none" stroke="#4a8fff" stroke-width="1" opacity=".4"/>
+        <circle cx="160" cy="90" r="30" fill="none" stroke="#c9a84c" stroke-width=".8" opacity=".5"/>
+        <circle cx="160" cy="90" r="6" fill="#c9a84c" opacity=".8"/>
+        <line x1="40" y1="90" x2="280" y2="90" stroke="#1e2535" stroke-width="1"/>
+        <line x1="160" y1="20" x2="160" y2="160" stroke="#1e2535" stroke-width="1"/>
+      </svg>
+    </div>
+    <h2 class="card-title">LoL完全初心者ガイド｜最初に選ぶべきチャンピオン5選</h2>
+    <p class="card-excerpt">170体以上のチャンピオンから何を選べばいい？ロール別おすすめと、ゲームを最速で覚えるための考え方を解説します。</p>
+    <div class="card-meta">
+      <span class="card-date">2026.03.27</span>
+      <span class="card-read">Read →</span>
+    </div>
+  </a>
+
+  <a class="card" href="#">
+    <span class="card-cat">Overwatch 2</span>
+    <div class="card-thumb">
+      <svg width="100%" height="100%" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+        <rect width="320" height="180" fill="#0a0c10"/>
+        <circle cx="160" cy="90" r="60" fill="none" stroke="#4a8fff" stroke-width="1.5" opacity=".3"/>
+        <circle cx="160" cy="90" r="40" fill="#4a8fff" opacity=".06"/>
+        <line x1="100" y1="90" x2="220" y2="90" stroke="#4a8fff" stroke-width="1" opacity=".5"/>
+        <line x1="160" y1="30" x2="160" y2="150" stroke="#4a8fff" stroke-width="1" opacity=".5"/>
+        <circle cx="160" cy="90" r="8" fill="#4a8fff" opacity=".6"/>
+      </svg>
+    </div>
+    <h2 class="card-title">OW2初心者向けヒーロー選び｜ロール別おすすめ解説</h2>
+    <p class="card-excerpt">タンク・ダメージ・サポート、どこから始めればいい？OverWatch 2を始めたばかりの人に向けたヒーロー選びのコツ。</p>
+    <div class="card-meta">
+      <span class="card-date">2026.03.27</span>
+      <span class="card-read">Read →</span>
+    </div>
+  </a>
+
+  <a class="card" href="#">
+    <span class="card-cat doujin">同人ゲームレビュー</span>
+    <div class="card-thumb">
+      <svg width="100%" height="100%" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+        <rect width="320" height="180" fill="#0a0c10"/>
+        <rect x="60" y="40" width="200" height="110" rx="4" fill="#10141c" stroke="#c9a84c" stroke-width=".8" opacity=".4"/>
+        <rect x="75" y="55" width="80" height="6" rx="3" fill="#c9a84c" opacity=".5"/>
+        <rect x="75" y="68" width="140" height="3" rx="2" fill="#1e2535"/>
+        <rect x="75" y="76" width="120" height="3" rx="2" fill="#1e2535"/>
+        <rect x="75" y="84" width="130" height="3" rx="2" fill="#1e2535"/>
+        <rect x="75" y="110" width="50" height="22" rx="2" fill="#c9a84c" opacity=".7"/>
+      </svg>
+    </div>
+    <h2 class="card-title">DLsite同人ゲームレビュー｜今月の注目作まとめ</h2>
+    <p class="card-excerpt">今月DLsiteで話題になった同人ゲームをピックアップ。ジャンル・ボリューム・おすすめ度を正直にレビューします。</p>
+    <div class="card-meta">
+      <span class="card-date">2026.03.27</span>
+      <span class="card-read">Read →</span>
+    </div>
+  </a>
+</section>
+
+<section class="ranking">
+  <div class="section-head" style="padding:0 0 0 0;"><h2>おすすめランキング</h2></div>
+  <div class="ranking-grid">
+    <a class="rank-item" href="#">
+      <span class="rank-num">01</span>
+      <span class="rank-title">LoL初心者おすすめチャンピオン TOP5</span>
+      <span class="rank-tag">League of Legends</span>
+    </a>
+    <a class="rank-item" href="#">
+      <span class="rank-num">02</span>
+      <span class="rank-title">DLsite 同人ゲーム 今月の人気作 TOP10</span>
+      <span class="rank-tag">同人ゲーム</span>
+    </a>
+    <a class="rank-item" href="#">
+      <span class="rank-num">03</span>
+      <span class="rank-title">OW2 初心者向けヒーロー ランキング</span>
+      <span class="rank-tag">Overwatch 2</span>
+    </a>
+    <a class="rank-item" href="#">
+      <span class="rank-num">04</span>
+      <span class="rank-title">LoL ジャングル 初心者おすすめチャンピオン</span>
+      <span class="rank-tag">League of Legends</span>
+    </a>
+    <a class="rank-item" href="#">
+      <span class="rank-num">05</span>
+      <span class="rank-title">DLsite RPG系 同人ゲーム 傑作選</span>
+      <span class="rank-tag">同人ゲーム</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">LEVELUP.jp</span>
+  <span class="footer-copy">© 2026 LevelUp.jp — ゲーム攻略・同人ゲームレビュー</span>
+</footer>
+
+</body>
+</html>
