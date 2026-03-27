@@ -369,6 +369,25 @@
       transition: color .2s, border-color .2s;
     }
     .doujin-link-btn:hover { color: var(--gold); border-color: var(--gold); }
+    .term-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      display: block;
+      margin-top: .6rem;
+    }
+    .term-with-img {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .6rem;
+      align-items: start;
+    }
+    .term-img-wrap { grid-column: 1 / -1; }
+    @media (min-width: 600px) {
+      .term-img-wrap { grid-column: auto; }
+    }
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -389,7 +408,6 @@
   <a class="logo" href="index.html">MariGura <span>Hub</span></a>
   <nav>
     <a href="index.html">TOP</a>
-    <a href="#">有名ゲーム</a>
     <a href="#">おすすめランキング</a>
   </nav>
 </header>
@@ -455,7 +473,13 @@
           <tr><td>ガンク</td><td>ジャングラーや他レーンのプレイヤーが奇襲すること。成功するとキルや有利を取りやすい。</td></tr>
           <tr><td>ローム</td><td>レーンを離れて他レーンを支援すること。主にMIDやサポートが行う。</td></tr>
           <tr><td>スプリットプッシュ</td><td>チームとは別のレーンを1人で攻め続けること。相手の戦力を分散させる戦術。</td></tr>
-          <tr><td>ワード</td><td>視界を確保するアイテム。置くことで敵の動きを把握しガンクを警戒できる。</td></tr>
+          <tr><td>
+            <span style="display:inline-flex;align-items:center;gap:.4rem;">
+              ワード
+              <span style="font-size:.6rem;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.1em;background:var(--blue);color:#fff;padding:.1rem .5rem;border-radius:3px;">視界確保</span>
+            </span><br>
+            <img src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/ward.png" alt="ワード" style="width:120px;height:80px;object-fit:cover;border:1px solid var(--border);border-radius:4px;margin-top:.4rem;display:block;">
+          </td><td>視界を確保するアイテム。置くことで敵の動きを把握しガンクを警戒できる。</td></tr>
           <tr><td>オブジェクト</td><td>ドラゴン・バロン・タワーなどゲームを有利に進めるための重要な目標のこと。</td></tr>
           <tr><td>スノーボール</td><td>序盤のキルや有利をそのまま試合終盤まで広げていくこと。有利を転がすイメージ。</td></tr>
         </tbody>
@@ -466,17 +490,41 @@
 
     <div class="info-box">
       <p class="info-box-title">15〜18：マップ上の重要オブジェクト</p>
-      <table class="info-table">
-        <thead>
-          <tr><th>用語</th><th>意味</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>バロン（Baron）</td><td>マップ最強の中立モンスター。倒すとチーム全体が強化されミニオンも強くなる。試合終盤の最重要オブジェクト。</td></tr>
-          <tr><td>ドラゴン（Dragon）</td><td>序盤から取り続けることでスタックが貯まり、強力なバフを得られるオブジェクト。4スタックで「魂」を取得。</td></tr>
-          <tr><td>ヴォイドクラブ</td><td>バロンと並ぶマップの強力な中立モンスター。倒すとジャングルとレーンに強力なミニオンを召喚できる。</td></tr>
-          <tr><td>インヒビター</td><td>各レーンのタワーの奥にある建物。破壊するとそのレーンに強化ミニオンが出現し、勝利に大きく近づく。</td></tr>
-        </tbody>
-      </table>
+      <div style="display:grid; grid-template-columns: repeat(2,1fr); gap:1rem; margin-top:.8rem;">
+
+        <div style="background:var(--bg); border:1px solid var(--border); border-radius:6px; overflow:hidden;">
+          <img src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/baron.png" alt="バロン" style="width:100%;height:160px;object-fit:cover;display:block;">
+          <div style="padding:.8rem;">
+            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:.4rem;">バロン</p>
+            <p style="font-size:.82rem;line-height:1.7;color:var(--muted);">マップ最強の中立モンスター。倒すとチーム全体が強化されミニオンも強くなる。試合終盤の最重要オブジェクト。</p>
+          </div>
+        </div>
+
+        <div style="background:var(--bg); border:1px solid var(--border); border-radius:6px; overflow:hidden;">
+          <img src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/dragon.png" alt="ドラゴン" style="width:100%;height:160px;object-fit:cover;display:block;">
+          <div style="padding:.8rem;">
+            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:.4rem;">ドラゴン</p>
+            <p style="font-size:.82rem;line-height:1.7;color:var(--muted);">序盤から取り続けることでスタックが貯まり、強力なバフを得られるオブジェクト。4スタックで「魂」を取得。</p>
+          </div>
+        </div>
+
+        <div style="background:var(--bg); border:1px solid var(--border); border-radius:6px; overflow:hidden;">
+          <img src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/voidgrub.png" alt="ヴォイドグラブ" style="width:100%;height:160px;object-fit:cover;display:block;">
+          <div style="padding:.8rem;">
+            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:.4rem;">ヴォイドグラブ</p>
+            <p style="font-size:.82rem;line-height:1.7;color:var(--muted);">バロンと並ぶマップの強力な中立モンスター。倒すとジャングルとレーンに強力なミニオンを召喚できる。</p>
+          </div>
+        </div>
+
+        <div style="background:var(--bg); border:1px solid var(--border); border-radius:6px; overflow:hidden;">
+          <img src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/riftherald.png" alt="リフトヘラルド" style="width:100%;height:160px;object-fit:cover;display:block;">
+          <div style="padding:.8rem;">
+            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:.4rem;">リフトヘラルド</p>
+            <p style="font-size:.82rem;line-height:1.7;color:var(--muted);">ジャングルに出現する大型モンスター。倒すと召喚アイテムを入手でき、タワーを破壊するのに役立てられる。</p>
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <h2>戦闘・ステータス用語</h2>
@@ -510,7 +558,7 @@
         <li>CS・ファーム・ガンクは試合の基本。まずこの3つを覚えよう</li>
         <li>ワードを置く習慣をつけると視野が広がりガンク被害が減る</li>
         <li>CC・AD/APを理解するとチャンピオン選びとビルドの意味がわかるようになる</li>
-        <li>バロン・ドラゴン・インヒビターはゲームの勝敗を決める重要オブジェクト</li>
+        <li>バロン・ドラゴン・リフトヘラルドはゲームの勝敗を決める重要オブジェクト</li>
         <li>全部一度に覚えなくてOK。プレイしながら少しずつ身につけよう</li>
       </ul>
     </div>
