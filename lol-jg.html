@@ -16,7 +16,7 @@
       --gold2:   #f0d080;
       --blue:    #4a8fff;
       --text:    #cdd6e8;
-      --muted:   #5a6580;
+      --muted:   #8a9ab8;
     }
     html { font-size: 16px; scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--text); font-family: 'Noto Sans JP', sans-serif; font-weight: 300; min-height: 100vh; overflow-x: hidden; }
@@ -33,13 +33,13 @@
     .article-date, .article-updated { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .1em; color: var(--muted); }
     h1.article-title { font-family: 'Rajdhani', sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; line-height: 1.2; letter-spacing: .04em; color: #e8eef8; margin-bottom: 1rem; }
     h1.article-title .hl { color: var(--gold); }
-    .article-lead { font-size: 1rem; line-height: 2; color: var(--muted); border-left: 3px solid var(--gold); padding-left: 1.2rem; margin: 2rem 0; }
+    .article-lead { font-size: 1rem; line-height: 2; color: #b8c8dc; border-left: 3px solid var(--gold); padding-left: 1.2rem; margin: 2rem 0; }
     .learn-box { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--gold); padding: 1.4rem 1.8rem; margin: 2rem 0; }
     .learn-box-title { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: .8rem; font-weight: 700; }
     .learn-box ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
     .learn-box li { font-size: .88rem; color: var(--text); line-height: 1.7; padding-left: 1.2rem; position: relative; }
     .learn-box li::before { content: '▸'; position: absolute; left: 0; color: var(--gold); font-size: .7rem; top: .2rem; }
-    .article-body { font-size: .95rem; line-height: 2.1; color: #9aa5be; }
+    .article-body { font-size: .95rem; line-height: 2.1; color: #c0cce0; }
     .article-body p { margin-bottom: 1.6rem; }
     .article-body h2 { font-family: 'Rajdhani', sans-serif; font-size: 1.2rem; font-weight: 700; letter-spacing: .08em; color: #e8eef8; margin: 3rem 0 1rem; padding-bottom: .6rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: .8rem; }
     .article-body h2::before { content: ''; display: block; width: 4px; height: 1.2em; background: var(--gold); flex-shrink: 0; }
@@ -48,13 +48,25 @@
     .champ-card:hover { border-color: var(--gold); }
     .champ-num { font-family: 'Orbitron', monospace; font-size: 1.6rem; font-weight: 900; color: var(--border); line-height: 1; padding-top: .2rem; }
     .champ-card:nth-child(1) .champ-num { color: var(--gold); }
+    .champ-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; object-position: top; border: 1px solid var(--border); margin-bottom: .6rem; display: block; }
     .champ-name { font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 700; letter-spacing: .06em; color: #e8eef8; margin-bottom: .3rem; }
     .champ-role { font-family: 'Rajdhani', sans-serif; font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--blue); margin-bottom: .6rem; }
-    .champ-desc { font-size: .85rem; line-height: 1.8; color: var(--muted); }
+    .champ-desc { font-size: .85rem; line-height: 1.8; color: #b8c8dc; }
     .champ-tags { display: flex; gap: .5rem; margin-top: .6rem; flex-wrap: wrap; }
     .tag { font-family: 'Rajdhani', sans-serif; font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border); padding: .1rem .5rem; }
-    .tbd-notice { background: rgba(201,168,76,.06); border: 1px dashed var(--gold); padding: 1.4rem 1.6rem; display: flex; align-items: center; gap: 1rem; color: var(--gold); font-family: 'Rajdhani', sans-serif; font-size: .85rem; letter-spacing: .08em; }
-    .tbd-icon { font-size: 1.4rem; flex-shrink: 0; opacity: .6; }
+    .champ-counter { margin-top: .8rem; padding-top: .8rem; border-top: 1px solid var(--border); }
+    .champ-counter-label { font-family: 'Rajdhani', sans-serif; font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: #e05555; margin-bottom: .4rem; font-weight: 700; }
+    .champ-counter-list { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .counter-tag { font-family: 'Rajdhani', sans-serif; font-size: .68rem; letter-spacing: .1em; color: #e05555; border: 1px solid rgba(224,85,85,.4); padding: .15rem .6rem; background: rgba(224,85,85,.06); }
+    .champ-build { margin-top: .8rem; padding-top: .8rem; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: .6rem; }
+    .champ-build-row { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+    .champ-build-label { font-family: 'Rajdhani', sans-serif; font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); font-weight: 700; white-space: nowrap; min-width: 110px; }
+    .champ-build-value { font-family: 'Rajdhani', sans-serif; font-size: .78rem; color: var(--text); letter-spacing: .04em; }
+    .item-icons-wrap { display: flex; flex-direction: column; gap: .3rem; }
+    .item-icons { display: flex; align-items: center; gap: .4rem; flex-wrap: wrap; margin-bottom: .2rem; }
+    .item-icon { width: 28px; height: 28px; border: 1px solid var(--border); border-radius: 3px; object-fit: cover; }
+    .item-arrow { font-size: .7rem; color: var(--muted); }
+    .disclaimer-note { font-family: 'Rajdhani', sans-serif; font-size: .62rem; letter-spacing: .1em; color: var(--muted); margin-top: .8rem; padding-top: .8rem; border-top: 1px solid var(--border); }
     .info-box { background: var(--surface); border: 1px solid var(--border); padding: 1.4rem 1.8rem; margin: 1.5rem 0; }
     .info-box-title { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; font-weight: 700; }
     .info-table { width: 100%; border-collapse: collapse; font-size: .85rem; }
@@ -66,7 +78,7 @@
     .summary-box ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
     .summary-box li { font-size: .88rem; color: var(--text); line-height: 1.8; padding-left: 1.4rem; position: relative; }
     .summary-box li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-size: .8rem; }
-    .article-closing { margin-top: 3rem; padding: 1.5rem; border: 1px solid var(--border); border-left: 3px solid var(--blue); font-size: .95rem; line-height: 2; color: var(--muted); font-style: italic; }
+    .article-closing { margin-top: 3rem; padding: 1.5rem; border: 1px solid var(--border); border-left: 3px solid var(--blue); font-size: .95rem; line-height: 2; color: #b8c8dc; font-style: italic; }
     .share-section { margin: 3rem 0 1rem; padding-top: 2rem; border-top: 1px solid var(--border); }
     .share-label { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; font-weight: 500; }
     .share-buttons { display: flex; gap: .8rem; flex-wrap: wrap; }
@@ -75,39 +87,10 @@
     .share-btn.x    { background: #000; border: 1px solid #333; }
     .share-btn.line { background: #06c755; }
     .share-btn.copy { background: var(--gold); color: #000; }
-    .references { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
-    .references-title { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; font-weight: 500; }
-    .references ol { padding-left: 1.2rem; }
-    .references li { font-size: .8rem; line-height: 2; color: var(--muted); margin-bottom: .3rem; }
-    .references a { color: var(--gold); text-decoration: underline; text-underline-offset: 2px; }
     footer { border-top: 1px solid var(--border); padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; }
     .footer-logo { font-family: 'Orbitron', monospace; font-size: .9rem; font-weight: 900; color: var(--gold); opacity: .5; }
     .footer-copy { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .1em; color: var(--muted); }
-
-    /* DOUJIN LINK */
-    .doujin-link { margin-bottom: 2rem; text-align: center; }
-    .doujin-link-btn {
-      display: inline-block;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: .78rem;
-      letter-spacing: .12em;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      padding: .5rem 1.4rem;
-      text-decoration: none;
-      transition: color .2s, border-color .2s;
-    }
-    .doujin-link-btn:hover { color: var(--gold); border-color: var(--gold); }
-
-    .riot-notice {
-      font-size: .65rem;
-      line-height: 1.7;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-      padding: 1.2rem 4rem;
-      text-align: center;
-      opacity: .7;
-    }
+    .riot-notice { font-size: .65rem; line-height: 1.7; color: var(--muted); border-top: 1px solid var(--border); padding: 1.2rem 4rem; text-align: center; opacity: .7; }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 700px) {
       header { padding: 1rem 1.5rem; }
@@ -169,99 +152,231 @@
       <table class="info-table">
         <thead><tr><th>ポイント</th><th>内容</th></tr></thead>
         <tbody>
-          <tr><td>① 序盤は決めたルートを回る</td><td>ブルー→グロンプ→ウルフ→ラプター→レッドの順など、まず固定ルートを覚えることが大切</td></tr>
+          <tr><td>① 序盤は決めたルートを回る</td><td>青バフ→グロンプ→ウルフ→ラプター→赤バフの順など、まず固定ルートを覚えることが大切</td></tr>
           <tr><td>② レーンの状況を見てガンク</td><td>相手が前に出ている、味方がCCを持っているときがガンクチャンス</td></tr>
-          <tr><td>③ ドラゴン・バロンを最優先</td><td>キルよりもオブジェクト（竜・バロン）を確保することがチームの勝利につながる</td></tr>
+          <tr><td>③ オブジェクト前に視界を確保</td><td>ドラゴンやバロンの出現前にコントロールワードを置いて視界を取り、スティールや奇襲を防ごう</td></tr>
         </tbody>
       </table>
     </div>
 
     <h2>初心者におすすめのチャンピオン TOP5</h2>
 
-    <div class="tbd-notice">
-      <span class="tbd-icon">⚙</span>
-      <span>このセクションのチャンピオンは後で指定されます。チャンピオン名・ロール・説明・タグを教えてください。</span>
-    </div>
-
     <div class="champ-list">
 
+      <!-- ボリベア -->
       <div class="champ-card">
         <span class="champ-num">01</span>
         <div>
-          <p class="champ-role">JUNGLE / ※ロール未設定</p>
-          <p class="champ-name">チャンピオン 1（未設定）</p>
-          <p class="champ-desc">このチャンピオンの説明はまだ入力されていません。後ほど指定してください。</p>
+          <img class="champ-img" src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/Volibear_0.jpg" alt="ボリベア">
+          <p class="champ-role">JUNGLE / タンク・ファイター</p>
+          <p class="champ-name">ボリベア</p>
+          <p class="champ-desc">高い耐久力とスタン付きQで初心者でもガンクが決めやすいタンク型ジャングラー。Rでタワーを一時停止できるためタワーダイブも強力。森のクリアが安定しており、序盤から中盤にかけて圧力をかけ続けられる。</p>
           <div class="champ-tags">
-            <span class="tag">TBD</span>
+            <span class="tag">初心者★★★</span><span class="tag">タンク</span><span class="tag">スタンあり</span><span class="tag">タワーダイブ強</span>
+          </div>
+          <div class="disclaimer-note">※ BAN推奨・サモナースペル・ビルドはいずれも一例です。環境やパッチにより最適解は異なります。</div>
+          <div class="champ-counter">
+            <p class="champ-counter-label">⚠ BAN推奨チャンピオン</p>
+            <div class="champ-counter-list">
+              <span class="counter-tag">マスター・イー</span>
+              <span class="counter-tag">グレイブス</span>
+            </div>
+          </div>
+          <div class="champ-build">
+            <div class="champ-build-row"><span class="champ-build-label">サモナースペル</span><span class="champ-build-value">スマイト ＋ フラッシュ</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">キーストーン</span><span class="champ-build-value">リーサルテンポ</span></div>
+            <div class="champ-build-row">
+              <span class="champ-build-label">ビルド</span>
+              <div class="item-icons-wrap">
+                <div class="item-icons">
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/222510.png" alt="黄昏と暁" title="黄昏と暁">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/3111.png" alt="マーキュリーブーツ" title="マーキュリーブーツ">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/6675.png" alt="ナヴォリフリッカーブレード" title="ナヴォリフリッカーブレード">
+                </div>
+                <span class="champ-build-value">黄昏と暁 → マーキュリーブーツ → ナヴォリフリッカーブレード</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- ノクターン -->
       <div class="champ-card">
         <span class="champ-num">02</span>
         <div>
-          <p class="champ-role">JUNGLE / ※ロール未設定</p>
-          <p class="champ-name">チャンピオン 2（未設定）</p>
-          <p class="champ-desc">このチャンピオンの説明はまだ入力されていません。後ほど指定してください。</p>
+          <img class="champ-img" src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/Nocturne_0.jpg" alt="ノクターン">
+          <p class="champ-role">JUNGLE / アサシン・ファイター</p>
+          <p class="champ-name">ノクターン</p>
+          <p class="champ-desc">Rで全マップの視界を暗転させながら遠距離から敵に飛びかかる、わかりやすいアサシン型ジャングラー。スキルシールドを持ちCC耐性もあり、操作が比較的シンプルで初心者でもウルトを軸にしたガンクが決めやすい。</p>
           <div class="champ-tags">
-            <span class="tag">TBD</span>
+            <span class="tag">初心者★★★</span><span class="tag">アサシン</span><span class="tag">広域R</span><span class="tag">スキルシールド</span>
+          </div>
+          <div class="disclaimer-note">※ BAN推奨・サモナースペル・ビルドはいずれも一例です。環境やパッチにより最適解は異なります。</div>
+          <div class="champ-counter">
+            <p class="champ-counter-label">⚠ BAN推奨チャンピオン</p>
+            <div class="champ-counter-list">
+              <span class="counter-tag">ヴァイ</span>
+              <span class="counter-tag">ヘカリム</span>
+            </div>
+          </div>
+          <div class="champ-build">
+            <div class="champ-build-row"><span class="champ-build-label">サモナースペル</span><span class="champ-build-value">スマイト ＋ フラッシュ</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">キーストーン</span><span class="champ-build-value">征服者</span></div>
+            <div class="champ-build-row">
+              <span class="champ-build-label">ビルド</span>
+              <div class="item-icons-wrap">
+                <div class="item-icons">
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/3073.png" alt="実験的ヘクスプレート" title="実験的ヘクスプレート">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/3047.png" alt="プレートスチールキャップ" title="プレートスチールキャップ">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/6631.png" alt="ストライドブレーカー" title="ストライドブレーカー">
+                </div>
+                <span class="champ-build-value">実験的ヘクスプレート → プレートスチールキャップ → ストライドブレーカー</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- アムム -->
       <div class="champ-card">
         <span class="champ-num">03</span>
         <div>
-          <p class="champ-role">JUNGLE / ※ロール未設定</p>
-          <p class="champ-name">チャンピオン 3（未設定）</p>
-          <p class="champ-desc">このチャンピオンの説明はまだ入力されていません。後ほど指定してください。</p>
+          <img class="champ-img" src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/Amumu_0.jpg" alt="アムム">
+          <p class="champ-role">JUNGLE / タンク・メイジ</p>
+          <p class="champ-name">アムム</p>
+          <p class="champ-desc">Qのスキルショットが当たれば簡単にガンクが成立するシンプルなタンク型。Rの全体拘束は集団戦を一変させる強力なウルトで、チームへの貢献度が非常に高い。序盤のクリアも安定しており、初心者ジャングラー入門として最適な1体。</p>
           <div class="champ-tags">
-            <span class="tag">TBD</span>
+            <span class="tag">初心者★★★</span><span class="tag">タンク</span><span class="tag">全体CC</span><span class="tag">集団戦向き</span>
+          </div>
+          <div class="disclaimer-note">※ BAN推奨・サモナースペル・ビルドはいずれも一例です。環境やパッチにより最適解は異なります。</div>
+          <div class="champ-counter">
+            <p class="champ-counter-label">⚠ BAN推奨チャンピオン</p>
+            <div class="champ-counter-list">
+              <span class="counter-tag">ヴィエゴ</span>
+              <span class="counter-tag">リー・シン</span>
+            </div>
+          </div>
+          <div class="champ-build">
+            <div class="champ-build-row"><span class="champ-build-label">サモナースペル</span><span class="champ-build-value">スマイト ＋ フラッシュ</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">キーストーン</span><span class="champ-build-value">征服者</span></div>
+            <div class="champ-build-row">
+              <span class="champ-build-label">ビルド</span>
+              <div class="item-icons-wrap">
+                <div class="item-icons">
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/6653.png" alt="ライアンドリーの仮面" title="ライアンドリーの仮面">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/3047.png" alt="プレートスチールキャップ" title="プレートスチールキャップ">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/3068.png" alt="サンファイアイージス" title="サンファイアイージス">
+                </div>
+                <span class="champ-build-value">ライアンドリーの仮面 → プレートスチールキャップ → サンファイアイージス</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- ブライアー -->
       <div class="champ-card">
         <span class="champ-num">04</span>
         <div>
-          <p class="champ-role">JUNGLE / ※ロール未設定</p>
-          <p class="champ-name">チャンピオン 4（未設定）</p>
-          <p class="champ-desc">このチャンピオンの説明はまだ入力されていません。後ほど指定してください。</p>
+          <img class="champ-img" src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/Briar_0.jpg" alt="ブライアー">
+          <p class="champ-role">JUNGLE / ファイター・アサシン</p>
+          <p class="champ-name">ブライアー</p>
+          <p class="champ-desc">Wで暴走状態になりながら高火力・高回復を発揮するユニークなジャングラー。Rで遠距離から敵に突撃するガンクが強力で、森のクリアも速い。暴走中は操作が特殊になるが、慣れると非常に強力。攻撃的なプレイが好きな人にオススメ。</p>
           <div class="champ-tags">
-            <span class="tag">TBD</span>
+            <span class="tag">初心者★★☆</span><span class="tag">ファイター</span><span class="tag">高回復</span><span class="tag">クリア速い</span>
+          </div>
+          <div class="disclaimer-note">※ BAN推奨・サモナースペル・ビルドはいずれも一例です。環境やパッチにより最適解は異なります。</div>
+          <div class="champ-counter">
+            <p class="champ-counter-label">⚠ BAN推奨チャンピオン</p>
+            <div class="champ-counter-list">
+              <span class="counter-tag">アムム</span>
+              <span class="counter-tag">ザック</span>
+            </div>
+          </div>
+          <div class="champ-build">
+            <div class="champ-build-row"><span class="champ-build-label">サモナースペル</span><span class="champ-build-value">スマイト ＋ フラッシュ</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">キーストーン</span><span class="champ-build-value">プレスアタック</span></div>
+            <div class="champ-build-row">
+              <span class="champ-build-label">ビルド</span>
+              <div class="item-icons-wrap">
+                <div class="item-icons">
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/3153.png" alt="ルインドキングブレード" title="ルインドキングブレード">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/3047.png" alt="プレートスチールキャップ" title="プレートスチールキャップ">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/3071.png" alt="ブラッククリーバー" title="ブラッククリーバー">
+                </div>
+                <span class="champ-build-value">ルインドキングブレード → プレートスチールキャップ → ブラッククリーバー</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- リリア -->
       <div class="champ-card">
         <span class="champ-num">05</span>
         <div>
-          <p class="champ-role">JUNGLE / ※ロール未設定</p>
-          <p class="champ-name">チャンピオン 5（未設定）</p>
-          <p class="champ-desc">このチャンピオンの説明はまだ入力されていません。後ほど指定してください。</p>
+          <img class="champ-img" src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/Lillia_0.jpg" alt="リリア">
+          <p class="champ-role">JUNGLE / メイジ・ファイター</p>
+          <p class="champ-name">リリア</p>
+          <p class="champ-desc">高い移動速度と範囲スキルでジャングルを素早く周回できるAP型ジャングラー。Rで複数の敵を眠らせる強力な集団戦ウルトを持ち、ドラゴンなどのオブジェクト確保にも貢献できる。スキルが全てスキルショットなため慣れが必要だが、刺さるととても強い。</p>
           <div class="champ-tags">
-            <span class="tag">TBD</span>
+            <span class="tag">初心者★★☆</span><span class="tag">AP型</span><span class="tag">高機動</span><span class="tag">眠り付与</span>
+          </div>
+          <div class="disclaimer-note">※ BAN推奨・サモナースペル・ビルドはいずれも一例です。環境やパッチにより最適解は異なります。</div>
+          <div class="champ-counter">
+            <p class="champ-counter-label">⚠ BAN推奨チャンピオン</p>
+            <div class="champ-counter-list">
+              <span class="counter-tag">ノクターン</span>
+              <span class="counter-tag">カ＝ジックス</span>
+            </div>
+          </div>
+          <div class="champ-build">
+            <div class="champ-build-row"><span class="champ-build-label">サモナースペル</span><span class="champ-build-value">スマイト ＋ フラッシュ</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">キーストーン</span><span class="champ-build-value">征服者</span></div>
+            <div class="champ-build-row">
+              <span class="champ-build-label">ビルド</span>
+              <div class="item-icons-wrap">
+                <div class="item-icons">
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/6653.png" alt="ライアンドリーの仮面" title="ライアンドリーの仮面">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/3020.png" alt="ソーサラーシューズ" title="ソーサラーシューズ">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/4633.png" alt="リフトメーカー" title="リフトメーカー">
+                </div>
+                <span class="champ-build-value">ライアンドリーの仮面 → ソーサラーシューズ → リフトメーカー</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
 
     <h2>最速で上達するための考え方</h2>
     <p>初心者がやりがちな失敗は「いろんなチャンピオンを試しすぎる」こと。最初は1〜2体に絞って、そのチャンピオンの動きが手に馴染むまで使い続けることが最も効率的な上達方法です。</p>
-    <p>また、負けたときは「なぜ負けたか」を1つだけ考えるクセをつけましょう。ポジションが悪かったのか、CSが取れていなかったのか、視野が足りなかったのか──1つ改善するだけでランクは上がっていきます。</p>
+    <p>また、負けたときは「なぜ負けたか」を1つだけ考えるクセをつけましょう。ガンクのタイミングが悪かったのか、ルーティンが崩れたのか、オブジェクトを見逃したのか──1つ改善するだけでランクは上がっていきます。</p>
 
     <div class="summary-box">
       <p class="summary-box-title">まとめ</p>
       <ul>
         <li>ジャングルは自己回復力が高くガンクしやすいチャンピオンを選ぼう</li>
-        <li>まず固定ルーティンを体で覚えることが最初の課題</li>
-        <li>ガンクはレーンの状況を見て、CCのある味方レーンに合わせる</li>
-        <li>キルよりもドラゴン・バロンなどのオブジェクト確保を優先する</li>
+        <li>初心者最推薦はアムム。シンプルなスキル構成と強力な集団戦ウルトで貢献しやすい</li>
+        <li>タンク志向ならボリベア、アサシン志向ならノクターンがおすすめ</li>
+        <li>ブライアーは高い回復力と火力が魅力。リリアは機動力とスリープが強力なAP型</li>
+        <li>まず固定ルーティンを体で覚え、オブジェクト確保を最優先にすることが勝利への近道</li>
       </ul>
     </div>
 
-    <p class="article-closing">ジャングルは最初は難しく感じますが、ルーティンを固定するだけで一気に安定します。まずは1体のジャングラーで全ルートをAI戦で練習してみてください。</p>
+    <p class="article-closing">ジャングルは最初は難しく感じますが、ルーティンを固定するだけで一気に安定します。まずは1体のジャングラーでジャングル周回をトレーニングモードで練習してみてください。</p>
 
-
-    <div class="doujin-link">
-      <a href="doujin.html" class="doujin-link-btn">【同人ゲームも紹介中】</a>
-    </div>
     <div class="share-section">
       <p class="share-label">この記事をシェアする</p>
       <div class="share-buttons">
@@ -272,6 +387,10 @@
     </div>
 </div>
 </article>
+
+  <div class="riot-notice">
+    MariGura Hubは、ライアットゲームズが公式承認するものではなく、ライアットゲームズ又はリーグ・オブ・レジェンドの製作・管理に正式に関与したいかなる者の見解・意見に基づくものではありません。リーグ・オブ・レジェンド及びライアットゲームズは、Riot Games, Inc.の商標又は登録商標です。リーグ・オブ・レジェンド © Riot Games, Inc.
+  </div>
 
 <footer>
   <span class="footer-logo">MariGura Hub</span>
