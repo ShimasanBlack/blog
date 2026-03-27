@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LoL サポート 初心者ガイド｜おすすめチャンピオン5選 — MariGura Hub</title>
+  <title>LoL SUPレーン 初心者ガイド｜おすすめチャンピオン5選 — MariGura Hub</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Noto+Sans+JP:wght@300;400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
   <style>
@@ -16,7 +16,7 @@
       --gold2:   #f0d080;
       --blue:    #4a8fff;
       --text:    #cdd6e8;
-      --muted:   #5a6580;
+      --muted:   #8a9ab8;
     }
     html { font-size: 16px; scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--text); font-family: 'Noto Sans JP', sans-serif; font-weight: 300; min-height: 100vh; overflow-x: hidden; }
@@ -33,13 +33,13 @@
     .article-date, .article-updated { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .1em; color: var(--muted); }
     h1.article-title { font-family: 'Rajdhani', sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; line-height: 1.2; letter-spacing: .04em; color: #e8eef8; margin-bottom: 1rem; }
     h1.article-title .hl { color: var(--gold); }
-    .article-lead { font-size: 1rem; line-height: 2; color: var(--muted); border-left: 3px solid var(--gold); padding-left: 1.2rem; margin: 2rem 0; }
+    .article-lead { font-size: 1rem; line-height: 2; color: #b8c8dc; border-left: 3px solid var(--gold); padding-left: 1.2rem; margin: 2rem 0; }
     .learn-box { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--gold); padding: 1.4rem 1.8rem; margin: 2rem 0; }
     .learn-box-title { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: .8rem; font-weight: 700; }
     .learn-box ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
     .learn-box li { font-size: .88rem; color: var(--text); line-height: 1.7; padding-left: 1.2rem; position: relative; }
     .learn-box li::before { content: '▸'; position: absolute; left: 0; color: var(--gold); font-size: .7rem; top: .2rem; }
-    .article-body { font-size: .95rem; line-height: 2.1; color: #9aa5be; }
+    .article-body { font-size: .95rem; line-height: 2.1; color: #c0cce0; }
     .article-body p { margin-bottom: 1.6rem; }
     .article-body h2 { font-family: 'Rajdhani', sans-serif; font-size: 1.2rem; font-weight: 700; letter-spacing: .08em; color: #e8eef8; margin: 3rem 0 1rem; padding-bottom: .6rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: .8rem; }
     .article-body h2::before { content: ''; display: block; width: 4px; height: 1.2em; background: var(--gold); flex-shrink: 0; }
@@ -48,13 +48,25 @@
     .champ-card:hover { border-color: var(--gold); }
     .champ-num { font-family: 'Orbitron', monospace; font-size: 1.6rem; font-weight: 900; color: var(--border); line-height: 1; padding-top: .2rem; }
     .champ-card:nth-child(1) .champ-num { color: var(--gold); }
+    .champ-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; object-position: top; border: 1px solid var(--border); margin-bottom: .6rem; display: block; }
     .champ-name { font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 700; letter-spacing: .06em; color: #e8eef8; margin-bottom: .3rem; }
     .champ-role { font-family: 'Rajdhani', sans-serif; font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--blue); margin-bottom: .6rem; }
-    .champ-desc { font-size: .85rem; line-height: 1.8; color: var(--muted); }
+    .champ-desc { font-size: .85rem; line-height: 1.8; color: #b8c8dc; }
     .champ-tags { display: flex; gap: .5rem; margin-top: .6rem; flex-wrap: wrap; }
     .tag { font-family: 'Rajdhani', sans-serif; font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border); padding: .1rem .5rem; }
-    .tbd-notice { background: rgba(201,168,76,.06); border: 1px dashed var(--gold); padding: 1.4rem 1.6rem; display: flex; align-items: center; gap: 1rem; color: var(--gold); font-family: 'Rajdhani', sans-serif; font-size: .85rem; letter-spacing: .08em; }
-    .tbd-icon { font-size: 1.4rem; flex-shrink: 0; opacity: .6; }
+    .champ-counter { margin-top: .8rem; padding-top: .8rem; border-top: 1px solid var(--border); }
+    .champ-counter-label { font-family: 'Rajdhani', sans-serif; font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: #e05555; margin-bottom: .4rem; font-weight: 700; }
+    .champ-counter-list { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .counter-tag { font-family: 'Rajdhani', sans-serif; font-size: .68rem; letter-spacing: .1em; color: #e05555; border: 1px solid rgba(224,85,85,.4); padding: .15rem .6rem; background: rgba(224,85,85,.06); }
+    .champ-build { margin-top: .8rem; padding-top: .8rem; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: .6rem; }
+    .champ-build-row { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+    .champ-build-label { font-family: 'Rajdhani', sans-serif; font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); font-weight: 700; white-space: nowrap; min-width: 110px; }
+    .champ-build-value { font-family: 'Rajdhani', sans-serif; font-size: .78rem; color: var(--text); letter-spacing: .04em; }
+    .item-icons-wrap { display: flex; flex-direction: column; gap: .3rem; }
+    .item-icons { display: flex; align-items: center; gap: .4rem; flex-wrap: wrap; margin-bottom: .2rem; }
+    .item-icon { width: 28px; height: 28px; border: 1px solid var(--border); border-radius: 3px; object-fit: cover; }
+    .item-arrow { font-size: .7rem; color: var(--muted); }
+    .disclaimer-note { font-family: 'Rajdhani', sans-serif; font-size: .62rem; letter-spacing: .1em; color: var(--muted); margin-top: .8rem; padding-top: .8rem; border-top: 1px solid var(--border); }
     .info-box { background: var(--surface); border: 1px solid var(--border); padding: 1.4rem 1.8rem; margin: 1.5rem 0; }
     .info-box-title { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; font-weight: 700; }
     .info-table { width: 100%; border-collapse: collapse; font-size: .85rem; }
@@ -66,7 +78,7 @@
     .summary-box ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
     .summary-box li { font-size: .88rem; color: var(--text); line-height: 1.8; padding-left: 1.4rem; position: relative; }
     .summary-box li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-size: .8rem; }
-    .article-closing { margin-top: 3rem; padding: 1.5rem; border: 1px solid var(--border); border-left: 3px solid var(--blue); font-size: .95rem; line-height: 2; color: var(--muted); font-style: italic; }
+    .article-closing { margin-top: 3rem; padding: 1.5rem; border: 1px solid var(--border); border-left: 3px solid var(--blue); font-size: .95rem; line-height: 2; color: #b8c8dc; font-style: italic; }
     .share-section { margin: 3rem 0 1rem; padding-top: 2rem; border-top: 1px solid var(--border); }
     .share-label { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; font-weight: 500; }
     .share-buttons { display: flex; gap: .8rem; flex-wrap: wrap; }
@@ -75,39 +87,10 @@
     .share-btn.x    { background: #000; border: 1px solid #333; }
     .share-btn.line { background: #06c755; }
     .share-btn.copy { background: var(--gold); color: #000; }
-    .references { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
-    .references-title { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; font-weight: 500; }
-    .references ol { padding-left: 1.2rem; }
-    .references li { font-size: .8rem; line-height: 2; color: var(--muted); margin-bottom: .3rem; }
-    .references a { color: var(--gold); text-decoration: underline; text-underline-offset: 2px; }
     footer { border-top: 1px solid var(--border); padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; }
     .footer-logo { font-family: 'Orbitron', monospace; font-size: .9rem; font-weight: 900; color: var(--gold); opacity: .5; }
     .footer-copy { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .1em; color: var(--muted); }
-
-    /* DOUJIN LINK */
-    .doujin-link { margin-bottom: 2rem; text-align: center; }
-    .doujin-link-btn {
-      display: inline-block;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: .78rem;
-      letter-spacing: .12em;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      padding: .5rem 1.4rem;
-      text-decoration: none;
-      transition: color .2s, border-color .2s;
-    }
-    .doujin-link-btn:hover { color: var(--gold); border-color: var(--gold); }
-
-    .riot-notice {
-      font-size: .65rem;
-      line-height: 1.7;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-      padding: 1.2rem 4rem;
-      text-align: center;
-      opacity: .7;
-    }
+    .riot-notice { font-size: .65rem; line-height: 1.7; color: var(--muted); border-top: 1px solid var(--border); padding: 1.2rem 4rem; text-align: center; opacity: .7; }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 700px) {
       header { padding: 1rem 1.5rem; }
@@ -142,136 +125,272 @@
   </div>
 
   <h1 class="article-title">
-    LoL <span class="hl">サポート</span> 初心者ガイド｜<br>
+    LoL <span class="hl">SUPレーン</span> 初心者ガイド｜<br>
     おすすめチャンピオン5選
   </h1>
 
-  <p class="article-lead">サポートはADCを守り、チーム全体を支える縁の下の力持ち。視野管理やエンゲージのタイミングなど、ゲームの「頭脳」を担うやりがいのあるポジションです。</p>
+  <p class="article-lead">サポートはADCをレーン戦で守り、チーム全体を勝利に導く縁の下の力持ち。自分がキルを取らなくても視野管理やエンゲージで試合を動かせる、玄人好みの奥深いロールです。</p>
 
   <div class="learn-box">
     <p class="learn-box-title">この記事でわかること</p>
     <ul>
-      <li>サポートの役割と視野管理の基本</li>
-      <li>初心者サポートチャンピオンを選ぶポイント</li>
-      <li>おすすめサポートチャンピオン5選（詳細解説付き）</li>
-      <li>ワード（視野）管理の基本と置き場所</li>
+      <li>SUPレーンの役割と基本的な動き方</li>
+      <li>初心者サポートに必要な3つのこと</li>
+      <li>おすすめSUPチャンピオン5選（詳細解説付き）</li>
+      <li>視野管理とエンゲージのタイミング</li>
     </ul>
   </div>
 
   <div class="article-body">
 
-    <h2>サポートの役割とは</h2>
-    <p>サポートは自分がダメージを出すより、味方を守って勝利に貢献するロール。視野管理とポジショニングが最重要スキルです。</p>
+    <h2>SUPレーンの役割とは</h2>
+    <p>サポートの主な役割はADCをレーン戦で補助し、ジャングラーと連携してオブジェクトを確保することです。ワードによる視野管理も非常に重要で、チーム全体の安全を守ります。自分が育たなくてもチームに貢献できる、初心者にも扱いやすいロールです。</p>
 
-    <h2>サポート初心者の基本戦略</h2>
+    <h2>SUP初心者の基本チェックリスト</h2>
     <div class="info-box">
-      <p class="info-box-title">サポート 初心者チェックリスト</p>
+      <p class="info-box-title">SUPレーン 初心者チェックリスト</p>
       <table class="info-table">
         <thead><tr><th>ポイント</th><th>内容</th></tr></thead>
         <tbody>
-          <tr><td>① ワードを切らさない</td><td>リコール後は必ずコントロールワードを買う。視野がゲームの勝敗を左右する</td></tr>
-          <tr><td>② ADCの近くにいる</td><td>序盤BOTレーンではADCから離れすぎず、常にカバーできるポジションを取る</td></tr>
-          <tr><td>③ スキルのタイミングを合わせる</td><td>エンゲージ（仕掛け）はADCのアイテムと体力が整ったタイミングを狙う</td></tr>
+          <tr><td>① ワードを常に置く</td><td>サポートアイテムに付属するワードを惜しまず使おう。川やジャングル入口への視界確保がチームを救う</td></tr>
+          <tr><td>② ADCの近くにいる</td><td>レーン戦中はADCのそばで守る意識を持とう。離れすぎると狙われやすくなる</td></tr>
+          <tr><td>③ ドラゴンの視界を取る</td><td>ドラゴン湧き前にコントロールワードを置いてジャングラーと連携しよう</td></tr>
         </tbody>
       </table>
     </div>
 
     <h2>初心者におすすめのチャンピオン TOP5</h2>
 
-    <div class="tbd-notice">
-      <span class="tbd-icon">⚙</span>
-      <span>このセクションのチャンピオンは後で指定されます。チャンピオン名・ロール・説明・タグを教えてください。</span>
-    </div>
-
     <div class="champ-list">
 
+      <!-- ノーチラス -->
       <div class="champ-card">
         <span class="champ-num">01</span>
         <div>
-          <p class="champ-role">SUPPORT / ※ロール未設定</p>
-          <p class="champ-name">チャンピオン 1（未設定）</p>
-          <p class="champ-desc">このチャンピオンの説明はまだ入力されていません。後ほど指定してください。</p>
+          <img class="champ-img" src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Nautilus_0.jpg" alt="ノーチラス">
+          <p class="champ-role">SUP / タンク</p>
+          <p class="champ-name">ノーチラス</p>
+          <p class="champ-desc">CCが非常に豊富なタンクサポート。Qのフックで敵を引き寄せ、パッシブのスネア、EのスロウそしてRの追尾ノックアップと、スキルを使うだけで次々とCCを連発できる。対象指定のRを使えばスキルショットが苦手な初心者でも確実にキャッチでき、どんなADCとも相性が良い万能な先出しサポート。</p>
           <div class="champ-tags">
-            <span class="tag">TBD</span>
+            <span class="tag">初心者★★★</span><span class="tag">タンク</span><span class="tag">豊富なCC</span><span class="tag">先出し可</span>
+          </div>
+          <div class="disclaimer-note">※ BAN推奨・サモナースペル・ビルドはいずれも一例です。環境やパッチにより最適解は異なります。</div>
+          <div class="champ-counter">
+            <p class="champ-counter-label">⚠ BAN推奨チャンピオン</p>
+            <div class="champ-counter-list">
+              <span class="counter-tag">レル</span>
+              <span class="counter-tag">アリスター</span>
+            </div>
+          </div>
+          <div class="champ-build">
+            <div class="champ-build-row"><span class="champ-build-label">サモナースペル</span><span class="champ-build-value">フラッシュ ＋ イグナイト</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">キーストーン</span><span class="champ-build-value">アフターショック</span></div>
+            <div class="champ-build-row">
+              <span class="champ-build-label">ビルド</span>
+              <div class="item-icons-wrap">
+                <div class="item-icons">
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/3869.png" alt="セレスティアルオポジション" title="セレスティアルオポジション">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/223047.png" alt="プレートスチールキャップ" title="プレートスチールキャップ">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/3190.png" alt="ソラリのロケッツ" title="ソラリのロケッツ">
+                </div>
+                <span class="champ-build-value">セレスティアルオポジション → プレートスチールキャップ → ソラリのロケッツ</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- レオナ -->
       <div class="champ-card">
         <span class="champ-num">02</span>
         <div>
-          <p class="champ-role">SUPPORT / ※ロール未設定</p>
-          <p class="champ-name">チャンピオン 2（未設定）</p>
-          <p class="champ-desc">このチャンピオンの説明はまだ入力されていません。後ほど指定してください。</p>
+          <img class="champ-img" src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Leona_0.jpg" alt="レオナ">
+          <p class="champ-role">SUP / タンク</p>
+          <p class="champ-name">レオナ</p>
+          <p class="champ-desc">自らが前線に飛び込んでEとQのコンボでスタン・スネアを連発する攻撃的なタンクサポート。Wのシールドで耐久力も高く、ADCが多少ミスをしても生き残れる強さがある。Rの広範囲スタンは集団戦の起点として優秀で、ジャングラーとのガンク合わせも非常に強力。積極的に仕掛けたいプレイヤーに最適。</p>
           <div class="champ-tags">
-            <span class="tag">TBD</span>
+            <span class="tag">初心者★★★</span><span class="tag">タンク</span><span class="tag">エンゲージ強</span><span class="tag">ガンク合わせ◎</span>
+          </div>
+          <div class="disclaimer-note">※ BAN推奨・サモナースペル・ビルドはいずれも一例です。環境やパッチにより最適解は異なります。</div>
+          <div class="champ-counter">
+            <p class="champ-counter-label">⚠ BAN推奨チャンピオン</p>
+            <div class="champ-counter-list">
+              <span class="counter-tag">ノーチラス</span>
+              <span class="counter-tag">モルガナ</span>
+            </div>
+          </div>
+          <div class="champ-build">
+            <div class="champ-build-row"><span class="champ-build-label">サモナースペル</span><span class="champ-build-value">フラッシュ ＋ イグナイト</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">キーストーン</span><span class="champ-build-value">アフターショック</span></div>
+            <div class="champ-build-row">
+              <span class="champ-build-label">ビルド</span>
+              <div class="item-icons-wrap">
+                <div class="item-icons">
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/3869.png" alt="セレスティアルオポジション" title="セレスティアルオポジション">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/223047.png" alt="プレートスチールキャップ" title="プレートスチールキャップ">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/3190.png" alt="ソラリのロケッツ" title="ソラリのロケッツ">
+                </div>
+                <span class="champ-build-value">セレスティアルオポジション → プレートスチールキャップ → ソラリのロケッツ</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- ブリッツクランク -->
       <div class="champ-card">
         <span class="champ-num">03</span>
         <div>
-          <p class="champ-role">SUPPORT / ※ロール未設定</p>
-          <p class="champ-name">チャンピオン 3（未設定）</p>
-          <p class="champ-desc">このチャンピオンの説明はまだ入力されていません。後ほど指定してください。</p>
+          <img class="champ-img" src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Blitzcrank_0.jpg" alt="ブリッツクランク">
+          <p class="champ-role">SUP / タンク</p>
+          <p class="champ-name">ブリッツクランク</p>
+          <p class="champ-desc">Qのロケットグラブで敵を引き寄せる「フック」が代名詞のタンクサポート。1発のフックが試合の流れを変える爽快感が魅力。スキルショットを当てる練習にもなる。Qを外したときのリスクもあるが、当てたときのリターンは大きく、初心者でも大きなプレイを生み出せるチャンピオン。</p>
           <div class="champ-tags">
-            <span class="tag">TBD</span>
+            <span class="tag">初心者★★☆</span><span class="tag">フックキャッチ</span><span class="tag">タンク</span><span class="tag">爽快感◎</span>
+          </div>
+          <div class="disclaimer-note">※ BAN推奨・サモナースペル・ビルドはいずれも一例です。環境やパッチにより最適解は異なります。</div>
+          <div class="champ-counter">
+            <p class="champ-counter-label">⚠ BAN推奨チャンピオン</p>
+            <div class="champ-counter-list">
+              <span class="counter-tag">アリスター</span>
+              <span class="counter-tag">レオナ</span>
+            </div>
+          </div>
+          <div class="champ-build">
+            <div class="champ-build-row"><span class="champ-build-label">サモナースペル</span><span class="champ-build-value">フラッシュ ＋ イグナイト</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">キーストーン</span><span class="champ-build-value">グレイシャルオーグメント</span></div>
+            <div class="champ-build-row">
+              <span class="champ-build-label">ビルド</span>
+              <div class="item-icons-wrap">
+                <div class="item-icons">
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/3869.png" alt="セレスティアルオポジション" title="セレスティアルオポジション">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/223009.png" alt="スイフトネスブーツ" title="スイフトネスブーツ">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/3190.png" alt="ソラリのロケッツ" title="ソラリのロケッツ">
+                </div>
+                <span class="champ-build-value">セレスティアルオポジション → スイフトネスブーツ → ソラリのロケッツ</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- ラックス -->
       <div class="champ-card">
         <span class="champ-num">04</span>
         <div>
-          <p class="champ-role">SUPPORT / ※ロール未設定</p>
-          <p class="champ-name">チャンピオン 4（未設定）</p>
-          <p class="champ-desc">このチャンピオンの説明はまだ入力されていません。後ほど指定してください。</p>
+          <img class="champ-img" src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Lux_0.jpg" alt="ラックス">
+          <p class="champ-role">SUP / メイジ</p>
+          <p class="champ-name">ラックス</p>
+          <p class="champ-desc">長射程のQスネアとEシールド、そしてクールダウンの短い超長距離Rが特徴のメイジサポート。遠くから安全にポークとCC両方をこなせる。EはADCへのシールドとしても使え、守りながらダメージを出せる攻守一体のスタイルが魅力。スキルショットの練習としても最適な1体。</p>
           <div class="champ-tags">
-            <span class="tag">TBD</span>
+            <span class="tag">初心者★★☆</span><span class="tag">メイジ</span><span class="tag">長射程ポーク</span><span class="tag">短CDのR</span>
+          </div>
+          <div class="disclaimer-note">※ BAN推奨・サモナースペル・ビルドはいずれも一例です。環境やパッチにより最適解は異なります。</div>
+          <div class="champ-counter">
+            <p class="champ-counter-label">⚠ BAN推奨チャンピオン</p>
+            <div class="champ-counter-list">
+              <span class="counter-tag">ノーチラス</span>
+              <span class="counter-tag">レオナ</span>
+            </div>
+          </div>
+          <div class="champ-build">
+            <div class="champ-build-row"><span class="champ-build-label">サモナースペル</span><span class="champ-build-value">フラッシュ ＋ ヒール</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">キーストーン</span><span class="champ-build-value">秘儀の彗星</span></div>
+            <div class="champ-build-row">
+              <span class="champ-build-label">ビルド</span>
+              <div class="item-icons-wrap">
+                <div class="item-icons">
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/3871.png" alt="ザズ＝ザクのレルムスパイク" title="ザズ＝ザクのレルムスパイク">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/223020.png" alt="ソーサラーシューズ" title="ソーサラーシューズ">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/6655.png" alt="ルーデンエコー" title="ルーデンエコー">
+                </div>
+                <span class="champ-build-value">ザズ＝ザクのレルムスパイク → ソーサラーシューズ → ルーデンエコー</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- ナミ -->
       <div class="champ-card">
         <span class="champ-num">05</span>
         <div>
-          <p class="champ-role">SUPPORT / ※ロール未設定</p>
-          <p class="champ-name">チャンピオン 5（未設定）</p>
-          <p class="champ-desc">このチャンピオンの説明はまだ入力されていません。後ほど指定してください。</p>
+          <img class="champ-img" src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Nami_0.jpg" alt="ナミ">
+          <p class="champ-role">SUP / エンチャンター</p>
+          <p class="champ-name">ナミ</p>
+          <p class="champ-desc">回復・スロウ・バフを兼ね備えた万能エンチャンターサポート。Wで味方を回復しながら敵にダメージを与えるユニークなスキルと、Eで付与する通常攻撃バフがADCとの相性抜群。Rの大波は広範囲スロウ＆ノックアップで集団戦の起点にもなる。守りながら戦える、バランスの良い初心者向けチャンピオン。</p>
           <div class="champ-tags">
-            <span class="tag">TBD</span>
+            <span class="tag">初心者★★★</span><span class="tag">エンチャンター</span><span class="tag">回復＋バフ</span><span class="tag">万能型</span>
+          </div>
+          <div class="disclaimer-note">※ BAN推奨・サモナースペル・ビルドはいずれも一例です。環境やパッチにより最適解は異なります。</div>
+          <div class="champ-counter">
+            <p class="champ-counter-label">⚠ BAN推奨チャンピオン</p>
+            <div class="champ-counter-list">
+              <span class="counter-tag">ブリッツクランク</span>
+              <span class="counter-tag">パイク</span>
+            </div>
+          </div>
+          <div class="champ-build">
+            <div class="champ-build-row"><span class="champ-build-label">サモナースペル</span><span class="champ-build-value">フラッシュ ＋ ヒール</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">キーストーン</span><span class="champ-build-value">エアリーの召喚</span></div>
+            <div class="champ-build-row">
+              <span class="champ-build-label">ビルド</span>
+              <div class="item-icons-wrap">
+                <div class="item-icons">
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/3870.png" alt="ドリームメーカー" title="ドリームメーカー">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/3158.png" alt="アイオニアブーツ" title="アイオニアブーツ">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/4005.png" alt="帝国の指令" title="帝国の指令">
+                </div>
+                <span class="champ-build-value">ドリームメーカー → アイオニアブーツ → 帝国の指令</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
 
     <h2>最速で上達するための考え方</h2>
-    <p>初心者がやりがちな失敗は「いろんなチャンピオンを試しすぎる」こと。最初は1〜2体に絞って、そのチャンピオンの動きが手に馴染むまで使い続けることが最も効率的な上達方法です。</p>
-    <p>また、負けたときは「なぜ負けたか」を1つだけ考えるクセをつけましょう。ポジションが悪かったのか、CSが取れていなかったのか、視野が足りなかったのか──1つ改善するだけでランクは上がっていきます。</p>
+    <p>サポートで最初に意識すべきことは「ワードを絶やさないこと」です。コントロールワードは常に1個購入してマップに置いておく習慣をつけましょう。視野があるだけでチームのデス数が減ります。</p>
+    <p>エンゲージのタイミングは「ウェーブが自分側にある」「相手の回避スキルがクールダウン中」「ジャングラーが近くにいる」の3つが揃ったときが理想です。焦らずチャンスを待つ意識が大切です。</p>
 
     <div class="summary-box">
       <p class="summary-box-title">まとめ</p>
       <ul>
-        <li>サポートはADCを守り、視野管理でチーム全体を支えるロール</li>
-        <li>リコールのたびにコントロールワードを購入する習慣が重要</li>
-        <li>ADCの近くのポジションをキープして常にカバーできる状態を保つ</li>
-        <li>エンゲージのタイミングはADCの状況を確認してから仕掛ける</li>
+        <li>ノーチラスは豊富なCCで先出しもしやすい万能タンクサポート</li>
+        <li>レオナは積極的にエンゲージしたい人向け。ガンク合わせが強力</li>
+        <li>ブリッツクランクはフック1発が試合を変える爽快感◎のキャッチ型</li>
+        <li>ラックスは長射程でポークとCCを両立。スキルショット練習にも最適</li>
+        <li>ナミは回復・バフ・CC全て揃った万能エンチャンター。初心者にやさしい</li>
       </ul>
     </div>
 
-    <p class="article-closing">サポートはゲームを『見える』ようになると、チームへの影響力が格段に上がるロールです。まずはワード管理とADCとの連携を意識することから始めましょう。</p>
+    <p class="article-closing">サポートはADCや味方の成長を支える、チームの要です。まずは1体に絞ってワード管理とエンゲージタイミングを体で覚えていきましょう。</p>
 
-
-    <div class="doujin-link">
-      <a href="doujin.html" class="doujin-link-btn">【同人ゲームも紹介中】</a>
-    </div>
     <div class="share-section">
       <p class="share-label">この記事をシェアする</p>
       <div class="share-buttons">
-        <a class="share-btn x" href="https://twitter.com/intent/tweet?text=LoL サポート 初心者ガイド｜おすすめチャンピオン5選&url=https://marigura.com/lol-sup.html" target="_blank" rel="noopener">𝕏 でシェア</a>
+        <a class="share-btn x" href="https://twitter.com/intent/tweet?text=LoL SUPレーン 初心者ガイド｜おすすめチャンピオン5選&url=https://marigura.com/lol-sup.html" target="_blank" rel="noopener">𝕏 でシェア</a>
         <a class="share-btn line" href="https://social-plugins.line.me/lineit/share?url=https://marigura.com/lol-sup.html" target="_blank" rel="noopener">LINE でシェア</a>
         <button class="share-btn copy" onclick="navigator.clipboard.writeText(location.href).then(()=>alert('URLをコピーしました'))">リンクをコピー</button>
       </div>
     </div>
-</div>
+  </div>
 </article>
+
+  <div class="riot-notice">
+    MariGura Hubは、ライアットゲームズが公式承認するものではなく、ライアットゲームズ又はリーグ・オブ・レジェンドの製作・管理に正式に関与したいかなる者の見解・意見に基づくものではありません。リーグ・オブ・レジェンド及びライアットゲームズは、Riot Games, Inc.の商標又は登録商標です。リーグ・オブ・レジェンド © Riot Games, Inc.
+  </div>
 
 <footer>
   <span class="footer-logo">MariGura Hub</span>
