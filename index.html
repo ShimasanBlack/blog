@@ -656,7 +656,6 @@
   <a class="logo" href="index.html">MariGura <span>Hub</span></a>
   <nav>
     <a href="#" class="active">TOP</a>
-    <a href="articles.html">おすすめ記事</a>
   </nav>
   <div class="nav-icons">
     <button class="search-btn" onclick="document.querySelector('.search-overlay').classList.add('open')">
@@ -725,66 +724,85 @@
 
 <div class="section-head"><h2>最新記事</h2></div>
 
-<section class="cards">
-  <a class="card" href="lol-beginner.html">
-    <span class="card-cat">League of Legends</span>
-    <h2 class="card-title">LoLで覚えておきたい専門用語20選</h2>
-    <p class="card-excerpt">CS・ガンク・CCなど試合中によく使われる専門用語を20個厳選して解説。攻略サイトや配信がグッとわかるようになります。</p>
-    <div class="card-meta">
-      <span class="card-date">2026.03.27</span>
-      <span class="card-read">Read →</span>
-    </div>
-  </a>
-  <a class="card" href="lol-top.html">
-    <span class="card-cat">League of Legends</span>
-    <h2 class="card-title">LoL TOP おすすめチャンピオン5選</h2>
-    <p class="card-excerpt">初心者でも扱いやすいTOPレーンのチャンピオンを5体厳選。サモナースペル・ルーン・ビルドもあわせて解説します。</p>
-    <div class="card-meta">
-      <span class="card-date">2026.03.27</span>
-      <span class="card-read">Read →</span>
-    </div>
-  </a>
-  <a class="card" href="lol-jg.html">
-    <span class="card-cat">League of Legends</span>
-    <h2 class="card-title">LoL JG おすすめチャンピオン5選</h2>
-    <p class="card-excerpt">初心者でも扱いやすいジャングルチャンピオンを5体厳選。サモナースペル・ルーン・ビルドもあわせて解説します。</p>
-    <div class="card-meta">
-      <span class="card-date">2026.03.27</span>
-      <span class="card-read">Read →</span>
-    </div>
-  </a>
-</section>
+<section class="cards" id="latest-cards"></section>
 
 <section class="ranking">
   <div class="section-head" style="padding:0 0 0 0;"><h2>おすすめランキング</h2></div>
-  <div class="ranking-grid">
-    <a class="rank-item" href="#">
-      <span class="rank-num">01</span>
-      <span class="rank-title">LoL TOP おすすめチャンピオン5選</span>
-      <span class="rank-tag">League of Legends</span>
-    </a>
-    <a class="rank-item" href="#">
-      <span class="rank-num">02</span>
-      <span class="rank-title">LoL JG おすすめチャンピオン5選</span>
-      <span class="rank-tag">League of Legends</span>
-    </a>
-    <a class="rank-item" href="#">
-      <span class="rank-num">03</span>
-      <span class="rank-title">LoL MID おすすめチャンピオン5選</span>
-      <span class="rank-tag">League of Legends</span>
-    </a>
-    <a class="rank-item" href="#">
-      <span class="rank-num">04</span>
-      <span class="rank-title">LoL BOT おすすめチャンピオン5選</span>
-      <span class="rank-tag">League of Legends</span>
-    </a>
-    <a class="rank-item" href="#">
-      <span class="rank-num">05</span>
-      <span class="rank-title">LoL SUP おすすめチャンピオン5選</span>
-      <span class="rank-tag">League of Legends</span>
-    </a>
-  </div>
+  <div class="ranking-grid" id="ranking-grid"></div>
 </section>
+
+<script>
+  // ============================================================
+  // ★ 記事を追加するときはここに1行追加するだけ！
+  //    配列の先頭が最新記事として自動表示されます。
+  // ============================================================
+  const ARTICLES = [
+    {
+      url:     'lol-sup.html',
+      cat:     'League of Legends',
+      title:   'LoL SUP おすすめチャンピオン5選',
+      excerpt: '初心者でも扱いやすいサポートチャンピオンを5体厳選。ノーチラス・レオナ・ブリッツクランク・ラックス・ナミをサモナースペル・ルーン・ビルドとあわせて解説します。',
+      date:    '2026.03.27',
+    },
+    {
+      url:     'lol-bot.html',
+      cat:     'League of Legends',
+      title:   'LoL BOT おすすめチャンピオン5選',
+      excerpt: '初心者でも扱いやすいBOTレーンのチャンピオンを5体厳選。アッシュ・ミス・フォーチュン・ジンクス・ケイトリン・ジンをサモナースペル・ルーン・ビルドとあわせて解説します。',
+      date:    '2026.03.27',
+    },
+    {
+      url:     'lol-mid.html',
+      cat:     'League of Legends',
+      title:   'LoL MID おすすめチャンピオン5選',
+      excerpt: '初心者でも扱いやすいMIDレーンのチャンピオンを5体厳選。アーリ・マルザハール・ヴェックス・ナフィーリ・ガリオをサモナースペル・ルーン・ビルドとあわせて解説します。',
+      date:    '2026.03.27',
+    },
+    {
+      url:     'lol-jg.html',
+      cat:     'League of Legends',
+      title:   'LoL JG おすすめチャンピオン5選',
+      excerpt: '初心者でも扱いやすいジャングルチャンピオンを5体厳選。ボリベア・ノクターン・アムム・ブライアー・リリアをサモナースペル・ルーン・ビルドとあわせて解説します。',
+      date:    '2026.03.27',
+    },
+    {
+      url:     'lol-top.html',
+      cat:     'League of Legends',
+      title:   'LoL TOP おすすめチャンピオン5選',
+      excerpt: '初心者でも扱いやすいTOPレーンのチャンピオンを5体厳選。ガレン・マルファイト・ナサス・ダリウス・モルデカイザーをサモナースペル・ルーン・ビルドとあわせて解説します。',
+      date:    '2026.03.27',
+    },
+    {
+      url:     'lol-beginner.html',
+      cat:     'League of Legends',
+      title:   'LoLで覚えておきたい専門用語20選',
+      excerpt: 'CS・ガンク・CCなど試合中によく使われる専門用語を20個厳選して解説。攻略サイトや配信がグッとわかるようになります。',
+      date:    '2026.03.27',
+    },
+  ];
+
+  // 最新記事カード（先頭3件を自動表示）
+  document.getElementById('latest-cards').innerHTML = ARTICLES.slice(0, 3).map(a => `
+    <a class="card" href="${a.url}">
+      <span class="card-cat">${a.cat}</span>
+      <h2 class="card-title">${a.title}</h2>
+      <p class="card-excerpt">${a.excerpt}</p>
+      <div class="card-meta">
+        <span class="card-date">${a.date}</span>
+        <span class="card-read">Read →</span>
+      </div>
+    </a>
+  `).join('');
+
+  // おすすめランキング（全記事を自動表示）
+  document.getElementById('ranking-grid').innerHTML = ARTICLES.slice(0, 5).map((a, i) => `
+    <a class="rank-item" href="${a.url}">
+      <span class="rank-num">${String(i + 1).padStart(2, '0')}</span>
+      <span class="rank-title">${a.title}</span>
+      <span class="rank-tag">${a.cat}</span>
+    </a>
+  `).join('');
+</script>
 
 <section class="yt-section">
   <a class="yt-banner" href="https://www.youtube.com/channel/UCNIQTigIQXtUQtB3td0AIrg" target="_blank" rel="noopener">
@@ -805,7 +823,7 @@
 
 <script>
   // ⚠️ 以下の YOUR_API_KEY をあなたのAPIキーに置き換えてください
-  const YT_API_KEY     = 'AIzaSyC4gPV6gmtcp1GwIZ7z7KJ3tHG-934V3n8';
+  const YT_API_KEY     = 'YOUR_API_KEY';
   const YT_CHANNEL_ID  = 'UCNIQTigIQXtUQtB3td0AIrg';
 
   async function loadYouTubeVideos() {
