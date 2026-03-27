@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoL TOPレーン 初心者ガイド｜おすすめチャンピオン5選 — MariGura Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Noto+Sans+JP:wght@300;400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:      #0a0c10;
+      --surface: #10141c;
+      --border:  #1e2535;
+      --gold:    #c9a84c;
+      --gold2:   #f0d080;
+      --blue:    #4a8fff;
+      --text:    #cdd6e8;
+      --muted:   #5a6580;
+    }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Noto Sans JP', sans-serif; font-weight: 300; min-height: 100vh; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.06) 2px, rgba(0,0,0,.06) 4px); pointer-events: none; z-index: 999; }
+    header { display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(10,12,16,.92); backdrop-filter: blur(12px); z-index: 100; }
+    .logo { font-family: 'Orbitron', monospace; font-size: 1.3rem; font-weight: 900; letter-spacing: .08em; text-decoration: none; color: var(--gold); text-shadow: 0 0 20px rgba(201,168,76,.4); }
+    .logo span { color: var(--text); }
+    nav { display: flex; gap: 2rem; }
+    nav a { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .2s; font-family: 'Rajdhani', sans-serif; font-weight: 500; }
+    nav a:hover { color: var(--gold); }
+    .article-wrap { max-width: 780px; margin: 0 auto; padding: 4rem 2rem 8rem; animation: fadeUp .6s ease both; }
+    .article-meta { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.8rem; flex-wrap: wrap; }
+    .cat-badge { font-family: 'Rajdhani', sans-serif; font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--blue); border: 1px solid var(--blue); padding: .2rem .8rem; font-weight: 500; }
+    .article-date, .article-updated { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .1em; color: var(--muted); }
+    h1.article-title { font-family: 'Rajdhani', sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; line-height: 1.2; letter-spacing: .04em; color: #e8eef8; margin-bottom: 1rem; }
+    h1.article-title .hl { color: var(--gold); }
+    .article-lead { font-size: 1rem; line-height: 2; color: var(--muted); border-left: 3px solid var(--gold); padding-left: 1.2rem; margin: 2rem 0; }
+    .learn-box { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--gold); padding: 1.4rem 1.8rem; margin: 2rem 0; }
+    .learn-box-title { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: .8rem; font-weight: 700; }
+    .learn-box ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+    .learn-box li { font-size: .88rem; color: var(--text); line-height: 1.7; padding-left: 1.2rem; position: relative; }
+    .learn-box li::before { content: '▸'; position: absolute; left: 0; color: var(--gold); font-size: .7rem; top: .2rem; }
+    .article-body { font-size: .95rem; line-height: 2.1; color: #9aa5be; }
+    .article-body p { margin-bottom: 1.6rem; }
+    .article-body h2 { font-family: 'Rajdhani', sans-serif; font-size: 1.2rem; font-weight: 700; letter-spacing: .08em; color: #e8eef8; margin: 3rem 0 1rem; padding-bottom: .6rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: .8rem; }
+    .article-body h2::before { content: ''; display: block; width: 4px; height: 1.2em; background: var(--gold); flex-shrink: 0; }
+    .champ-list { display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; }
+    .champ-card { background: var(--surface); border: 1px solid var(--border); padding: 1.4rem 1.6rem; display: grid; grid-template-columns: auto 1fr; gap: 1rem 1.4rem; align-items: start; transition: border-color .2s; }
+    .champ-card:hover { border-color: var(--gold); }
+    .champ-num { font-family: 'Orbitron', monospace; font-size: 1.6rem; font-weight: 900; color: var(--border); line-height: 1; padding-top: .2rem; }
+    .champ-card:nth-child(1) .champ-num { color: var(--gold); }
+    .champ-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; object-position: top; border: 1px solid var(--border); margin-bottom: .6rem; display: block; }
+    .champ-name { font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 700; letter-spacing: .06em; color: #e8eef8; margin-bottom: .3rem; }
+    .champ-role { font-family: 'Rajdhani', sans-serif; font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--blue); margin-bottom: .6rem; }
+    .champ-desc { font-size: .85rem; line-height: 1.8; color: var(--muted); }
+    .champ-tags { display: flex; gap: .5rem; margin-top: .6rem; flex-wrap: wrap; }
+    .tag { font-family: 'Rajdhani', sans-serif; font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border); padding: .1rem .5rem; }
+    .champ-counter { margin-top: .8rem; padding-top: .8rem; border-top: 1px solid var(--border); }
+    .champ-counter-label { font-family: 'Rajdhani', sans-serif; font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: #e05555; margin-bottom: .4rem; font-weight: 700; }
+    .champ-counter-list { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .counter-tag { font-family: 'Rajdhani', sans-serif; font-size: .68rem; letter-spacing: .1em; color: #e05555; border: 1px solid rgba(224,85,85,.4); padding: .15rem .6rem; background: rgba(224,85,85,.06); }
+    .champ-build { margin-top: .8rem; padding-top: .8rem; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: .6rem; }
+    .champ-build-row { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+    .champ-build-label { font-family: 'Rajdhani', sans-serif; font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); font-weight: 700; white-space: nowrap; min-width: 90px; }
+    .champ-build-value { font-family: 'Rajdhani', sans-serif; font-size: .78rem; color: var(--text); letter-spacing: .04em; }
+    .tbd-notice { background: rgba(201,168,76,.06); border: 1px dashed var(--gold); padding: 1.4rem 1.6rem; display: flex; align-items: center; gap: 1rem; color: var(--gold); font-family: 'Rajdhani', sans-serif; font-size: .85rem; letter-spacing: .08em; }
+    .tbd-icon { font-size: 1.4rem; flex-shrink: 0; opacity: .6; }
+    .info-box { background: var(--surface); border: 1px solid var(--border); padding: 1.4rem 1.8rem; margin: 1.5rem 0; }
+    .info-box-title { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; font-weight: 700; }
+    .info-table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+    .info-table th { text-align: left; font-family: 'Rajdhani', sans-serif; letter-spacing: .1em; color: var(--muted); padding: .5rem .8rem .5rem 0; border-bottom: 1px solid var(--border); font-size: .72rem; text-transform: uppercase; }
+    .info-table td { padding: .6rem .8rem .6rem 0; border-bottom: 1px solid rgba(30,37,53,.6); color: var(--text); line-height: 1.6; }
+    .info-table tr:last-child td { border-bottom: none; }
+    .summary-box { background: var(--surface); border: 1px solid var(--gold); padding: 1.8rem 2rem; margin: 3rem 0 1rem; }
+    .summary-box-title { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; font-weight: 700; }
+    .summary-box ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+    .summary-box li { font-size: .88rem; color: var(--text); line-height: 1.8; padding-left: 1.4rem; position: relative; }
+    .summary-box li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-size: .8rem; }
+    .article-closing { margin-top: 3rem; padding: 1.5rem; border: 1px solid var(--border); border-left: 3px solid var(--blue); font-size: .95rem; line-height: 2; color: var(--muted); font-style: italic; }
+    .share-section { margin: 3rem 0 1rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+    .share-label { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; font-weight: 500; }
+    .share-buttons { display: flex; gap: .8rem; flex-wrap: wrap; }
+    .share-btn { display: inline-flex; align-items: center; gap: .5rem; font-family: 'Rajdhani', sans-serif; font-size: .78rem; letter-spacing: .12em; font-weight: 700; padding: .5rem 1.2rem; text-decoration: none; transition: opacity .2s; color: #fff; border: none; cursor: pointer; text-transform: uppercase; }
+    .share-btn:hover { opacity: .8; }
+    .share-btn.x    { background: #000; border: 1px solid #333; }
+    .share-btn.line { background: #06c755; }
+    .share-btn.copy { background: var(--gold); color: #000; }
+    .references { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+    .references-title { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; font-weight: 500; }
+    .references ol { padding-left: 1.2rem; }
+    .references li { font-size: .8rem; line-height: 2; color: var(--muted); margin-bottom: .3rem; }
+    .references a { color: var(--gold); text-decoration: underline; text-underline-offset: 2px; }
+    footer { border-top: 1px solid var(--border); padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-family: 'Orbitron', monospace; font-size: .9rem; font-weight: 900; color: var(--gold); opacity: .5; }
+    .footer-copy { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .1em; color: var(--muted); }
+
+    /* DOUJIN LINK */
+    .doujin-link { margin-bottom: 2rem; text-align: center; }
+    .doujin-link-btn {
+      display: inline-block;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .78rem;
+      letter-spacing: .12em;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: .5rem 1.4rem;
+      text-decoration: none;
+      transition: color .2s, border-color .2s;
+    }
+    .doujin-link-btn:hover { color: var(--gold); border-color: var(--gold); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 700px) {
+      header { padding: 1rem 1.5rem; }
+      .article-wrap { padding: 2.5rem 1.5rem 5rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: .5rem; text-align: center; }
+      .champ-card { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <a class="logo" href="index.html">MariGura <span>Hub</span></a>
+  <nav>
+    <a href="index.html">TOP</a>
+    <a href="#">有名ゲーム</a>
+    <a href="#">同人ゲームレビュー</a>
+    <a href="#">おすすめランキング</a>
+  </nav>
+</header>
+
+<article class="article-wrap">
+  <div class="article-meta">
+    <span class="cat-badge">League of Legends — TOPレーン</span>
+    <span class="article-date">2026.03.27</span>
+    <span class="article-updated">最終更新：2026年3月27日</span>
+  </div>
+
+  <h1 class="article-title">
+    LoL <span class="hl">TOPレーン</span> 初心者ガイド｜<br>
+    おすすめチャンピオン5選
+  </h1>
+
+  <p class="article-lead">TOPレーンは1対1の時間が長く、チャンピオン選びが勝敗に直結しやすいポジションです。序盤を安定して乗り切り、チームに貢献できる初心者向けチャンピオン5体を解説します。</p>
+
+  <div class="learn-box">
+    <p class="learn-box-title">この記事でわかること</p>
+    <ul>
+      <li>TOPレーンの役割と基本的な立ち回り</li>
+      <li>初心者TOPチャンピオンを選ぶ3つのポイント</li>
+      <li>おすすめTOPチャンピオン5選（詳細解説付き）</li>
+      <li>レーン戦で生き残るための基本知識</li>
+    </ul>
+  </div>
+
+  <div class="article-body">
+
+    <h2>TOPレーンの役割とは</h2>
+    <p>TOPレーンは孤独な1対1が基本。耐久力があり、ミスをしても立て直しやすいチャンピオンが初心者には最適です。</p>
+
+    <h2>TOPレーン初心者の基本戦略</h2>
+    <div class="info-box">
+      <p class="info-box-title">TOPレーン 初心者チェックリスト</p>
+      <table class="info-table">
+        <thead><tr><th>ポイント</th><th>内容</th></tr></thead>
+        <tbody>
+          <tr><td>① CSを最優先</td><td>序盤はキルを狙わず、ミニオン処理（CS）で安定したゴールドを稼ぐことが最重要</td></tr>
+          <tr><td>② 視野管理を意識</td><td>川沿いにワードを置いてジャングラーのガンクを警戒する習慣をつける</td></tr>
+          <tr><td>③ テレポートを温存</td><td>集団戦・ドラゴン・バロンへのTPは試合を左右するため、使いどころを考える</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>初心者におすすめのチャンピオン TOP5</h2>
+
+    <div class="champ-list">
+
+      <div class="champ-card">
+        <span class="champ-num">01</span>
+        <div>
+          <img class="champ-img" src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/Garen_0.jpg" alt="ガレン">
+          <p class="champ-role">TOP / ファイター</p>
+          <p class="champ-name">ガレン</p>
+          <p class="champ-desc">スキルショットがなく、マナも不要。スキルを押すだけで戦える最も初心者フレンドリーなTOPチャンピオン。パッシブの自動回復でミスをしても立て直しやすく、ウルトは体力が低い敵に大ダメージを与えるシンプルな仕組みで爽快感も高い。序盤から中盤にかけての1対1は非常に強力。</p>
+          <div class="champ-tags">
+            <span class="tag">初心者★★★</span><span class="tag">マナなし</span><span class="tag">スキルシンプル</span><span class="tag">自動回復</span>
+          </div>
+          <div class="champ-counter">
+            <p class="champ-counter-label">⚠ BAN推奨チャンピオン</p>
+            <div class="champ-counter-list">
+              <span class="counter-tag">ヴェイン</span>
+              <span class="counter-tag">モルデカイザー</span>
+            </div>
+          </div>
+          <div class="champ-build">
+            <div class="champ-build-row"><span class="champ-build-label">スペル</span><span class="champ-build-value">フラッシュ ＋ イグナイト</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">キーストーン</span><span class="champ-build-value">征服者</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">ビルド</span><span class="champ-build-value">ストライドブレーカー → バーサーカーブーツ → ファントムダンサー</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="champ-card">
+        <span class="champ-num">02</span>
+        <div>
+          <img class="champ-img" src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/Malphite_0.jpg" alt="マルファイト">
+          <p class="champ-role">TOP / タンク</p>
+          <p class="champ-name">マルファイト</p>
+          <p class="champ-desc">シールドと高い防御力を持つタンク。相手チームにADが多い時に特に輝く。序盤はCSを稼ぎながら耐えて、ウルトで複数人をノックアップする集団戦エンゲージが最大の役割。「集団戦のタイミング」という重要な概念を自然に身につけられるチャンピオン。</p>
+          <div class="champ-tags">
+            <span class="tag">初心者★★★</span><span class="tag">タンク</span><span class="tag">集団戦向き</span><span class="tag">対AD最強</span>
+          </div>
+          <div class="champ-counter">
+            <p class="champ-counter-label">⚠ BAN推奨チャンピオン</p>
+            <div class="champ-counter-list">
+              <span class="counter-tag">サイラス</span>
+              <span class="counter-tag">モルデカイザー</span>
+            </div>
+          </div>
+          <div class="champ-build">
+            <div class="champ-build-row"><span class="champ-build-label">スペル</span><span class="champ-build-value">フラッシュ ＋ テレポート</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">キーストーン</span><span class="champ-build-value">不死者の握撃</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">ビルド</span><span class="champ-build-value">サンファイアイージス → プレートスチールキャップ → ソーンメイル</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="champ-card">
+        <span class="champ-num">03</span>
+        <div>
+          <img class="champ-img" src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/Nasus_0.jpg" alt="ナサス">
+          <p class="champ-role">TOP / ファイター</p>
+          <p class="champ-name">ナサス</p>
+          <p class="champ-desc">Qスキルでミニオンにとどめを刺すたびにダメージが永遠に増え続ける独特のスケール型チャンピオン。序盤はひたすらCS稼ぎに徹して我慢し、後半に圧倒的なQで敵をなぎ倒すのが基本戦術。「序盤我慢して後半無双」という明快なゲームプランが初心者にも理解しやすい。</p>
+          <div class="champ-tags">
+            <span class="tag">初心者★★☆</span><span class="tag">スケール型</span><span class="tag">後半無双</span><span class="tag">CS重視</span>
+          </div>
+          <div class="champ-counter">
+            <p class="champ-counter-label">⚠ BAN推奨チャンピオン</p>
+            <div class="champ-counter-list">
+              <span class="counter-tag">ダリウス</span>
+              <span class="counter-tag">イラオイ</span>
+            </div>
+          </div>
+          <div class="champ-build">
+            <div class="champ-build-row"><span class="champ-build-label">スペル</span><span class="champ-build-value">ゴースト ＋ テレポート</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">キーストーン</span><span class="champ-build-value">フリートフットワーク</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">ビルド</span><span class="champ-build-value">トリニティフォース → アイオニアブーツ → フローズンハート</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="champ-card">
+        <span class="champ-num">04</span>
+        <div>
+          <img class="champ-img" src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/Darius_0.jpg" alt="ダリウス">
+          <p class="champ-role">TOP / ファイター</p>
+          <p class="champ-name">ダリウス</p>
+          <p class="champ-desc">パッシブの出血スタックを5回貯めると「紅血の激昂」状態になり、序盤の1対1では無類の強さを発揮する。QスキルはCSも取れてチャンピオンに当たると体力回復と一石二鳥。ウルトはとどめを刺すたびにリセットされペンタキルも狙える爽快感の高いチャンピオン。</p>
+          <div class="champ-tags">
+            <span class="tag">初心者★★☆</span><span class="tag">序盤最強</span><span class="tag">出血スタック</span><span class="tag">爽快感高い</span>
+          </div>
+          <div class="champ-counter">
+            <p class="champ-counter-label">⚠ BAN推奨チャンピオン</p>
+            <div class="champ-counter-list">
+              <span class="counter-tag">ヴェイン</span>
+              <span class="counter-tag">アーゴット</span>
+            </div>
+          </div>
+          <div class="champ-build">
+            <div class="champ-build-row"><span class="champ-build-label">スペル</span><span class="champ-build-value">フラッシュ ＋ ゴースト</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">キーストーン</span><span class="champ-build-value">征服者</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">ビルド</span><span class="champ-build-value">ストライドブレーカー → プレートスチールキャップ → ステラックの篭手</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="champ-card">
+        <span class="champ-num">05</span>
+        <div>
+          <img class="champ-img" src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/Mordekaiser_0.jpg" alt="モルデカイザー">
+          <p class="champ-role">TOP / ファイター（AP）</p>
+          <p class="champ-name">モルデカイザー</p>
+          <p class="champ-desc">マナなし・シールド・回復と初心者向け要素が揃ったTOPのAP型チャンピオン。Rで相手を別次元に引き込む1対1特化のウルトは解除不可能で、殴り合いで圧倒的な強さを誇る。操作難度は最も簡単な部類で、成功体験を積みやすい初心者の正解ピックの一つ。</p>
+          <div class="champ-tags">
+            <span class="tag">初心者★★★</span><span class="tag">マナなし</span><span class="tag">AP型</span><span class="tag">1対1最強</span>
+          </div>
+          <div class="champ-counter">
+            <p class="champ-counter-label">⚠ BAN推奨チャンピオン</p>
+            <div class="champ-counter-list">
+              <span class="counter-tag">フィオラ</span>
+              <span class="counter-tag">トランドル</span>
+            </div>
+          </div>
+          <div class="champ-build">
+            <div class="champ-build-row"><span class="champ-build-label">スペル</span><span class="champ-build-value">フラッシュ ＋ イグナイト</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">キーストーン</span><span class="champ-build-value">征服者</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">ビルド</span><span class="champ-build-value">リーライクリスタルセプター → プレートスチールキャップ → リフトメーカー</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <h2>最速で上達するための考え方</h2>
+    <p>初心者がやりがちな失敗は「いろんなチャンピオンを試しすぎる」こと。最初は1〜2体に絞って、そのチャンピオンの動きが手に馴染むまで使い続けることが最も効率的な上達方法です。</p>
+    <p>また、負けたときは「なぜ負けたか」を1つだけ考えるクセをつけましょう。ポジションが悪かったのか、CSが取れていなかったのか、視野が足りなかったのか──1つ改善するだけでランクは上がっていきます。</p>
+
+    <div class="summary-box">
+      <p class="summary-box-title">まとめ</p>
+      <ul>
+        <li>TOPレーンは序盤の1対1が長く、耐久力のあるチャンピオンが初心者向き</li>
+        <li>初心者最推薦はガレン。マナなし・スキルシンプル・自動回復で最も扱いやすい</li>
+        <li>タンク志向ならマルファイト、後半無双を狙うならナサスがおすすめ</li>
+        <li>ダリウスは序盤の殴り合いが強く爽快感も高い。モルデカイザーはAP型の正解ピック</li>
+        <li>まず1体に絞り込み、ワードを置きながらCS稼ぎに集中することが上達の近道</li>
+      </ul>
+    </div>
+
+    <p class="article-closing">TOPレーンは孤独に見えてゲームへの影響力が大きいレーンです。まずは1体のチャンピオンを徹底的に使い込んで、レーン戦の基礎を身につけましょう。</p>
+
+
+    <div class="doujin-link">
+      <a href="doujin.html" class="doujin-link-btn">【同人ゲームも紹介中】</a>
+    </div>
+    <div class="share-section">
+      <p class="share-label">この記事をシェアする</p>
+      <div class="share-buttons">
+        <a class="share-btn x" href="https://twitter.com/intent/tweet?text=LoL TOPレーン 初心者ガイド｜おすすめチャンピオン5選&url=https://marigura.com/lol-top.html" target="_blank" rel="noopener">𝕏 でシェア</a>
+        <a class="share-btn line" href="https://social-plugins.line.me/lineit/share?url=https://marigura.com/lol-top.html" target="_blank" rel="noopener">LINE でシェア</a>
+        <button class="share-btn copy" onclick="navigator.clipboard.writeText(location.href).then(()=>alert('URLをコピーしました'))">リンクをコピー</button>
+      </div>
+    </div>
+</div>
+</article>
+
+<footer>
+  <span class="footer-logo">MariGura Hub</span>
+  <span class="footer-copy">© 2026 MariGura Hub — ゲーム攻略・レビュー</span>
+</footer>
+</body>
+</html>

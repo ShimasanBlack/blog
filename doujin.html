@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>同人ゲームジャンル別ランキング — MariGura Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #fdfaf6;
+      --surface:  #ffffff;
+      --border:   #ede8e0;
+      --text:     #2d2620;
+      --muted:    #8a7e74;
+      --accent1:  #e8734a;  /* orange */
+      --accent2:  #4a90d9;  /* blue */
+      --accent3:  #6ab187;  /* green */
+      --accent4:  #c45b8a;  /* pink */
+      --accent5:  #8b5cf6;  /* purple */
+      --yellow:   #f5c842;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Zen Maru Gothic', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: var(--surface);
+      border-bottom: 2px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      animation: fadeDown .5s ease both;
+    }
+
+    .logo {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .logo span { color: var(--accent1); }
+
+    nav { display: flex; gap: 2rem; }
+    nav a {
+      font-size: .82rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    nav a:hover { color: var(--accent1); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #fff8f0 0%, #fef0e8 50%, #fff4f8 100%);
+      padding: 4rem 4rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp .6s .1s ease both;
+    }
+
+    .hero::before {
+      content: '🎮';
+      position: absolute;
+      font-size: 12rem;
+      opacity: .04;
+      top: -2rem;
+      left: -2rem;
+      line-height: 1;
+    }
+    .hero::after {
+      content: '🕹️';
+      position: absolute;
+      font-size: 10rem;
+      opacity: .04;
+      bottom: -1rem;
+      right: 2rem;
+      line-height: 1;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--accent1);
+      color: #fff;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      padding: .3rem 1rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: .8rem;
+      color: var(--text);
+    }
+    .hero-title span { color: var(--accent1); }
+
+    .hero-desc {
+      font-size: .95rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 50ch;
+      margin: 0 auto 1.5rem;
+    }
+
+    .hero-tags {
+      display: flex;
+      gap: .6rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .hero-tag {
+      font-size: .72rem;
+      font-weight: 700;
+      padding: .3rem .9rem;
+      border-radius: 999px;
+      border: 2px solid;
+      cursor: pointer;
+      transition: all .2s;
+      text-decoration: none;
+    }
+    .hero-tag:hover { transform: translateY(-2px); }
+    .hero-tag.t1 { color: var(--accent1); border-color: var(--accent1); background: rgba(232,115,74,.08); }
+    .hero-tag.t2 { color: var(--accent2); border-color: var(--accent2); background: rgba(74,144,217,.08); }
+    .hero-tag.t3 { color: var(--accent3); border-color: var(--accent3); background: rgba(106,177,135,.08); }
+    .hero-tag.t4 { color: var(--accent4); border-color: var(--accent4); background: rgba(196,91,138,.08); }
+    .hero-tag.t5 { color: var(--accent5); border-color: var(--accent5); background: rgba(139,92,246,.08); }
+
+    /* ── SECTION ── */
+    .section {
+      padding: 3rem 4rem;
+      animation: fadeUp .7s ease both;
+    }
+    .section + .section { padding-top: 0; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .section-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    .section-badge {
+      font-size: .65rem;
+      font-weight: 700;
+      padding: .2rem .7rem;
+      border-radius: 999px;
+      color: #fff;
+      margin-left: auto;
+    }
+    .badge-rpg    { background: var(--accent1); }
+    .badge-action { background: var(--accent2); }
+    .badge-adv    { background: var(--accent3); }
+    .badge-novel  { background: var(--accent4); }
+    .badge-other  { background: var(--accent5); }
+
+    /* ── RANKING CARDS ── */
+    .ranking-list {
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+    }
+
+    .rank-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      transition: transform .15s, box-shadow .15s, border-color .15s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .rank-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,.08);
+    }
+    .rank-card:hover.rpg    { border-color: var(--accent1); }
+    .rank-card:hover.action { border-color: var(--accent2); }
+    .rank-card:hover.adv    { border-color: var(--accent3); }
+    .rank-card:hover.novel  { border-color: var(--accent4); }
+    .rank-card:hover.other  { border-color: var(--accent5); }
+
+    .rank-num {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1;
+    }
+    .rank-num.gold   { color: var(--yellow); }
+    .rank-num.silver { color: #b0b0b8; }
+    .rank-num.bronze { color: #c8905a; }
+    .rank-num.normal { color: var(--border); }
+
+    .rank-info {}
+    .rank-name {
+      font-size: .95rem;
+      font-weight: 700;
+      margin-bottom: .2rem;
+      line-height: 1.4;
+    }
+    .rank-meta {
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .rank-tag {
+      font-size: .65rem;
+      font-weight: 700;
+      padding: .15rem .6rem;
+      border-radius: 999px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .rank-price {
+      font-size: .75rem;
+      color: var(--muted);
+    }
+
+    .rank-btn {
+      font-size: .72rem;
+      font-weight: 700;
+      padding: .45rem 1rem;
+      border-radius: 999px;
+      color: #fff;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity .2s;
+    }
+    .rank-btn:hover { opacity: .85; }
+    .btn-rpg    { background: var(--accent1); }
+    .btn-action { background: var(--accent2); }
+    .btn-adv    { background: var(--accent3); }
+    .btn-novel  { background: var(--accent4); }
+    .btn-other  { background: var(--accent5); }
+
+    /* ── SIDEBAR LAYOUT ── */
+    .page-layout {
+      display: grid;
+      grid-template-columns: 160px 1fr 160px;
+      gap: 0;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .sidebar {
+      padding: 2rem .8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+    }
+    .sidebar-banner {
+      width: 140px;
+      background: var(--surface);
+      border: 1.5px dashed var(--border);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem .8rem;
+      gap: .5rem;
+      text-align: center;
+      position: sticky;
+      top: 5rem;
+      min-height: 200px;
+    }
+    .sidebar-banner-icon { font-size: 2rem; }
+    .sidebar-banner-text {
+      font-size: .65rem;
+      color: var(--muted);
+      line-height: 1.6;
+      font-weight: 500;
+    }
+    .sidebar-banner-label {
+      font-size: .58rem;
+      color: var(--border);
+      letter-spacing: .08em;
+    }
+    .main-content { min-width: 0; }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 0 4rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 2px solid var(--border);
+      padding: 2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--surface);
+      margin-top: 2rem;
+    }
+    .footer-logo {
+      font-family: 'Poppins', sans-serif;
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+    .footer-logo span { color: var(--accent1); }
+    .footer-copy { font-size: .72rem; color: var(--muted); }
+
+    /* ── DISCLAIMER ── */
+    .disclaimer {
+      text-align: center;
+      font-size: .72rem;
+      color: var(--muted);
+      padding: 1.5rem 4rem;
+      line-height: 1.8;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      header { padding: 1rem 1.5rem; }
+      .hero { padding: 3rem 1.5rem 2.5rem; }
+      .page-layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .section { padding: 2rem 1.5rem; }
+      .divider { margin: 0 1.5rem; }
+      footer, .disclaimer { padding-left: 1.5rem; padding-right: 1.5rem; }
+      footer { flex-direction: column; gap: .5rem; text-align: center; }
+      .rank-card { grid-template-columns: 40px 1fr; }
+      .rank-btn { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">MariGura <span>Hub</span></a>
+  <nav>
+    <a href="index.html">TOP</a>
+    <a href="#">有名ゲーム</a>
+    <a href="doujin.html">同人ゲーム</a>
+    <a href="#">おすすめランキング</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <span class="hero-badge">🎮 DLsite 同人ゲーム</span>
+  <h1 class="hero-title">ジャンル別<span>おすすめ</span>ランキング</h1>
+  <p class="hero-desc">RPG・アクション・アドベンチャー・ノベルなど、ジャンル別に厳選した同人ゲームをランキング形式でご紹介！</p>
+  <div class="hero-tags">
+    <a class="hero-tag t1" href="#rpg">🗡️ RPG</a>
+    <a class="hero-tag t2" href="#action">⚔️ アクション</a>
+    <a class="hero-tag t3" href="#adv">🔍 アドベンチャー</a>
+    <a class="hero-tag t4" href="#novel">📖 ノベル</a>
+    <a class="hero-tag t5" href="#other">🌟 その他</a>
+  </div>
+</section>
+
+<!-- SIDEBAR LAYOUT -->
+<div class="page-layout">
+
+  <!-- 左サイドバー -->
+  <aside class="sidebar">
+    <div class="sidebar-banner">
+      <span class="sidebar-banner-icon">🎮</span>
+      <p class="sidebar-banner-text">DLsite<br>バナー広告<br>準備中</p>
+      <p class="sidebar-banner-label">BANNER</p>
+    </div>
+    <div class="sidebar-banner">
+      <span class="sidebar-banner-icon">🕹️</span>
+      <p class="sidebar-banner-text">DLsite<br>バナー広告<br>準備中</p>
+      <p class="sidebar-banner-label">BANNER</p>
+    </div>
+  </aside>
+
+  <!-- メインコンテンツ -->
+  <div class="main-content">
+
+<!-- RPG -->
+<section class="section" id="rpg">
+  <div class="section-header">
+    <span class="section-icon">🗡️</span>
+    <span class="section-title">RPGランキング</span>
+    <span class="section-badge badge-rpg">TOP 5</span>
+  </div>
+  <div class="ranking-list">
+    <a class="rank-card rpg" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num gold">1</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">RPG</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-rpg" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+    <a class="rank-card rpg" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num silver">2</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">RPG</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-rpg" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+    <a class="rank-card rpg" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num bronze">3</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">RPG</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-rpg" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+    <a class="rank-card rpg" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num normal">4</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">RPG</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-rpg" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+    <a class="rank-card rpg" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num normal">5</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">RPG</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-rpg" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ACTION -->
+<section class="section" id="action">
+  <div class="section-header">
+    <span class="section-icon">⚔️</span>
+    <span class="section-title">アクションランキング</span>
+    <span class="section-badge badge-action">TOP 5</span>
+  </div>
+  <div class="ranking-list">
+    <a class="rank-card action" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num gold">1</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">アクション</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-action" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+    <a class="rank-card action" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num silver">2</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">アクション</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-action" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+    <a class="rank-card action" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num bronze">3</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">アクション</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-action" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+    <a class="rank-card action" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num normal">4</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">アクション</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-action" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+    <a class="rank-card action" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num normal">5</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">アクション</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-action" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ADVENTURE -->
+<section class="section" id="adv">
+  <div class="section-header">
+    <span class="section-icon">🔍</span>
+    <span class="section-title">アドベンチャーランキング</span>
+    <span class="section-badge badge-adv">TOP 5</span>
+  </div>
+  <div class="ranking-list">
+    <a class="rank-card adv" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num gold">1</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">アドベンチャー</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-adv" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+    <a class="rank-card adv" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num silver">2</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">アドベンチャー</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-adv" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+    <a class="rank-card adv" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num bronze">3</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">アドベンチャー</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-adv" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+    <a class="rank-card adv" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num normal">4</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">アドベンチャー</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-adv" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+    <a class="rank-card adv" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num normal">5</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">アドベンチャー</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-adv" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- NOVEL -->
+<section class="section" id="novel">
+  <div class="section-header">
+    <span class="section-icon">📖</span>
+    <span class="section-title">ノベルランキング</span>
+    <span class="section-badge badge-novel">TOP 5</span>
+  </div>
+  <div class="ranking-list">
+    <a class="rank-card novel" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num gold">1</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">ノベル</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-novel" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+    <a class="rank-card novel" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num silver">2</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">ノベル</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-novel" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+    <a class="rank-card novel" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num bronze">3</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">ノベル</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-novel" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+    <a class="rank-card novel" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num normal">4</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">ノベル</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-novel" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+    <a class="rank-card novel" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num normal">5</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">ノベル</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-novel" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- OTHER -->
+<section class="section" id="other">
+  <div class="section-header">
+    <span class="section-icon">🌟</span>
+    <span class="section-title">その他ランキング</span>
+    <span class="section-badge badge-other">TOP 5</span>
+  </div>
+  <div class="ranking-list">
+    <a class="rank-card other" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num gold">1</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">その他</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-other" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+    <a class="rank-card other" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num silver">2</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">その他</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-other" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+    <a class="rank-card other" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num bronze">3</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">その他</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-other" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+    <a class="rank-card other" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num normal">4</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">その他</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-other" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+    <a class="rank-card other" href="#" target="_blank" rel="noopener sponsored">
+      <span class="rank-num normal">5</span>
+      <div class="rank-info">
+        <p class="rank-name">作品名（準備中）</p>
+        <div class="rank-meta">
+          <span class="rank-tag">その他</span>
+          <span class="rank-price">価格：準備中</span>
+        </div>
+      </div>
+      <a class="rank-btn btn-other" href="#" target="_blank" rel="noopener sponsored">DLsiteで見る</a>
+    </a>
+  </div>
+</section>
+
+  </div><!-- /main-content -->
+
+  <!-- 右サイドバー -->
+  <aside class="sidebar">
+    <div class="sidebar-banner">
+      <span class="sidebar-banner-icon">⭐</span>
+      <p class="sidebar-banner-text">DLsite<br>バナー広告<br>準備中</p>
+      <p class="sidebar-banner-label">BANNER</p>
+    </div>
+    <div class="sidebar-banner">
+      <span class="sidebar-banner-icon">🎯</span>
+      <p class="sidebar-banner-text">DLsite<br>バナー広告<br>準備中</p>
+      <p class="sidebar-banner-label">BANNER</p>
+    </div>
+  </aside>
+
+</div><!-- /page-layout -->
+
+<p class="disclaimer">
+  ※ 本ページのリンクはDLsiteアフィリエイトリンクを含みます。<br>
+  リンク経由で購入された場合、当サイトに一定の報酬が発生することがあります。
+</p>
+
+<footer>
+  <span class="footer-logo">MariGura <span>Hub</span></span>
+  <span class="footer-copy">© 2026 MariGura Hub — ゲーム攻略・レビュー</span>
+</footer>
+
+</body>
+</html>
