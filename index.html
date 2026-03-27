@@ -162,9 +162,8 @@
       padding: 6rem 4rem 5rem;
       overflow: hidden;
       animation: fadeUp .7s .1s ease both;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
+      display: flex;
+      justify-content: center;
       align-items: center;
     }
 
@@ -173,13 +172,15 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse at 70% 50%, rgba(74,143,255,.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 50% 50%, rgba(74,143,255,.08) 0%, transparent 60%),
         radial-gradient(ellipse at 20% 80%, rgba(201,168,76,.06) 0%, transparent 50%);
     }
 
     .hero-inner {
       position: relative;
-      max-width: 700px;
+      max-width: 960px;
+      width: 100%;
+      text-align: center;
     }
 
     .hero-cards {
@@ -247,9 +248,17 @@
       margin-bottom: 1.2rem;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: .8rem;
     }
     .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .hero-eyebrow::after {
       content: '';
       display: block;
       width: 32px;
@@ -271,8 +280,8 @@
       font-size: 1rem;
       line-height: 1.9;
       color: var(--muted);
-      max-width: 50ch;
-      margin-bottom: 2.5rem;
+      max-width: 60ch;
+      margin: 0 auto 2.5rem;
     }
 
     .hero-cta {
@@ -634,11 +643,18 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 960px) {
       header { padding: 1rem 1.5rem; }
-      .hero { padding: 4rem 1.5rem 3rem; grid-template-columns: 1fr; gap: 2rem; }
+      .hero { padding: 4rem 1.5rem 3rem; }
+      .hero-inner { max-width: 100%; }
       .cards { grid-template-columns: 1fr; }
       .ranking-grid { grid-template-columns: repeat(2, 1fr); }
       .section-head, .ranking, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
-      .hero-deco { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 3rem 1.2rem 2.5rem; }
+      .ranking-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: clamp(1.8rem, 8vw, 2.6rem); }
+      .search-btn { padding: .5rem 1rem; }
     }
   </style>
   <!-- Google Analytics -->
@@ -678,14 +694,6 @@
 </div>
 
 <section class="hero">
-  <svg class="hero-deco" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <pattern id="hex" x="0" y="0" width="60" height="52" patternUnits="userSpaceOnUse">
-        <polygon points="30,2 58,17 58,47 30,62 2,47 2,17" fill="none" stroke="#4a8fff" stroke-width="1"/>
-      </pattern>
-    </defs>
-    <rect width="500" height="500" fill="url(#hex)"/>
-  </svg>
   <div class="hero-inner">
     <p class="hero-eyebrow">Game Guide &amp; Review</p>
     <h1 class="hero-title">
@@ -697,28 +705,6 @@
       LoL攻略記事・YouTube動画など、ゲームをもっと楽しむための情報サイトです。
     </p>
     <a class="hero-cta" href="articles.html">▶ 記事一覧を見る</a>
-  </div>
-  <div class="hero-cards">
-    <a class="hero-site-card" href="lol-beginner.html">
-      <div class="hero-card-icon lol">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="#4a8fff" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="#4a8fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div>
-        <p class="hero-card-label">League of Legends</p>
-        <p class="hero-card-name">LoL攻略記事</p>
-      </div>
-      <span class="hero-card-arrow">→</span>
-    </a>
-    <a class="hero-site-card" href="https://www.youtube.com/channel/UCNIQTigIQXtUQtB3td0AIrg" target="_blank" rel="noopener">
-      <div class="hero-card-icon yt">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="#ff4444" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
-      </div>
-      <div>
-        <p class="hero-card-label">YouTube</p>
-        <p class="hero-card-name">marigura_Hubch</p>
-      </div>
-      <span class="hero-card-arrow">→</span>
-    </a>
   </div>
 </section>
 
