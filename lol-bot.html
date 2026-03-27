@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LoL BOTレーン（ADC）初心者ガイド｜おすすめチャンピオン5選 — MariGura Hub</title>
+  <title>LoL BOTレーン 初心者ガイド｜おすすめチャンピオン5選 — MariGura Hub</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Noto+Sans+JP:wght@300;400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
   <style>
@@ -16,7 +16,7 @@
       --gold2:   #f0d080;
       --blue:    #4a8fff;
       --text:    #cdd6e8;
-      --muted:   #5a6580;
+      --muted:   #8a9ab8;
     }
     html { font-size: 16px; scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--text); font-family: 'Noto Sans JP', sans-serif; font-weight: 300; min-height: 100vh; overflow-x: hidden; }
@@ -33,13 +33,13 @@
     .article-date, .article-updated { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .1em; color: var(--muted); }
     h1.article-title { font-family: 'Rajdhani', sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; line-height: 1.2; letter-spacing: .04em; color: #e8eef8; margin-bottom: 1rem; }
     h1.article-title .hl { color: var(--gold); }
-    .article-lead { font-size: 1rem; line-height: 2; color: var(--muted); border-left: 3px solid var(--gold); padding-left: 1.2rem; margin: 2rem 0; }
+    .article-lead { font-size: 1rem; line-height: 2; color: #b8c8dc; border-left: 3px solid var(--gold); padding-left: 1.2rem; margin: 2rem 0; }
     .learn-box { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--gold); padding: 1.4rem 1.8rem; margin: 2rem 0; }
     .learn-box-title { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: .8rem; font-weight: 700; }
     .learn-box ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
     .learn-box li { font-size: .88rem; color: var(--text); line-height: 1.7; padding-left: 1.2rem; position: relative; }
     .learn-box li::before { content: '▸'; position: absolute; left: 0; color: var(--gold); font-size: .7rem; top: .2rem; }
-    .article-body { font-size: .95rem; line-height: 2.1; color: #9aa5be; }
+    .article-body { font-size: .95rem; line-height: 2.1; color: #c0cce0; }
     .article-body p { margin-bottom: 1.6rem; }
     .article-body h2 { font-family: 'Rajdhani', sans-serif; font-size: 1.2rem; font-weight: 700; letter-spacing: .08em; color: #e8eef8; margin: 3rem 0 1rem; padding-bottom: .6rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: .8rem; }
     .article-body h2::before { content: ''; display: block; width: 4px; height: 1.2em; background: var(--gold); flex-shrink: 0; }
@@ -48,13 +48,25 @@
     .champ-card:hover { border-color: var(--gold); }
     .champ-num { font-family: 'Orbitron', monospace; font-size: 1.6rem; font-weight: 900; color: var(--border); line-height: 1; padding-top: .2rem; }
     .champ-card:nth-child(1) .champ-num { color: var(--gold); }
+    .champ-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; object-position: top; border: 1px solid var(--border); margin-bottom: .6rem; display: block; }
     .champ-name { font-family: 'Rajdhani', sans-serif; font-size: 1.1rem; font-weight: 700; letter-spacing: .06em; color: #e8eef8; margin-bottom: .3rem; }
     .champ-role { font-family: 'Rajdhani', sans-serif; font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--blue); margin-bottom: .6rem; }
-    .champ-desc { font-size: .85rem; line-height: 1.8; color: var(--muted); }
+    .champ-desc { font-size: .85rem; line-height: 1.8; color: #b8c8dc; }
     .champ-tags { display: flex; gap: .5rem; margin-top: .6rem; flex-wrap: wrap; }
     .tag { font-family: 'Rajdhani', sans-serif; font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border); padding: .1rem .5rem; }
-    .tbd-notice { background: rgba(201,168,76,.06); border: 1px dashed var(--gold); padding: 1.4rem 1.6rem; display: flex; align-items: center; gap: 1rem; color: var(--gold); font-family: 'Rajdhani', sans-serif; font-size: .85rem; letter-spacing: .08em; }
-    .tbd-icon { font-size: 1.4rem; flex-shrink: 0; opacity: .6; }
+    .champ-counter { margin-top: .8rem; padding-top: .8rem; border-top: 1px solid var(--border); }
+    .champ-counter-label { font-family: 'Rajdhani', sans-serif; font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: #e05555; margin-bottom: .4rem; font-weight: 700; }
+    .champ-counter-list { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .counter-tag { font-family: 'Rajdhani', sans-serif; font-size: .68rem; letter-spacing: .1em; color: #e05555; border: 1px solid rgba(224,85,85,.4); padding: .15rem .6rem; background: rgba(224,85,85,.06); }
+    .champ-build { margin-top: .8rem; padding-top: .8rem; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: .6rem; }
+    .champ-build-row { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+    .champ-build-label { font-family: 'Rajdhani', sans-serif; font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); font-weight: 700; white-space: nowrap; min-width: 110px; }
+    .champ-build-value { font-family: 'Rajdhani', sans-serif; font-size: .78rem; color: var(--text); letter-spacing: .04em; }
+    .item-icons-wrap { display: flex; flex-direction: column; gap: .3rem; }
+    .item-icons { display: flex; align-items: center; gap: .4rem; flex-wrap: wrap; margin-bottom: .2rem; }
+    .item-icon { width: 28px; height: 28px; border: 1px solid var(--border); border-radius: 3px; object-fit: cover; }
+    .item-arrow { font-size: .7rem; color: var(--muted); }
+    .disclaimer-note { font-family: 'Rajdhani', sans-serif; font-size: .62rem; letter-spacing: .1em; color: var(--muted); margin-top: .8rem; padding-top: .8rem; border-top: 1px solid var(--border); }
     .info-box { background: var(--surface); border: 1px solid var(--border); padding: 1.4rem 1.8rem; margin: 1.5rem 0; }
     .info-box-title { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; font-weight: 700; }
     .info-table { width: 100%; border-collapse: collapse; font-size: .85rem; }
@@ -66,7 +78,7 @@
     .summary-box ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
     .summary-box li { font-size: .88rem; color: var(--text); line-height: 1.8; padding-left: 1.4rem; position: relative; }
     .summary-box li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-size: .8rem; }
-    .article-closing { margin-top: 3rem; padding: 1.5rem; border: 1px solid var(--border); border-left: 3px solid var(--blue); font-size: .95rem; line-height: 2; color: var(--muted); font-style: italic; }
+    .article-closing { margin-top: 3rem; padding: 1.5rem; border: 1px solid var(--border); border-left: 3px solid var(--blue); font-size: .95rem; line-height: 2; color: #b8c8dc; font-style: italic; }
     .share-section { margin: 3rem 0 1rem; padding-top: 2rem; border-top: 1px solid var(--border); }
     .share-label { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; font-weight: 500; }
     .share-buttons { display: flex; gap: .8rem; flex-wrap: wrap; }
@@ -75,39 +87,10 @@
     .share-btn.x    { background: #000; border: 1px solid #333; }
     .share-btn.line { background: #06c755; }
     .share-btn.copy { background: var(--gold); color: #000; }
-    .references { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
-    .references-title { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; font-weight: 500; }
-    .references ol { padding-left: 1.2rem; }
-    .references li { font-size: .8rem; line-height: 2; color: var(--muted); margin-bottom: .3rem; }
-    .references a { color: var(--gold); text-decoration: underline; text-underline-offset: 2px; }
     footer { border-top: 1px solid var(--border); padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; }
     .footer-logo { font-family: 'Orbitron', monospace; font-size: .9rem; font-weight: 900; color: var(--gold); opacity: .5; }
     .footer-copy { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .1em; color: var(--muted); }
-
-    /* DOUJIN LINK */
-    .doujin-link { margin-bottom: 2rem; text-align: center; }
-    .doujin-link-btn {
-      display: inline-block;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: .78rem;
-      letter-spacing: .12em;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      padding: .5rem 1.4rem;
-      text-decoration: none;
-      transition: color .2s, border-color .2s;
-    }
-    .doujin-link-btn:hover { color: var(--gold); border-color: var(--gold); }
-
-    .riot-notice {
-      font-size: .65rem;
-      line-height: 1.7;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-      padding: 1.2rem 4rem;
-      text-align: center;
-      opacity: .7;
-    }
+    .riot-notice { font-size: .65rem; line-height: 1.7; color: var(--muted); border-top: 1px solid var(--border); padding: 1.2rem 4rem; text-align: center; opacity: .7; }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 700px) {
       header { padding: 1rem 1.5rem; }
@@ -136,142 +119,278 @@
 
 <article class="article-wrap">
   <div class="article-meta">
-    <span class="cat-badge">League of Legends — BOTレーン（ADC）</span>
+    <span class="cat-badge">League of Legends — ボット</span>
     <span class="article-date">2026.03.27</span>
     <span class="article-updated">最終更新：2026年3月27日</span>
   </div>
 
   <h1 class="article-title">
-    LoL <span class="hl">BOTレーン（ADC）</span> 初心者ガイド｜<br>
+    LoL <span class="hl">BOTレーン</span> 初心者ガイド｜<br>
     おすすめチャンピオン5選
   </h1>
 
-  <p class="article-lead">ADCはチームのダメージ源として後衛から攻撃を続けるロール。序盤のCS稼ぎから後半の集団戦での立ち回りまで、着実に成長を実感できるポジションです。</p>
+  <p class="article-lead">BOTレーン（ADC）はサポートとペアを組み、継続的な物理ダメージで試合を制するキャリーポジション。序盤のファームをしっかり積み上げてアイテムを揃えれば、集団戦で圧倒的な存在感を発揮できます。</p>
 
   <div class="learn-box">
     <p class="learn-box-title">この記事でわかること</p>
     <ul>
-      <li>ADCの役割と基本的な立ち回り</li>
-      <li>初心者ADCチャンピオンを選ぶポイント</li>
-      <li>おすすめADCチャンピオン5選（詳細解説付き）</li>
-      <li>集団戦でのポジショニングの基本</li>
+      <li>BOTレーン（ADC）の役割と基本的な動き方</li>
+      <li>初心者ADCに必要な3つのこと</li>
+      <li>おすすめBOTチャンピオン5選（詳細解説付き）</li>
+      <li>ポジショニングとCSの重要性</li>
     </ul>
   </div>
 
   <div class="article-body">
 
     <h2>BOTレーン（ADC）の役割とは</h2>
-    <p>ADCは後列から安定してダメージを出し続けることが役割。死なずにアイテムを揃えることが最優先です。</p>
+    <p>ADCの最大の役割は継続的な物理ダメージを出し続けることです。タンクを溶かし、オブジェクトを素早く破壊する力はADCにしかできません。序盤はCSを優先してアイテムを揃え、中盤以降の集団戦で真価を発揮しましょう。</p>
 
-    <h2>ADC初心者の基本戦略</h2>
+    <h2>ADC初心者の基本チェックリスト</h2>
     <div class="info-box">
-      <p class="info-box-title">BOTレーン（ADC） 初心者チェックリスト</p>
+      <p class="info-box-title">BOTレーン 初心者チェックリスト</p>
       <table class="info-table">
         <thead><tr><th>ポイント</th><th>内容</th></tr></thead>
         <tbody>
-          <tr><td>① CSを徹底的に稼ぐ</td><td>序盤10分で60CS（1分6CS）を目標に。ゴールドの安定した稼ぎがアイテム差につながる</td></tr>
-          <tr><td>② 後衛ポジションを守る</td><td>集団戦では前に出ず、後ろから安全にダメージを出し続けることが最重要</td></tr>
-          <tr><td>③ サポートと連携する</td><td>サポートのスキルに合わせてエンゲージ・ハラスのタイミングを合わせる</td></tr>
+          <tr><td>① CSを最優先にファームする</td><td>序盤はキルを狙うより、ミニオンのCSを取り続けてゴールドを稼ぐことが最重要</td></tr>
+          <tr><td>② 安全なポジションを維持する</td><td>ADCは体力が低く狙われやすい。常に味方サポートの後ろに位置取りしてデスを避けよう</td></tr>
+          <tr><td>③ なるべく川や視界のない場所にいかない</td><td>ADCは体力が低く単独で川などに入ると狙われやすい。視界が取れていない場所にはサポートと一緒でも慎重に行動しよう</td></tr>
         </tbody>
       </table>
     </div>
 
     <h2>初心者におすすめのチャンピオン TOP5</h2>
 
-    <div class="tbd-notice">
-      <span class="tbd-icon">⚙</span>
-      <span>このセクションのチャンピオンは後で指定されます。チャンピオン名・ロール・説明・タグを教えてください。</span>
-    </div>
-
     <div class="champ-list">
 
+      <!-- アッシュ -->
       <div class="champ-card">
         <span class="champ-num">01</span>
         <div>
-          <p class="champ-role">BOT (ADC) / ※ロール未設定</p>
-          <p class="champ-name">チャンピオン 1（未設定）</p>
-          <p class="champ-desc">このチャンピオンの説明はまだ入力されていません。後ほど指定してください。</p>
+          <img class="champ-img" src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ashe_0.jpg" alt="アッシュ">
+          <p class="champ-role">BOT / マークスマン</p>
+          <p class="champ-name">アッシュ</p>
+          <p class="champ-desc">全ADC中トップクラスの長射程と、通常攻撃にスロウが付くパッシブで相手を安全に一方的にハラスできる入門チャンピオン。Eでジャングルの視界を確保でき、Rの矢は全マップにスタンを付与できる強力なウルト。スキルコンボが少なくポジショニングを学ぶのに最適。</p>
           <div class="champ-tags">
-            <span class="tag">TBD</span>
+            <span class="tag">初心者★★★</span><span class="tag">長射程</span><span class="tag">スロウ付きAA</span><span class="tag">全体スタンR</span>
+          </div>
+          <div class="disclaimer-note">※ BAN推奨・サモナースペル・ビルドはいずれも一例です。環境やパッチにより最適解は異なります。</div>
+          <div class="champ-counter">
+            <p class="champ-counter-label">⚠ BAN推奨チャンピオン</p>
+            <div class="champ-counter-list">
+              <span class="counter-tag">ドレイヴン</span>
+              <span class="counter-tag">カイサ</span>
+            </div>
+          </div>
+          <div class="champ-build">
+            <div class="champ-build-row"><span class="champ-build-label">サモナースペル</span><span class="champ-build-value">フラッシュ ＋ バリア</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">キーストーン</span><span class="champ-build-value">リーサルテンポ</span></div>
+            <div class="champ-build-row">
+              <span class="champ-build-label">ビルド</span>
+              <div class="item-icons-wrap">
+                <div class="item-icons">
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/6672.png" alt="クラーケンスレイヤー" title="クラーケンスレイヤー">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/223006.png" alt="バーサーカーブーツ" title="バーサーカーブーツ">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/223046.png" alt="ファントムダンサー" title="ファントムダンサー">
+                </div>
+                <span class="champ-build-value">クラーケンスレイヤー → バーサーカーブーツ → ファントムダンサー</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- ミス・フォーチュン -->
       <div class="champ-card">
         <span class="champ-num">02</span>
         <div>
-          <p class="champ-role">BOT (ADC) / ※ロール未設定</p>
-          <p class="champ-name">チャンピオン 2（未設定）</p>
-          <p class="champ-desc">このチャンピオンの説明はまだ入力されていません。後ほど指定してください。</p>
+          <img class="champ-img" src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/MissFortune_0.jpg" alt="ミス・フォーチュン">
+          <p class="champ-role">BOT / マークスマン</p>
+          <p class="champ-name">ミス・フォーチュン</p>
+          <p class="champ-desc">QのハラスとCSを同時に狙える攻撃的なADC。ダメージを受けなければWで移動速度が上がり立ち回りがしやすい。Rの扇形弾幕は集団戦や敵が密集した場面で強烈なダメージを叩き出す。シンプルなスキルで序盤から積極的に動けるため、初心者でも存在感を出しやすい。</p>
           <div class="champ-tags">
-            <span class="tag">TBD</span>
+            <span class="tag">初心者★★★</span><span class="tag">序盤強い</span><span class="tag">ハラス◎</span><span class="tag">強力なR</span>
+          </div>
+          <div class="disclaimer-note">※ BAN推奨・サモナースペル・ビルドはいずれも一例です。環境やパッチにより最適解は異なります。</div>
+          <div class="champ-counter">
+            <p class="champ-counter-label">⚠ BAN推奨チャンピオン</p>
+            <div class="champ-counter-list">
+              <span class="counter-tag">ジンクス</span>
+              <span class="counter-tag">ケイトリン</span>
+            </div>
+          </div>
+          <div class="champ-build">
+            <div class="champ-build-row"><span class="champ-build-label">サモナースペル</span><span class="champ-build-value">フラッシュ ＋ バリア</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">キーストーン</span><span class="champ-build-value">ファーストストライク</span></div>
+            <div class="champ-build-row">
+              <span class="champ-build-label">ビルド</span>
+              <div class="item-icons-wrap">
+                <div class="item-icons">
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/223072.png" alt="ブラッドサースター" title="ブラッドサースター">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/223009.png" alt="スイフトネスブーツ" title="スイフトネスブーツ">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/6676.png" alt="コレクター" title="コレクター">
+                </div>
+                <span class="champ-build-value">ブラッドサースター → スイフトネスブーツ → コレクター</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- ジンクス -->
       <div class="champ-card">
         <span class="champ-num">03</span>
         <div>
-          <p class="champ-role">BOT (ADC) / ※ロール未設定</p>
-          <p class="champ-name">チャンピオン 3（未設定）</p>
-          <p class="champ-desc">このチャンピオンの説明はまだ入力されていません。後ほど指定してください。</p>
+          <img class="champ-img" src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Jinx_0.jpg" alt="ジンクス">
+          <p class="champ-role">BOT / マークスマン</p>
+          <p class="champ-name">ジンクス</p>
+          <p class="champ-desc">キルやアシストを取るたびにパッシブで移動速度と攻撃速度が急上昇し、スノーボールが非常に強力なADC。試合が長引く初心者帯の展開と相性抜群で、アイテムを揃えた後半が特に強い。Rの超長距離ロケットで他レーンに介入できるのも魅力。</p>
           <div class="champ-tags">
-            <span class="tag">TBD</span>
+            <span class="tag">初心者★★★</span><span class="tag">後半超強力</span><span class="tag">スノーボール</span><span class="tag">長距離R</span>
+          </div>
+          <div class="disclaimer-note">※ BAN推奨・サモナースペル・ビルドはいずれも一例です。環境やパッチにより最適解は異なります。</div>
+          <div class="champ-counter">
+            <p class="champ-counter-label">⚠ BAN推奨チャンピオン</p>
+            <div class="champ-counter-list">
+              <span class="counter-tag">ドレイヴン</span>
+              <span class="counter-tag">カリスタ</span>
+            </div>
+          </div>
+          <div class="champ-build">
+            <div class="champ-build-row"><span class="champ-build-label">サモナースペル</span><span class="champ-build-value">フラッシュ ＋ バリア</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">キーストーン</span><span class="champ-build-value">リーサルテンポ</span></div>
+            <div class="champ-build-row">
+              <span class="champ-build-label">ビルド</span>
+              <div class="item-icons-wrap">
+                <div class="item-icons">
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/2523.png" alt="ヘクスオブティックC44" title="ヘクスオブティックC44">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/223006.png" alt="バーサーカーブーツ" title="バーサーカーブーツ">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/223046.png" alt="ファントムダンサー" title="ファントムダンサー">
+                </div>
+                <span class="champ-build-value">ヘクスオブティックC44 → バーサーカーブーツ → ファントムダンサー</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- ケイトリン -->
       <div class="champ-card">
         <span class="champ-num">04</span>
         <div>
-          <p class="champ-role">BOT (ADC) / ※ロール未設定</p>
-          <p class="champ-name">チャンピオン 4（未設定）</p>
-          <p class="champ-desc">このチャンピオンの説明はまだ入力されていません。後ほど指定してください。</p>
+          <img class="champ-img" src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Caitlyn_0.jpg" alt="ケイトリン">
+          <p class="champ-role">BOT / マークスマン</p>
+          <p class="champ-name">ケイトリン</p>
+          <p class="champ-desc">全ADC最長クラスの射程を持ち、序盤レーン戦で相手を一方的に押し込める強力なハラスが武器。Wの罠でゾーン管理もでき、パッシブの確定クリティカルで瞬間火力も出せる。Rで体力の少ない敵を確実に仕留める追撃も強力。射程を活かした安全な立ち回りを学ぶのに最適な1体。</p>
           <div class="champ-tags">
-            <span class="tag">TBD</span>
+            <span class="tag">初心者★★☆</span><span class="tag">最長射程</span><span class="tag">レーン戦最強クラス</span><span class="tag">罠ゾーン</span>
+          </div>
+          <div class="disclaimer-note">※ BAN推奨・サモナースペル・ビルドはいずれも一例です。環境やパッチにより最適解は異なります。</div>
+          <div class="champ-counter">
+            <p class="champ-counter-label">⚠ BAN推奨チャンピオン</p>
+            <div class="champ-counter-list">
+              <span class="counter-tag">ジン</span>
+              <span class="counter-tag">ジンクス</span>
+            </div>
+          </div>
+          <div class="champ-build">
+            <div class="champ-build-row"><span class="champ-build-label">サモナースペル</span><span class="champ-build-value">フラッシュ ＋ バリア</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">キーストーン</span><span class="champ-build-value">リーサルテンポ</span></div>
+            <div class="champ-build-row">
+              <span class="champ-build-label">ビルド</span>
+              <div class="item-icons-wrap">
+                <div class="item-icons">
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/6676.png" alt="コレクター" title="コレクター">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/223006.png" alt="バーサーカーブーツ" title="バーサーカーブーツ">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/223031.png" alt="インフィニティエッジ" title="インフィニティエッジ">
+                </div>
+                <span class="champ-build-value">コレクター → バーサーカーブーツ → インフィニティエッジ</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- ジン -->
       <div class="champ-card">
         <span class="champ-num">05</span>
         <div>
-          <p class="champ-role">BOT (ADC) / ※ロール未設定</p>
-          <p class="champ-name">チャンピオン 5（未設定）</p>
-          <p class="champ-desc">このチャンピオンの説明はまだ入力されていません。後ほど指定してください。</p>
+          <img class="champ-img" src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Jhin_0.jpg" alt="ジン">
+          <p class="champ-role">BOT / マークスマン</p>
+          <p class="champ-name">ジン</p>
+          <p class="champ-desc">4発リロード式の通常攻撃と、4発目の高ダメージ確定クリティカルが特徴的なマークスマン。Wの超長距離スネアで敵を拘束し、Rの長射程4連射でキャッチや集団戦に貢献できる。攻撃速度が固定のため通常のADCとは感覚が異なるが、慣れれば非常に高い火力を発揮できる。</p>
           <div class="champ-tags">
-            <span class="tag">TBD</span>
+            <span class="tag">初心者★★☆</span><span class="tag">高瞬間火力</span><span class="tag">長距離スネア</span><span class="tag">独特の操作感</span>
+          </div>
+          <div class="disclaimer-note">※ BAN推奨・サモナースペル・ビルドはいずれも一例です。環境やパッチにより最適解は異なります。</div>
+          <div class="champ-counter">
+            <p class="champ-counter-label">⚠ BAN推奨チャンピオン</p>
+            <div class="champ-counter-list">
+              <span class="counter-tag">ジンクス</span>
+              <span class="counter-tag">カイサ</span>
+            </div>
+          </div>
+          <div class="champ-build">
+            <div class="champ-build-row"><span class="champ-build-label">サモナースペル</span><span class="champ-build-value">フラッシュ ＋ バリア</span></div>
+            <div class="champ-build-row"><span class="champ-build-label">キーストーン</span><span class="champ-build-value">フリートフットワーク</span></div>
+            <div class="champ-build-row">
+              <span class="champ-build-label">ビルド</span>
+              <div class="item-icons-wrap">
+                <div class="item-icons">
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/6676.png" alt="コレクター" title="コレクター">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/223009.png" alt="スイフトネスブーツ" title="スイフトネスブーツ">
+                  <span class="item-arrow">→</span>
+                  <img class="item-icon" src="https://ddragon.leagueoflegends.com/cdn/16.6.1/img/item/223031.png" alt="インフィニティエッジ" title="インフィニティエッジ">
+                </div>
+                <span class="champ-build-value">コレクター → スイフトネスブーツ → インフィニティエッジ</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
 
     <h2>最速で上達するための考え方</h2>
-    <p>初心者がやりがちな失敗は「いろんなチャンピオンを試しすぎる」こと。最初は1〜2体に絞って、そのチャンピオンの動きが手に馴染むまで使い続けることが最も効率的な上達方法です。</p>
-    <p>また、負けたときは「なぜ負けたか」を1つだけ考えるクセをつけましょう。ポジションが悪かったのか、CSが取れていなかったのか、視野が足りなかったのか──1つ改善するだけでランクは上がっていきます。</p>
+    <p>ADCで最初に意識すべきことは「デスしないこと」と「CSを取り続けること」の2点です。どれだけキルを取ったとしても、デスが多ければアイテムが揃わず後半に弱くなってしまいます。まずは生き残りながらファームを積み上げる練習をしましょう。</p>
+    <p>集団戦では一番後ろから通常攻撃を打ち続けることを意識してください。前に出すぎてデスするのがADC初心者に最も多い失敗です。</p>
 
     <div class="summary-box">
       <p class="summary-box-title">まとめ</p>
       <ul>
-        <li>ADCはCSを稼いでアイテムを揃え、後衛から安定してダメージを出すロール</li>
-        <li>序盤は無理なキルを狙わず、CS優先で安全に動くことが基本</li>
-        <li>集団戦では後ろのポジションをキープして死なないことが最重要</li>
-        <li>サポートのスキルや動きに合わせて行動するとレーン戦が安定する</li>
+        <li>アッシュはポジショニング学習に最適な入門ADC。長射程とスロウが強力</li>
+        <li>ミス・フォーチュンは序盤からハラスが強く、Rの集団戦火力が高い</li>
+        <li>ジンクスは後半型で初心者帯の長試合と相性◎。キル後のスノーボールが爽快</li>
+        <li>ケイトリンは全ADC最長射程でレーン戦最強クラス。射程を活かした立ち回りが学べる</li>
+        <li>ジンは独特の操作感だが慣れると高火力を発揮。超長距離スネアとRが強力</li>
       </ul>
     </div>
 
-    <p class="article-closing">ADCは序盤が地味に見えますが、アイテムが揃った後半は試合を決定づける存在になれます。まずはCS稼ぎを徹底することから始めましょう。</p>
+    <p class="article-closing">ADCはLoLの中でも特にポジショニングが問われるロールです。まずは1体に絞って「デスしない立ち回り」と「CSを積み上げること」を体で覚えていきましょう。</p>
 
-
-    <div class="doujin-link">
-      <a href="doujin.html" class="doujin-link-btn">【同人ゲームも紹介中】</a>
-    </div>
     <div class="share-section">
       <p class="share-label">この記事をシェアする</p>
       <div class="share-buttons">
-        <a class="share-btn x" href="https://twitter.com/intent/tweet?text=LoL BOTレーン（ADC）初心者ガイド｜おすすめチャンピオン5選&url=https://marigura.com/lol-bot.html" target="_blank" rel="noopener">𝕏 でシェア</a>
+        <a class="share-btn x" href="https://twitter.com/intent/tweet?text=LoL BOTレーン 初心者ガイド｜おすすめチャンピオン5選&url=https://marigura.com/lol-bot.html" target="_blank" rel="noopener">𝕏 でシェア</a>
         <a class="share-btn line" href="https://social-plugins.line.me/lineit/share?url=https://marigura.com/lol-bot.html" target="_blank" rel="noopener">LINE でシェア</a>
         <button class="share-btn copy" onclick="navigator.clipboard.writeText(location.href).then(()=>alert('URLをコピーしました'))">リンクをコピー</button>
       </div>
     </div>
 </div>
 </article>
+
+  <div class="riot-notice">
+    MariGura Hubは、ライアットゲームズが公式承認するものではなく、ライアットゲームズ又はリーグ・オブ・レジェンドの製作・管理に正式に関与したいかなる者の見解・意見に基づくものではありません。リーグ・オブ・レジェンド及びライアットゲームズは、Riot Games, Inc.の商標又は登録商標です。リーグ・オブ・レジェンド © Riot Games, Inc.
+  </div>
 
 <footer>
   <span class="footer-logo">MariGura Hub</span>
