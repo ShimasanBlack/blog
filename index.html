@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MariGura Hub — ゲーム攻略・レビュー</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Noto+Sans+JP:wght@300;400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0a0c10;
+      --surface: #10141c;
+      --border:  #1e2535;
+      --gold:    #c9a84c;
+      --gold2:   #f0d080;
+      --blue:    #4a8fff;
+      --text:    #cdd6e8;
+      --muted:   #5a6580;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* scanline texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,.08) 2px,
+        rgba(0,0,0,.08) 4px
+      );
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* ── HEADER ── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(10,12,16,.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      animation: fadeDown .5s ease both;
+    }
+
+    .logo {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.3rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-decoration: none;
+      color: var(--gold);
+      text-shadow: 0 0 20px rgba(201,168,76,.4);
+    }
+    .logo span { color: var(--text); }
+
+    nav { display: flex; gap: 2rem; align-items: center; }
+    nav a {
+      font-size: .78rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 500;
+    }
+    nav a:hover { color: var(--gold); }
+    nav a.active { color: var(--gold); }
+
+    .nav-icons { display: flex; align-items: center; gap: 1rem; }
+    .nav-icon {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+      display: flex;
+      align-items: center;
+    }
+    .nav-icon:hover { color: var(--gold); }
+    .nav-icon svg { width: 18px; height: 18px; fill: currentColor; }
+
+    .search-btn {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .85rem;
+      letter-spacing: .12em;
+      color: var(--muted);
+      background: none;
+      border: 1px solid var(--border);
+      padding: .5rem 2.4rem;
+      cursor: pointer;
+      transition: color .2s, border-color .2s;
+    }
+    .search-btn svg { width: 16px; height: 16px; }
+    .search-btn:hover { color: var(--gold); border-color: var(--gold); }
+
+    /* SEARCH MODAL */
+    .search-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.7);
+      z-index: 200;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 8rem;
+    }
+    .search-overlay.open { display: flex; }
+    .search-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      width: 100%;
+      max-width: 560px;
+      padding: 1.2rem;
+      display: flex;
+      gap: .8rem;
+      align-items: center;
+    }
+    .search-input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 1rem;
+      color: var(--text);
+    }
+    .search-input::placeholder { color: var(--muted); }
+    .search-close {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.2rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      padding: 6rem 4rem 5rem;
+      overflow: hidden;
+      animation: fadeUp .7s .1s ease both;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 70% 50%, rgba(74,143,255,.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(201,168,76,.06) 0%, transparent 50%);
+    }
+
+    .hero-inner {
+      position: relative;
+      max-width: 700px;
+    }
+
+    .hero-cards {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+    }
+
+    .hero-site-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: .9rem 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color .2s, background .2s;
+    }
+    .hero-site-card:hover { border-color: var(--gold); background: #141820; }
+
+    .hero-card-icon {
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .hero-card-icon.lol  { border-color: rgba(74,143,255,.3); background: rgba(74,143,255,.08); }
+    .hero-card-icon.doujin { border-color: rgba(201,168,76,.3); background: rgba(201,168,76,.08); }
+    .hero-card-icon.yt   { border-color: rgba(255,0,0,.3); background: rgba(255,0,0,.08); }
+
+    .hero-card-label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .6rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .2rem;
+    }
+    .hero-card-name {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .9rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      color: #cdd6e8;
+    }
+    .hero-card-arrow {
+      margin-left: auto;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .75rem;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .75rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-title {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: .04em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title .hl { color: var(--gold); }
+
+    .hero-desc {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--muted);
+      max-width: 50ch;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      background: var(--gold);
+      color: #000;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .85rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: .75rem 2rem;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+      transition: background .2s, transform .15s;
+    }
+    .hero-cta:hover { background: var(--gold2); transform: translateY(-2px); }
+
+    /* decorative hex grid */
+    .hero-deco {
+      position: absolute;
+      right: -80px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: .06;
+      width: 500px;
+      height: 500px;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 3rem 4rem 1.5rem;
+    }
+    .section-head h2 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .72rem;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+    }
+    .section-head::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── CARDS GRID ── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      animation: fadeUp .8s .3s ease both;
+    }
+
+    .card {
+      background: var(--surface);
+      padding: 1.2rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      transition: background .2s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+    .card:hover { background: #141820; }
+
+    .card-cat {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .62rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--blue);
+      font-weight: 500;
+    }
+    .card-cat.doujin { color: var(--gold); }
+
+    .card-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .95rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      line-height: 1.4;
+      color: #e8eef8;
+    }
+
+    .card-excerpt {
+      font-size: .75rem;
+      line-height: 1.7;
+      color: var(--muted);
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: .6rem;
+      border-top: 1px solid var(--border);
+    }
+    .card-date {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .62rem;
+      letter-spacing: .1em;
+      color: var(--muted);
+    }
+    .card-read {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .65rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ── RANKING STRIP ── */
+    .ranking {
+      padding: 3rem 4rem;
+      animation: fadeUp .8s .4s ease both;
+    }
+    .ranking-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .rank-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      transition: border-color .2s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+    .rank-item:hover { border-color: var(--gold); }
+    .rank-num {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--border);
+      line-height: 1;
+    }
+    .rank-item:nth-child(1) .rank-num { color: var(--gold); }
+    .rank-item:nth-child(2) .rank-num { color: #a0a0b0; }
+    .rank-item:nth-child(3) .rank-num { color: #8b6a3a; }
+    .rank-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .9rem;
+      font-weight: 700;
+      color: #d0d8e8;
+      line-height: 1.3;
+    }
+    .rank-tag {
+      font-size: .65rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── YOUTUBE BANNER ── */
+    .yt-section {
+      padding: 2.5rem 4rem;
+      animation: fadeUp .8s .5s ease both;
+    }
+    .yt-banner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 2rem;
+      background: linear-gradient(120deg, #0f1620 0%, #111827 60%, #1a1008 100%);
+      border: 1px solid var(--border);
+      border-left: 3px solid #ff0000;
+      padding: 1.8rem 2rem;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color .2s, background .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .yt-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 80% 50%, rgba(255,0,0,.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .yt-banner:hover { border-color: var(--border); border-left-color: #ff4444; background: linear-gradient(120deg, #131a24 0%, #151e2e 60%, #1e1208 100%); }
+    .yt-left { display: flex; flex-direction: column; gap: .6rem; }
+    .yt-eyebrow {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .65rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: #ff4444;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .yt-eyebrow::before {
+      content: '';
+      display: block;
+      width: 16px;
+      height: 1px;
+      background: #ff4444;
+    }
+    .yt-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.1rem;
+      font-weight: 900;
+      letter-spacing: .04em;
+      color: #e8eef8;
+    }
+    .yt-desc {
+      font-size: .78rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .yt-btn {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      background: #ff0000;
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      padding: .7rem 1.4rem;
+      white-space: nowrap;
+      transition: background .2s;
+      flex-shrink: 0;
+    }
+    .yt-banner:hover .yt-btn { background: #cc0000; }
+    .yt-btn svg { width: 16px; height: 16px; fill: #fff; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-logo {
+      font-family: 'Orbitron', monospace;
+      font-size: .9rem;
+      font-weight: 900;
+      color: var(--gold);
+      opacity: .5;
+    }
+    .footer-copy {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .72rem;
+      letter-spacing: .1em;
+      color: var(--muted);
+    }
+
+    /* ── YOUTUBE VIDEOS ── */
+    .yt-videos {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-top: 1px;
+    }
+    .yt-video-card {
+      background: var(--surface);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: background .2s;
+    }
+    .yt-video-card:hover { background: #141820; }
+    .yt-thumb-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: #0a0c10;
+    }
+    .yt-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .yt-play-icon {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,.3);
+      opacity: 0;
+      transition: opacity .2s;
+    }
+    .yt-video-card:hover .yt-play-icon { opacity: 1; }
+    .yt-play-icon svg { width: 40px; height: 40px; fill: #fff; }
+    .yt-video-info { padding: .8rem 1rem; }
+    .yt-video-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .82rem;
+      font-weight: 700;
+      color: #e8eef8;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .yt-video-date {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .62rem;
+      letter-spacing: .08em;
+      color: var(--muted);
+      margin-top: .3rem;
+    }
+    .yt-loading {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 2rem;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .78rem;
+      letter-spacing: .1em;
+      color: var(--muted);
+    }
+    @media (max-width: 960px) {
+      .yt-videos { grid-template-columns: 1fr; }
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      header { padding: 1rem 1.5rem; }
+      .hero { padding: 4rem 1.5rem 3rem; grid-template-columns: 1fr; gap: 2rem; }
+      .cards { grid-template-columns: 1fr; }
+      .ranking-grid { grid-template-columns: repeat(2, 1fr); }
+      .section-head, .ranking, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .hero-deco { display: none; }
+    }
+  </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KMJYZL6Y3Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KMJYZL6Y3Z');
+  </script>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">MariGura <span>Hub</span></a>
+  <nav>
+    <a href="#" class="active">TOP</a>
+    <a href="articles.html">おすすめ記事</a>
+  </nav>
+  <div class="nav-icons">
+    <button class="search-btn" onclick="document.querySelector('.search-overlay').classList.add('open')">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      検索
+    </button>
+    <a class="nav-icon" href="https://www.youtube.com/channel/UCNIQTigIQXtUQtB3td0AIrg" target="_blank" rel="noopener" title="YouTube">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
+    </a>
+  </div>
+</header>
+
+<!-- SEARCH MODAL -->
+<div class="search-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="search-box">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--muted);flex-shrink:0"><circle cx="11" cy="11" r="6"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input class="search-input" type="text" placeholder="記事を検索する...">
+    <button class="search-close" onclick="document.querySelector('.search-overlay').classList.remove('open')">✕</button>
+  </div>
+</div>
+
+<section class="hero">
+  <svg class="hero-deco" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="hex" x="0" y="0" width="60" height="52" patternUnits="userSpaceOnUse">
+        <polygon points="30,2 58,17 58,47 30,62 2,47 2,17" fill="none" stroke="#4a8fff" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="500" height="500" fill="url(#hex)"/>
+  </svg>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Game Guide &amp; Review</p>
+    <h1 class="hero-title">
+      知れば、<br>
+      <span class="hl">もっと</span><br>
+      面白くなる。
+    </h1>
+    <p class="hero-desc">
+      LoL攻略記事・YouTube動画など、ゲームをもっと楽しむための情報サイトです。
+    </p>
+    <a class="hero-cta" href="articles.html">▶ 記事一覧を見る</a>
+  </div>
+  <div class="hero-cards">
+    <a class="hero-site-card" href="lol-beginner.html">
+      <div class="hero-card-icon lol">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#4a8fff" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="#4a8fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div>
+        <p class="hero-card-label">League of Legends</p>
+        <p class="hero-card-name">LoL攻略記事</p>
+      </div>
+      <span class="hero-card-arrow">→</span>
+    </a>
+    <a class="hero-site-card" href="https://www.youtube.com/channel/UCNIQTigIQXtUQtB3td0AIrg" target="_blank" rel="noopener">
+      <div class="hero-card-icon yt">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#ff4444" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
+      </div>
+      <div>
+        <p class="hero-card-label">YouTube</p>
+        <p class="hero-card-name">marigura_Hubch</p>
+      </div>
+      <span class="hero-card-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<div class="section-head"><h2>最新記事</h2></div>
+
+<section class="cards">
+  <a class="card" href="lol-beginner.html">
+    <span class="card-cat">League of Legends</span>
+    <h2 class="card-title">LoLで覚えておきたい専門用語20選</h2>
+    <p class="card-excerpt">CS・ガンク・CCなど試合中によく使われる専門用語を20個厳選して解説。攻略サイトや配信がグッとわかるようになります。</p>
+    <div class="card-meta">
+      <span class="card-date">2026.03.27</span>
+      <span class="card-read">Read →</span>
+    </div>
+  </a>
+  <a class="card" href="lol-top.html">
+    <span class="card-cat">League of Legends</span>
+    <h2 class="card-title">LoL TOP おすすめチャンピオン5選</h2>
+    <p class="card-excerpt">初心者でも扱いやすいTOPレーンのチャンピオンを5体厳選。サモナースペル・ルーン・ビルドもあわせて解説します。</p>
+    <div class="card-meta">
+      <span class="card-date">2026.03.27</span>
+      <span class="card-read">Read →</span>
+    </div>
+  </a>
+  <a class="card" href="lol-jg.html">
+    <span class="card-cat">League of Legends</span>
+    <h2 class="card-title">LoL JG おすすめチャンピオン5選</h2>
+    <p class="card-excerpt">初心者でも扱いやすいジャングルチャンピオンを5体厳選。サモナースペル・ルーン・ビルドもあわせて解説します。</p>
+    <div class="card-meta">
+      <span class="card-date">2026.03.27</span>
+      <span class="card-read">Read →</span>
+    </div>
+  </a>
+</section>
+
+<section class="ranking">
+  <div class="section-head" style="padding:0 0 0 0;"><h2>おすすめランキング</h2></div>
+  <div class="ranking-grid">
+    <a class="rank-item" href="#">
+      <span class="rank-num">01</span>
+      <span class="rank-title">LoL TOP おすすめチャンピオン5選</span>
+      <span class="rank-tag">League of Legends</span>
+    </a>
+    <a class="rank-item" href="#">
+      <span class="rank-num">02</span>
+      <span class="rank-title">LoL JG おすすめチャンピオン5選</span>
+      <span class="rank-tag">League of Legends</span>
+    </a>
+    <a class="rank-item" href="#">
+      <span class="rank-num">03</span>
+      <span class="rank-title">LoL MID おすすめチャンピオン5選</span>
+      <span class="rank-tag">League of Legends</span>
+    </a>
+    <a class="rank-item" href="#">
+      <span class="rank-num">04</span>
+      <span class="rank-title">LoL BOT おすすめチャンピオン5選</span>
+      <span class="rank-tag">League of Legends</span>
+    </a>
+    <a class="rank-item" href="#">
+      <span class="rank-num">05</span>
+      <span class="rank-title">LoL SUP おすすめチャンピオン5選</span>
+      <span class="rank-tag">League of Legends</span>
+    </a>
+  </div>
+</section>
+
+<section class="yt-section">
+  <a class="yt-banner" href="https://www.youtube.com/channel/UCNIQTigIQXtUQtB3td0AIrg" target="_blank" rel="noopener">
+    <div class="yt-left">
+      <p class="yt-eyebrow">YouTube Channel</p>
+      <p class="yt-title">MariGura Hub — 動画でも発信中！</p>
+      <p class="yt-desc">LoL攻略ショート動画を配信中。チャンネル登録して最新動画をチェック！</p>
+    </div>
+    <div class="yt-btn">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
+      チャンネルを見る
+    </div>
+  </a>
+  <div class="yt-videos" id="yt-videos">
+    <div class="yt-loading">動画を読み込んでいます...</div>
+  </div>
+</section>
+
+<script>
+  // ⚠️ 以下の YOUR_API_KEY をあなたのAPIキーに置き換えてください
+  const YT_API_KEY     = 'AIzaSyC4gPV6gmtcp1GwIZ7z7KJ3tHG-934V3n8';
+  const YT_CHANNEL_ID  = 'UCNIQTigIQXtUQtB3td0AIrg';
+
+  async function loadYouTubeVideos() {
+    const container = document.getElementById('yt-videos');
+    try {
+      const res = await fetch(
+        `https://www.googleapis.com/youtube/v3/search?key=${YT_API_KEY}&channelId=${YT_CHANNEL_ID}&part=snippet&order=date&maxResults=3&type=video`
+      );
+      const data = await res.json();
+
+      if (!data.items || data.items.length === 0) {
+        container.innerHTML = '<div class="yt-loading">動画が見つかりませんでした</div>';
+        return;
+      }
+
+      container.innerHTML = data.items.map(item => {
+        const videoId = item.id.videoId;
+        const title   = item.snippet.title;
+        const thumb   = item.snippet.thumbnails.medium.url;
+        const date    = new Date(item.snippet.publishedAt).toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '.');
+        return `
+          <a class="yt-video-card" href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener">
+            <div class="yt-thumb-wrap">
+              <img src="${thumb}" alt="${title}" loading="lazy">
+              <div class="yt-play-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+            <div class="yt-video-info">
+              <p class="yt-video-title">${title}</p>
+              <p class="yt-video-date">${date}</p>
+            </div>
+          </a>
+        `;
+      }).join('');
+    } catch (e) {
+      container.innerHTML = '<div class="yt-loading">動画の読み込みに失敗しました</div>';
+    }
+  }
+
+  loadYouTubeVideos();
+</script>
+
+<footer>
+  <span class="footer-logo">MariGura Hub</span>
+  <span class="footer-copy">© 2026 MariGura Hub — ゲーム攻略・レビュー</span>
+</footer>
+
+</body>
+</html>
