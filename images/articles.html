@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>記事一覧 — MariGura Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Noto+Sans+JP:wght@300;400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0a0c10;
+      --surface: #10141c;
+      --border:  #1e2535;
+      --gold:    #c9a84c;
+      --gold2:   #f0d080;
+      --blue:    #4a8fff;
+      --text:    #cdd6e8;
+      --muted:   #5a6580;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 2px,
+        rgba(0,0,0,.08) 2px, rgba(0,0,0,.08) 4px
+      );
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* ── HEADER ── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(10,12,16,.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      animation: fadeDown .5s ease both;
+    }
+
+    .logo {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.3rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-decoration: none;
+      color: var(--gold);
+      text-shadow: 0 0 20px rgba(201,168,76,.4);
+    }
+    .logo span { color: var(--text); }
+
+    nav { display: flex; gap: 2rem; align-items: center; }
+    nav a {
+      font-size: .78rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 500;
+    }
+    nav a:hover { color: var(--gold); }
+    nav a.active { color: var(--gold); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 3rem 4rem 2rem;
+      animation: fadeUp .6s .1s ease both;
+    }
+    .page-eyebrow {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .72rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: .8rem;
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+    }
+    .page-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .page-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: .06em;
+    }
+    .page-count {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .75rem;
+      letter-spacing: .12em;
+      color: var(--muted);
+      margin-top: .5rem;
+    }
+
+    /* ── CATEGORY TABS ── */
+    .cat-tabs {
+      display: flex;
+      gap: 0;
+      padding: 0 4rem;
+      border-bottom: 1px solid var(--border);
+      animation: fadeUp .6s .15s ease both;
+      overflow-x: auto;
+    }
+    .cat-tab {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .72rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: .8rem 1.4rem;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+      white-space: nowrap;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+    }
+    .cat-tab:hover { color: var(--text); }
+    .cat-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    /* ── ARTICLE LIST ── */
+    .articles-wrap {
+      padding: 2.5rem 4rem;
+      animation: fadeUp .7s .2s ease both;
+    }
+
+    .cat-section { margin-bottom: 3rem; }
+    .cat-section.hidden { display: none; }
+
+    .cat-label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .68rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+    }
+    .cat-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .article-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .article-item {
+      background: var(--surface);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.2rem 1.6rem;
+      text-decoration: none;
+      color: inherit;
+      transition: background .2s;
+    }
+    .article-item:hover { background: #141820; }
+    .article-item:hover .article-arrow { color: var(--gold); transform: translateX(4px); }
+
+    .article-left { display: flex; flex-direction: column; gap: .4rem; }
+
+    .article-cat {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .62rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+    .article-cat.lol  { color: var(--blue); }
+    .article-cat.doujin { color: var(--gold); }
+
+    .article-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      color: #e8eef8;
+      line-height: 1.4;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .article-date {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .65rem;
+      letter-spacing: .1em;
+      color: var(--muted);
+    }
+    .article-tag {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .6rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: .1rem .5rem;
+    }
+
+    .article-arrow {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .8rem;
+      color: var(--muted);
+      transition: color .2s, transform .2s;
+      letter-spacing: .1em;
+    }
+
+    /* ── PAGINATION ── */
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      padding: 2rem 0 1rem;
+    }
+    .page-btn {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .75rem;
+      letter-spacing: .12em;
+      color: var(--muted);
+      background: none;
+      border: 1px solid var(--border);
+      padding: .4rem .9rem;
+      cursor: pointer;
+      transition: color .2s, border-color .2s;
+    }
+    .page-btn:hover { color: var(--gold); border-color: var(--gold); }
+    .page-btn.active { color: var(--gold); border-color: var(--gold); background: rgba(201,168,76,.08); }
+    .page-btn:disabled { opacity: .3; cursor: default; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-logo {
+      font-family: 'Orbitron', monospace;
+      font-size: .9rem;
+      font-weight: 900;
+      color: var(--gold);
+      opacity: .5;
+    }
+    .footer-copy {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .72rem;
+      letter-spacing: .1em;
+      color: var(--muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      header { padding: 1rem 1.5rem; }
+      .page-header { padding: 2rem 1.5rem 1.5rem; }
+      .cat-tabs { padding: 0 1.5rem; }
+      .articles-wrap { padding: 2rem 1.5rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: .5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">MARI<span>GURA</span>.HUB</a>
+  <nav>
+    <a href="index.html">TOP</a>
+    <a href="articles.html" class="active">おすすめ記事</a>
+  </nav>
+</header>
+
+<div class="page-header">
+  <p class="page-eyebrow">Article List</p>
+  <h1 class="page-title">記事一覧</h1>
+  <p class="page-count" id="article-count">全7記事</p>
+</div>
+
+<!-- CATEGORY TABS -->
+<div class="cat-tabs">
+  <button class="cat-tab active" onclick="filterCat('all', this)">すべて</button>
+  <button class="cat-tab" onclick="filterCat('lol', this)">League of Legends</button>
+  <button class="cat-tab" onclick="filterCat('doujin', this)">同人ゲーム</button>
+</div>
+
+<div class="articles-wrap">
+  <div id="articles-inner"></div>
+  <div id="pagination" class="pagination"></div>
+</div>
+
+<footer>
+  <span class="footer-logo">MariGura Hub</span>
+  <span class="footer-copy">© 2026 MariGura Hub — ゲーム攻略・レビュー</span>
+</footer>
+
+<script>
+  const PER_PAGE = 10;
+  let currentCat = 'all';
+  let currentPage = 1;
+
+  // 全記事データ
+  const articles = [
+    { cat: 'lol', href: 'lol-beginner.html', title: 'LoLで覚えておきたい専門用語20選', date: '2026.03.27', tags: ['初心者向け', '用語集'] },
+    { cat: 'lol', href: 'lol-top.html',      title: 'LoL TOP おすすめチャンピオン5選', date: '2026.03.27', tags: ['TOPレーン', 'チャンピオン'] },
+    { cat: 'lol', href: 'lol-jg.html',       title: 'LoL JG おすすめチャンピオン5選',  date: '2026.03.27', tags: ['ジャングル', 'チャンピオン'] },
+    { cat: 'lol', href: 'lol-mid.html',      title: 'LoL MID おすすめチャンピオン5選', date: '2026.03.27', tags: ['MIDレーン', 'チャンピオン'] },
+    { cat: 'lol', href: 'lol-bot.html',      title: 'LoL BOT おすすめチャンピオン5選', date: '2026.03.27', tags: ['BOTレーン', 'チャンピオン'] },
+    { cat: 'lol', href: 'lol-sup.html',      title: 'LoL SUP おすすめチャンピオン5選', date: '2026.03.27', tags: ['サポート', 'チャンピオン'] },
+    { cat: 'doujin', href: 'doujin.html',    title: '同人ゲームジャンル別おすすめランキング', date: '2026.03.27', tags: ['DLsite', 'ランキング'] },
+  ];
+
+  const catLabels = { lol: 'League of Legends', doujin: '同人ゲーム' };
+  const catColors = { lol: 'lol', doujin: 'doujin' };
+
+  function getFiltered() {
+    return currentCat === 'all' ? articles : articles.filter(a => a.cat === currentCat);
+  }
+
+  function render() {
+    const filtered = getFiltered();
+    const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
+    currentPage = Math.min(currentPage, totalPages);
+
+    const start = (currentPage - 1) * PER_PAGE;
+    const pageItems = filtered.slice(start, start + PER_PAGE);
+
+    // グループ化（カテゴリー別）
+    const groups = {};
+    pageItems.forEach(a => {
+      if (!groups[a.cat]) groups[a.cat] = [];
+      groups[a.cat].push(a);
+    });
+
+    // 記事エリア描画
+    const wrap = document.getElementById('articles-inner');
+    wrap.innerHTML = Object.entries(groups).map(([cat, items]) => `
+      <div class="cat-section">
+        <p class="cat-label">${catLabels[cat]}</p>
+        <div class="article-list">
+          ${items.map(a => `
+            <a class="article-item" href="${a.href}">
+              <div class="article-left">
+                <span class="article-cat ${catColors[a.cat]}">${catLabels[a.cat]}</span>
+                <span class="article-title">${a.title}</span>
+                <div class="article-meta">
+                  <span class="article-date">${a.date}</span>
+                  ${a.tags.map(t => `<span class="article-tag">${t}</span>`).join('')}
+                </div>
+              </div>
+              <span class="article-arrow">READ →</span>
+            </a>
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
+
+    // 記事数更新
+    document.getElementById('article-count').textContent = `全${filtered.length}記事`;
+
+    // ページネーション描画
+    const pager = document.getElementById('pagination');
+    if (totalPages <= 1) {
+      pager.innerHTML = '';
+      return;
+    }
+    let html = `<button class="page-btn" onclick="goPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>← PREV</button>`;
+    for (let i = 1; i <= totalPages; i++) {
+      html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goPage(${i})">${i}</button>`;
+    }
+    html += `<button class="page-btn" onclick="goPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>NEXT →</button>`;
+    pager.innerHTML = html;
+  }
+
+  function filterCat(cat, btn) {
+    currentCat = cat;
+    currentPage = 1;
+    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    render();
+  }
+
+  function goPage(page) {
+    const filtered = getFiltered();
+    const totalPages = Math.ceil(filtered.length / PER_PAGE);
+    if (page < 1 || page > totalPages) return;
+    currentPage = page;
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // 初回描画
+  render();
+</script>
+
+</body>
+</html>
