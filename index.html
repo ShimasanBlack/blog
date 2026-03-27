@@ -162,6 +162,10 @@
       padding: 6rem 4rem 5rem;
       overflow: hidden;
       animation: fadeUp .7s .1s ease both;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
     }
 
     .hero::before {
@@ -176,6 +180,62 @@
     .hero-inner {
       position: relative;
       max-width: 700px;
+    }
+
+    .hero-cards {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+    }
+
+    .hero-site-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: .9rem 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color .2s, background .2s;
+    }
+    .hero-site-card:hover { border-color: var(--gold); background: #141820; }
+
+    .hero-card-icon {
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .hero-card-icon.lol  { border-color: rgba(74,143,255,.3); background: rgba(74,143,255,.08); }
+    .hero-card-icon.doujin { border-color: rgba(201,168,76,.3); background: rgba(201,168,76,.08); }
+    .hero-card-icon.yt   { border-color: rgba(255,0,0,.3); background: rgba(255,0,0,.08); }
+
+    .hero-card-label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .6rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .2rem;
+    }
+    .hero-card-name {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .9rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      color: #cdd6e8;
+    }
+    .hero-card-arrow {
+      margin-left: auto;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: .75rem;
+      color: var(--muted);
+      flex-shrink: 0;
     }
 
     .hero-eyebrow {
@@ -574,13 +634,21 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 960px) {
       header { padding: 1rem 1.5rem; }
-      .hero { padding: 4rem 1.5rem 3rem; }
+      .hero { padding: 4rem 1.5rem 3rem; grid-template-columns: 1fr; gap: 2rem; }
       .cards { grid-template-columns: 1fr; }
       .ranking-grid { grid-template-columns: repeat(2, 1fr); }
       .section-head, .ranking, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
       .hero-deco { display: none; }
     }
   </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KMJYZL6Y3Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KMJYZL6Y3Z');
+  </script>
 </head>
 <body>
 
@@ -631,6 +699,38 @@
     </p>
     <a class="hero-cta" href="articles.html">▶ 記事一覧を見る</a>
   </div>
+  <div class="hero-cards">
+    <a class="hero-site-card" href="lol-beginner.html">
+      <div class="hero-card-icon lol">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#4a8fff" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="#4a8fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div>
+        <p class="hero-card-label">League of Legends</p>
+        <p class="hero-card-name">LoL攻略記事</p>
+      </div>
+      <span class="hero-card-arrow">→</span>
+    </a>
+    <a class="hero-site-card" href="doujin.html">
+      <div class="hero-card-icon doujin">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="#c9a84c" stroke-width="2" stroke-linejoin="round"/></svg>
+      </div>
+      <div>
+        <p class="hero-card-label">同人ゲーム</p>
+        <p class="hero-card-name">ジャンル別ランキング</p>
+      </div>
+      <span class="hero-card-arrow">→</span>
+    </a>
+    <a class="hero-site-card" href="https://www.youtube.com/channel/UCNIQTigIQXtUQtB3td0AIrg" target="_blank" rel="noopener">
+      <div class="hero-card-icon yt">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#ff4444" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
+      </div>
+      <div>
+        <p class="hero-card-label">YouTube</p>
+        <p class="hero-card-name">marigura_Hubch</p>
+      </div>
+      <span class="hero-card-arrow">→</span>
+    </a>
+  </div>
 </section>
 
 <div class="section-head"><h2>最新記事</h2></div>
@@ -654,10 +754,10 @@
       <span class="card-read">Read →</span>
     </div>
   </a>
-  <a class="card" href="doujin.html">
-    <span class="card-cat doujin">同人ゲーム</span>
-    <h2 class="card-title">同人ゲームジャンル別おすすめランキング</h2>
-    <p class="card-excerpt">RPG・アクション・ノベルなどジャンル別に厳選した同人ゲームをランキング形式でご紹介。DLsiteの注目作をチェック！</p>
+  <a class="card" href="lol-jg.html">
+    <span class="card-cat">League of Legends</span>
+    <h2 class="card-title">LoL JG おすすめチャンピオン5選</h2>
+    <p class="card-excerpt">初心者でも扱いやすいジャングルチャンピオンを5体厳選。サモナースペル・ルーン・ビルドもあわせて解説します。</p>
     <div class="card-meta">
       <span class="card-date">2026.03.27</span>
       <span class="card-read">Read →</span>
