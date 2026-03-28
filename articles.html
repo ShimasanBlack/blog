@@ -340,7 +340,6 @@
 <div class="cat-tabs">
   <button class="cat-tab active" onclick="filterCat('all', this)">すべて</button>
   <button class="cat-tab" onclick="filterCat('lol', this)">League of Legends</button>
-  <button class="cat-tab" onclick="filterCat('doujin', this)">同人ゲーム</button>
 </div>
 
 <div class="articles-wrap">
@@ -366,11 +365,10 @@
     { cat: 'lol', href: 'lol-mid.html',      title: 'LoL MID おすすめチャンピオン5選', date: '2026.03.27', tags: ['MIDレーン', 'チャンピオン'] },
     { cat: 'lol', href: 'lol-bot.html',      title: 'LoL BOT おすすめチャンピオン5選', date: '2026.03.27', tags: ['BOTレーン', 'チャンピオン'] },
     { cat: 'lol', href: 'lol-sup.html',      title: 'LoL SUP おすすめチャンピオン5選', date: '2026.03.27', tags: ['サポート', 'チャンピオン'] },
-    { cat: 'doujin', href: 'doujin.html',    title: '同人ゲームジャンル別おすすめランキング', date: '2026.03.27', tags: ['DLsite', 'ランキング'] },
   ];
 
-  const catLabels = { lol: 'League of Legends', doujin: '同人ゲーム' };
-  const catColors = { lol: 'lol', doujin: 'doujin' };
+  const catLabels = { lol: 'League of Legends' };
+  const catColors = { lol: 'lol' };
 
   function getFiltered() {
     return currentCat === 'all' ? articles : articles.filter(a => a.cat === currentCat);
