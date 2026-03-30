@@ -5,420 +5,172 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LoLで覚えておきたい専門用語20選｜初心者向け完全ガイド — MariGura Hub</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Noto+Sans+JP:wght@300;400;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg:      #0a0c10;
-      --surface: #10141c;
-      --border:  #1e2535;
-      --gold:    #c9a84c;
-      --gold2:   #f0d080;
-      --blue:    #4a8fff;
-      --text:    #cdd6e8;
-      --muted:   #5a6580;
+      --bg:      #f8f9fa;
+      --surface: #ffffff;
+      --border:  #e2e6ea;
+      --accent:  #4a6cf7;
+      --accent2: #7c3aed;
+      --text:    #1a1a2e;
+      --muted:   #6c757d;
+      --gold:    #4a6cf7;
+      --gold2:   #7c3aed;
+      --blue:    #4a6cf7;
+      --red:     #e05555;
+      --max-w:   760px;
     }
     html { font-size: 16px; scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Noto Sans JP', sans-serif;
-      font-weight: 300;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.06) 2px, rgba(0,0,0,.06) 4px);
-      pointer-events: none;
-      z-index: 999;
-    }
-
-    /* HEADER */
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.2rem 4rem;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      background: rgba(10,12,16,.92);
-      backdrop-filter: blur(12px);
-      z-index: 100;
-    }
-    .logo {
-      font-family: 'Orbitron', monospace;
-      font-size: 1.3rem;
-      font-weight: 900;
-      letter-spacing: .08em;
-      text-decoration: none;
-      color: var(--gold);
-      text-shadow: 0 0 20px rgba(201,168,76,.4);
-    }
+    body { background: var(--bg); color: var(--text); font-family: 'Noto Sans JP', sans-serif; font-weight: 400; min-height: 100vh; overflow-x: hidden; }
+    header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(255,255,255,.95); backdrop-filter: blur(12px); z-index: 100; }
+    .logo { font-family: 'Noto Sans JP', sans-serif; font-size: 1.1rem; font-weight: 700; letter-spacing: .02em; text-decoration: none; color: var(--accent); }
     .logo span { color: var(--text); }
     nav { display: flex; gap: 2rem; }
-    nav a {
-      font-size: .78rem;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color .2s;
-      font-family: 'Rajdhani', sans-serif;
-      font-weight: 500;
-    }
-    nav a:hover { color: var(--gold); }
-
-    /* ARTICLE LAYOUT */
-    .article-wrap {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 4rem 2rem 8rem;
-      animation: fadeUp .6s ease both;
-    }
-
-    /* META */
-    .article-meta {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.8rem;
-      flex-wrap: wrap;
-    }
-    .cat-badge {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: .68rem;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--blue);
-      border: 1px solid var(--blue);
-      padding: .2rem .8rem;
-      font-weight: 500;
-    }
-    .article-date {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: .72rem;
-      letter-spacing: .1em;
-      color: var(--muted);
-    }
-    .article-updated {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: .7rem;
-      color: var(--muted);
-    }
-
-    /* TITLE */
-    h1.article-title {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-      font-weight: 700;
-      line-height: 1.2;
-      letter-spacing: .04em;
-      color: #e8eef8;
-      margin-bottom: 1rem;
-    }
-    h1.article-title .hl { color: var(--gold); }
-
-    /* LEAD */
-    .article-lead {
-      font-size: 1rem;
-      line-height: 2;
-      color: var(--muted);
-      border-left: 3px solid var(--gold);
-      padding-left: 1.2rem;
-      margin: 2rem 0;
-    }
-
-    /* LEARN BOX */
-    .learn-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--gold);
-      padding: 1.4rem 1.8rem;
-      margin: 2rem 0;
-    }
-    .learn-box-title {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: .72rem;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: .8rem;
-      font-weight: 700;
-    }
+    nav a { font-size: .85rem; color: var(--muted); text-decoration: none; transition: color .2s; font-family: 'Noto Sans JP', sans-serif; font-weight: 400; }
+    nav a:hover { color: var(--accent); }
+    .nav-icons { display: flex; align-items: center; gap: 1rem; }
+    .nav-icon { color: var(--muted); text-decoration: none; transition: color .2s; display: flex; align-items: center; }
+    .nav-icon:hover { color: var(--accent); }
+    .nav-icon svg { width: 18px; height: 18px; fill: currentColor; }
+    .search-btn { display: flex; align-items: center; gap: .5rem; font-family: 'Noto Sans JP', sans-serif; font-size: .82rem; color: var(--muted); background: none; border: 1px solid var(--border); border-radius: 6px; padding: .45rem 1rem; cursor: pointer; transition: color .2s, border-color .2s; }
+    .search-btn svg { width: 16px; height: 16px; }
+    .search-btn:hover { color: var(--accent); border-color: var(--accent); }
+    .article-wrap { max-width: var(--max-w); margin: 0 auto; padding: 3rem 2rem 6rem; animation: fadeUp .6s ease both; }
+    .article-meta { display: flex; align-items: center; gap: .8rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .cat-badge { font-family: 'Noto Sans JP', sans-serif; font-size: .72rem; color: var(--accent); border: 1px solid var(--accent); border-radius: 4px; padding: .2rem .8rem; font-weight: 700; }
+    .article-date, .article-updated { font-family: 'Noto Sans JP', sans-serif; font-size: .75rem; color: var(--muted); }
+    h1.article-title { font-family: 'Noto Sans JP', sans-serif; font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 700; line-height: 1.4; color: var(--text); margin-bottom: 1rem; }
+    h1.article-title .hl { color: var(--accent); }
+    .article-lead { font-size: .95rem; line-height: 2; color: var(--muted); border-left: 3px solid var(--accent); padding-left: 1.2rem; margin: 2rem 0; }
+    .learn-box { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 8px; padding: 1.4rem 1.8rem; margin: 2rem 0; }
+    .learn-box-title { font-family: 'Noto Sans JP', sans-serif; font-size: .82rem; color: var(--accent); margin-bottom: .8rem; font-weight: 700; }
     .learn-box ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
-    .learn-box li {
-      font-size: .88rem;
-      color: var(--text);
-      line-height: 1.7;
-      padding-left: 1.2rem;
-      position: relative;
-    }
-    .learn-box li::before { content: '▸'; position: absolute; left: 0; color: var(--gold); font-size: .7rem; top: .2rem; }
-
-    /* BODY */
-    .article-body { font-size: .95rem; line-height: 2.1; color: #9aa5be; }
+    .learn-box li { font-size: .88rem; color: var(--text); line-height: 1.7; padding-left: 1.2rem; position: relative; }
+    .learn-box li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: .7rem; top: .2rem; }
+    .article-body { font-size: .95rem; line-height: 2; color: var(--text); }
     .article-body p { margin-bottom: 1.6rem; }
-
-    .article-body h2 {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      letter-spacing: .08em;
-      color: #e8eef8;
-      margin: 3rem 0 1rem;
-      padding-bottom: .6rem;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: .8rem;
-    }
-    .article-body h2::before {
-      content: '';
-      display: block;
-      width: 4px;
-      height: 1.2em;
-      background: var(--gold);
-      flex-shrink: 0;
-    }
-
-    /* CHAMPION CARDS */
-    .champ-list { display: flex; flex-direction: column; gap: 1rem; margin: 1.5rem 0; }
-    .champ-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 1.4rem 1.6rem;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 1rem 1.4rem;
-      align-items: start;
-      transition: border-color .2s;
-    }
-    .champ-card:hover { border-color: var(--gold); }
-    .champ-num {
-      font-family: 'Orbitron', monospace;
-      font-size: 1.6rem;
-      font-weight: 900;
-      color: var(--border);
-      line-height: 1;
-      padding-top: .2rem;
-    }
-    .champ-card:nth-child(1) .champ-num { color: var(--gold); }
-    .champ-card:nth-child(2) .champ-num,
-    .champ-card:nth-child(3) .champ-num { color: #4a5570; }
-    .champ-name {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: .06em;
-      color: #e8eef8;
-      margin-bottom: .3rem;
-    }
-    .champ-role {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: .68rem;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: .6rem;
-    }
+    .article-body h2 { font-family: 'Noto Sans JP', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text); margin: 3rem 0 1rem; padding-bottom: .6rem; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: .8rem; }
+    .article-body h2::before { content: ''; display: block; width: 4px; height: 1.2em; background: var(--accent); flex-shrink: 0; border-radius: 2px; }
+    .champ-list { display: flex; flex-direction: column; gap: 1.2rem; margin: 1.5rem 0; }
+    .champ-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.4rem 1.6rem; display: grid; grid-template-columns: auto 1fr; gap: 1rem 1.4rem; align-items: start; transition: box-shadow .2s, transform .2s; }
+    .champ-card:hover { box-shadow: 0 4px 16px rgba(74,108,247,.1); transform: translateY(-2px); }
+    .champ-num { font-family: 'Noto Sans JP', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--border); line-height: 1; padding-top: .2rem; }
+    .champ-card:nth-child(1) .champ-num { color: var(--accent); }
+    .champ-card:nth-child(2) .champ-num, .champ-card:nth-child(3) .champ-num { color: #a0a0b0; }
+    .champ-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; object-position: top; border: 1px solid var(--border); border-radius: 6px; margin-bottom: .6rem; display: block; }
+    .champ-name { font-family: 'Noto Sans JP', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: .3rem; }
+    .champ-role { font-family: 'Noto Sans JP', sans-serif; font-size: .72rem; color: var(--accent); margin-bottom: .6rem; font-weight: 700; }
     .champ-desc { font-size: .85rem; line-height: 1.8; color: var(--muted); }
     .champ-tags { display: flex; gap: .5rem; margin-top: .6rem; flex-wrap: wrap; }
-    .tag {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: .62rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      padding: .1rem .5rem;
-    }
-
-    /* INFO TABLE */
-    .info-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 1.4rem 1.8rem;
-      margin: 1.5rem 0;
-    }
-    .info-box-title {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: .72rem;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1rem;
-      font-weight: 700;
-    }
-    .info-table { width: 100%; border-collapse: collapse; font-size: .85rem; }
-    .info-table th {
-      text-align: left;
-      font-family: 'Rajdhani', sans-serif;
-      letter-spacing: .1em;
-      color: var(--muted);
-      padding: .5rem .8rem .5rem 0;
-      border-bottom: 1px solid var(--border);
-      font-size: .72rem;
-      text-transform: uppercase;
-    }
-    .info-table td {
-      padding: .6rem .8rem .6rem 0;
-      border-bottom: 1px solid rgba(30,37,53,.6);
-      color: var(--text);
-      line-height: 1.6;
-    }
+    .tag { font-family: 'Noto Sans JP', sans-serif; font-size: .72rem; color: var(--muted); border: 1px solid var(--border); border-radius: 4px; padding: .1rem .5rem; }
+    .champ-counter { margin-top: .8rem; padding-top: .8rem; border-top: 1px solid var(--border); }
+    .champ-counter-label { font-family: 'Noto Sans JP', sans-serif; font-size: .72rem; color: var(--red); margin-bottom: .4rem; font-weight: 700; }
+    .champ-counter-list { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .counter-tag { font-family: 'Noto Sans JP', sans-serif; font-size: .72rem; color: var(--red); border: 1px solid rgba(224,85,85,.4); border-radius: 4px; padding: .15rem .6rem; background: rgba(224,85,85,.06); }
+    .champ-build { margin-top: .8rem; padding-top: .8rem; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: .6rem; }
+    .champ-build-row { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+    .champ-build-label { font-family: 'Noto Sans JP', sans-serif; font-size: .72rem; color: var(--accent); font-weight: 700; white-space: nowrap; min-width: 90px; }
+    .champ-build-value { font-family: 'Noto Sans JP', sans-serif; font-size: .82rem; color: var(--text); }
+    .item-icons-wrap { display: flex; flex-direction: column; gap: .3rem; }
+    .item-icons { display: flex; align-items: center; gap: .4rem; flex-wrap: wrap; margin-bottom: .2rem; }
+    .item-icon { width: 28px; height: 28px; border: 1px solid var(--border); border-radius: 4px; object-fit: cover; }
+    .item-arrow { font-size: .7rem; color: var(--muted); }
+    .tbd-notice { background: rgba(74,108,247,.05); border: 1px dashed var(--accent); border-radius: 8px; padding: 1.4rem 1.6rem; display: flex; align-items: center; gap: 1rem; color: var(--accent); font-family: 'Noto Sans JP', sans-serif; font-size: .85rem; }
+    .tbd-icon { font-size: 1.4rem; flex-shrink: 0; opacity: .6; }
+    .info-box { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.4rem 1.8rem; margin: 1.5rem 0; }
+    .info-box-title { font-family: 'Noto Sans JP', sans-serif; font-size: .82rem; color: var(--accent); margin-bottom: 1rem; font-weight: 700; }
+    .info-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    .info-table th { text-align: left; font-family: 'Noto Sans JP', sans-serif; color: var(--muted); padding: .5rem .8rem .5rem 0; border-bottom: 1px solid var(--border); font-size: .78rem; font-weight: 700; }
+    .info-table td { padding: .6rem .8rem .6rem 0; border-bottom: 1px solid var(--border); color: var(--text); line-height: 1.7; }
     .info-table tr:last-child td { border-bottom: none; }
-
-    /* SUMMARY */
-    .summary-box {
-      background: var(--surface);
-      border: 1px solid var(--gold);
-      padding: 1.8rem 2rem;
-      margin: 3rem 0 1rem;
-    }
-    .summary-box-title {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: .72rem;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1rem;
-      font-weight: 700;
-    }
+    .summary-box { background: var(--surface); border: 1px solid var(--accent); border-radius: 8px; padding: 1.8rem 2rem; margin: 3rem 0 1rem; }
+    .summary-box-title { font-family: 'Noto Sans JP', sans-serif; font-size: .82rem; color: var(--accent); margin-bottom: 1rem; font-weight: 700; }
     .summary-box ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
-    .summary-box li {
-      font-size: .88rem;
-      color: var(--text);
-      line-height: 1.8;
-      padding-left: 1.4rem;
-      position: relative;
+    .summary-box li { font-size: .88rem; color: var(--text); line-height: 1.8; padding-left: 1.4rem; position: relative; }
+    .summary-box li::before { content: '✓'; position: absolute; left: 0; color: var(--accent); font-size: .8rem; }
+    .article-closing { margin-top: 3rem; padding: 1.5rem; border: 1px solid var(--border); border-left: 3px solid var(--blue); border-radius: 8px; font-size: .95rem; line-height: 2; color: var(--muted); }
+    /* ── NEXT ACTION ── */
+    .next-action {
+      margin: 2.5rem 0 1rem;
+      padding: 1.4rem 1.6rem;
+      background: #f8f9ff;
+      border: 1px solid #dde3ff;
+      border-radius: 8px;
     }
-    .summary-box li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-size: .8rem; }
-
-    /* CLOSING */
-    .article-closing {
-      margin-top: 3rem;
-      padding: 1.5rem;
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--blue);
-      font-size: .95rem;
-      line-height: 2;
-      color: var(--muted);
-      font-style: italic;
-    }
-
-    /* SHARE */
-    .share-section { margin: 3rem 0 1rem; padding-top: 2rem; border-top: 1px solid var(--border); }
-    .share-label { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; font-weight: 500; }
-    .share-buttons { display: flex; gap: .8rem; flex-wrap: wrap; }
-    .share-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      font-family: 'Rajdhani', sans-serif;
+    .next-action-title {
       font-size: .78rem;
-      letter-spacing: .12em;
       font-weight: 700;
-      padding: .5rem 1.2rem;
-      text-decoration: none;
-      transition: opacity .2s;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      text-transform: uppercase;
+      color: #4a6cf7;
+      letter-spacing: .08em;
+      margin-bottom: 1rem;
     }
-    .share-btn:hover { opacity: .8; }
-    .share-btn.x    { background: #000; border: 1px solid #333; }
-    .share-btn.line { background: #06c755; }
-    .share-btn.copy { background: var(--gold); color: #000; }
-
-    /* REFERENCES */
-    .references { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
-    .references-title { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; font-weight: 500; }
-    .references ol { padding-left: 1.2rem; }
-    .references li { font-size: .8rem; line-height: 2; color: var(--muted); margin-bottom: .3rem; }
-    .references a { color: var(--gold); text-decoration: underline; text-underline-offset: 2px; }
-    .references a:hover { color: var(--gold2); }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem 4rem;
+    .next-action-links {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .footer-logo { font-family: 'Orbitron', monospace; font-size: .9rem; font-weight: 900; color: var(--gold); opacity: .5; }
-    .footer-copy { font-family: 'Rajdhani', sans-serif; font-size: .72rem; letter-spacing: .1em; color: var(--muted); }
-
-
-    /* DOUJIN LINK */
-    .doujin-link { margin-bottom: 2rem; text-align: center; }
-    .doujin-link-btn {
-      display: inline-block;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: .78rem;
-      letter-spacing: .12em;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      padding: .5rem 1.4rem;
-      text-decoration: none;
-      transition: color .2s, border-color .2s;
-    }
-    .doujin-link-btn:hover { color: var(--gold); border-color: var(--gold); }
-    .term-img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      display: block;
-      margin-top: .6rem;
-    }
-    .term-with-img {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      flex-direction: column;
       gap: .6rem;
-      align-items: start;
     }
+    .next-action-link {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .88rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      text-decoration: none;
+      padding: .5rem .8rem;
+      border-radius: 6px;
+      background: #ffffff;
+      border: 1px solid #e2e6ea;
+      transition: border-color .2s, color .2s;
+    }
+    .next-action-link:hover { border-color: #4a6cf7; color: #4a6cf7; }
+    .next-action-link .icon { font-size: .9rem; }
+
+    .share-section { margin: 3rem 0 1rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+    .share-label { font-family: 'Noto Sans JP', sans-serif; font-size: .78rem; color: var(--muted); margin-bottom: 1rem; font-weight: 700; }
+    .share-buttons { display: flex; gap: .8rem; flex-wrap: wrap; }
+    .share-btn { display: inline-flex; align-items: center; gap: .5rem; font-family: 'Noto Sans JP', sans-serif; font-size: .82rem; font-weight: 700; padding: .5rem 1.2rem; text-decoration: none; transition: opacity .2s; color: #fff; border: none; cursor: pointer; border-radius: 6px; }
+    .share-btn:hover { opacity: .8; }
+    .share-btn.x    { background: #000; }
+    .share-btn.line { background: #06c755; }
+    .share-btn.copy { background: var(--accent); color: #fff; }
+    .references { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+    .references-title { font-family: 'Noto Sans JP', sans-serif; font-size: .78rem; color: var(--muted); margin-bottom: 1rem; font-weight: 700; }
+    .references ol { padding-left: 1.2rem; }
+    .references li { font-size: .82rem; line-height: 2; color: var(--muted); margin-bottom: .3rem; }
+    .references a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+    footer { border-top: 1px solid var(--border); padding: 2rem; display: flex; justify-content: space-between; align-items: center; max-width: calc(var(--max-w) + 4rem); margin: 0 auto; width: 100%; }
+    .footer-logo { font-family: 'Noto Sans JP', sans-serif; font-size: .88rem; font-weight: 700; color: var(--accent); opacity: .7; }
+    .footer-copy { font-family: 'Noto Sans JP', sans-serif; font-size: .75rem; color: var(--muted); }
+    .doujin-link { margin-bottom: 2rem; text-align: center; }
+    .doujin-link-btn { display: inline-block; font-family: 'Noto Sans JP', sans-serif; font-size: .82rem; color: var(--muted); border: 1px solid var(--border); border-radius: 6px; padding: .5rem 1.4rem; text-decoration: none; transition: color .2s, border-color .2s; }
+    .doujin-link-btn:hover { color: var(--accent); border-color: var(--accent); }
+    .riot-notice { font-size: .72rem; line-height: 1.7; color: var(--muted); border-top: 1px solid var(--border); padding: 1.2rem 2rem; text-align: center; opacity: .8; }
+    /* beginner page specific */
+    .champ-card.doujin { border-left: 3px solid var(--gold); }
+    .term-img { width: 100%; height: 180px; object-fit: cover; border: 1px solid var(--border); border-radius: 6px; display: block; margin-top: .6rem; }
+    .term-with-img { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; align-items: start; }
     .term-img-wrap { grid-column: 1 / -1; }
-    @media (min-width: 600px) {
-      .term-img-wrap { grid-column: auto; }
-    }
-
-    .riot-notice {
-      font-size: .65rem;
-      line-height: 1.7;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-      padding: 1.2rem 4rem;
-      text-align: center;
-      opacity: .7;
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
+    @media (min-width: 600px) { .term-img-wrap { grid-column: auto; } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 700px) {
       header { padding: 1rem 1.5rem; }
       nav { gap: 1rem; }
-      .article-wrap { padding: 2.5rem 1.2rem 5rem; }
+      .article-wrap { padding: 2rem 1.2rem 4rem; }
       footer { padding: 1.5rem; flex-direction: column; gap: .5rem; text-align: center; }
-      .riot-notice { padding: 1.2rem 1.2rem; }
+      .riot-notice { padding: 1rem 1.2rem; }
       .champ-card { grid-template-columns: 1fr; }
-      .champ-num { font-size: 1rem; }
+      .champ-build-label { min-width: 80px; font-size: .65rem; }
+      .champ-build-value { font-size: .78rem; }
+      .item-icon { width: 24px; height: 24px; }
       .info-table { font-size: .78rem; }
       .info-table th, .info-table td { padding: .4rem .4rem .4rem 0; }
-      .info-box { padding: 1.2rem 1rem; }
-      .summary-box { padding: 1.2rem 1rem; }
+      .article-title { font-size: clamp(1.4rem, 6vw, 2rem); }
+      .summary-box { padding: 1.2rem 1.2rem; }
+      .learn-box { padding: 1.2rem 1.2rem; }
       .term-with-img { grid-template-columns: 1fr; }
-      .term-img-wrap { grid-column: auto; }
-      .article-body h2 { font-size: 1rem; }
-      h1.article-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
     }
   </style>
   <!-- Google Analytics -->
@@ -520,7 +272,7 @@
         <div style="background:var(--bg); border:1px solid var(--border); border-radius:6px; overflow:hidden;">
           <img src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/baron.png" alt="バロン" style="width:100%;height:160px;object-fit:cover;display:block;">
           <div style="padding:.8rem;">
-            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:.4rem;">バロン</p>
+            <p style="font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:.4rem;">バロン</p>
             <p style="font-size:.82rem;line-height:1.7;color:var(--muted);">マップ最強の中立モンスター。倒すとチーム全体が強化されミニオンも強くなる。試合終盤の最重要オブジェクト。</p>
           </div>
         </div>
@@ -528,7 +280,7 @@
         <div style="background:var(--bg); border:1px solid var(--border); border-radius:6px; overflow:hidden;">
           <img src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/dragon.png" alt="ドラゴン" style="width:100%;height:160px;object-fit:cover;display:block;">
           <div style="padding:.8rem;">
-            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:.4rem;">ドラゴン</p>
+            <p style="font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:.4rem;">ドラゴン</p>
             <p style="font-size:.82rem;line-height:1.7;color:var(--muted);">序盤から取り続けることでスタックが貯まり、強力なバフを得られるオブジェクト。4スタックで「魂」を取得。</p>
           </div>
         </div>
@@ -536,7 +288,7 @@
         <div style="background:var(--bg); border:1px solid var(--border); border-radius:6px; overflow:hidden;">
           <img src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/voidgrub.png" alt="ヴォイドグラブ" style="width:100%;height:160px;object-fit:cover;display:block;">
           <div style="padding:.8rem;">
-            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:.4rem;">ヴォイドグラブ</p>
+            <p style="font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:.4rem;">ヴォイドグラブ</p>
             <p style="font-size:.82rem;line-height:1.7;color:var(--muted);">バロンと並ぶマップの強力な中立モンスター。倒すとジャングルとレーンに強力なミニオンを召喚できる。</p>
           </div>
         </div>
@@ -544,7 +296,7 @@
         <div style="background:var(--bg); border:1px solid var(--border); border-radius:6px; overflow:hidden;">
           <img src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/riftherald.png" alt="リフトヘラルド" style="width:100%;height:160px;object-fit:cover;display:block;">
           <div style="padding:.8rem;">
-            <p style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:.4rem;">リフトヘラルド</p>
+            <p style="font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:.4rem;">リフトヘラルド</p>
             <p style="font-size:.82rem;line-height:1.7;color:var(--muted);">ジャングルに出現する大型モンスター。倒すと召喚アイテムを入手でき、タワーを破壊するのに役立てられる。</p>
           </div>
         </div>
