@@ -809,14 +809,14 @@
 
 <script>
   // ⚠️ 以下の YOUR_API_KEY をあなたのAPIキーに置き換えてください
-  const YT_API_KEY     = 'AIzaSyC4gPV6gmtcp1GwIZ7z7KJ3tHG-934V3n8';
+  const YT_API_KEY     = 'YOUR_API_KEY';
   const YT_CHANNEL_ID  = 'UCNIQTigIQXtUQtB3td0AIrg';
 
   async function loadYouTubeVideos() {
     const container = document.getElementById('yt-videos');
     try {
       const res = await fetch(
-        `https://www.googleapis.com/youtube/v3/search?key=${YT_API_KEY}&channelId=${YT_CHANNEL_ID}&part=snippet&order=date&maxResults=3&type=video`
+        `https://www.googleapis.com/youtube/v3/search?key=${YT_API_KEY}&channelId=${YT_CHANNEL_ID}&part=snippet&order=viewCount&maxResults=3&type=video`
       );
       const data = await res.json();
 
