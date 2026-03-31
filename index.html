@@ -694,25 +694,27 @@
     .yt-videos {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      margin-top: 1px;
+      gap: .8rem;
+      margin-top: 1rem;
     }
     .yt-video-card {
       background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
       text-decoration: none;
       color: inherit;
       display: flex;
       flex-direction: column;
-      transition: background .2s;
+      overflow: hidden;
+      transition: box-shadow .2s, transform .2s;
     }
-    .yt-video-card:hover { background: #141820; }
+    .yt-video-card:hover { box-shadow: 0 4px 16px rgba(74,108,247,.1); transform: translateY(-2px); }
     .yt-thumb-wrap {
       position: relative;
       width: 100%;
       aspect-ratio: 16/9;
       overflow: hidden;
-      background: #0a0c10;
+      background: #e2e6ea;
     }
     .yt-thumb-wrap img {
       width: 100%;
@@ -732,22 +734,21 @@
     }
     .yt-video-card:hover .yt-play-icon { opacity: 1; }
     .yt-play-icon svg { width: 40px; height: 40px; fill: #fff; }
-    .yt-video-info { padding: .8rem 1rem; }
+    .yt-video-info { padding: .7rem .9rem; }
     .yt-video-title {
-      font-family: 'Rajdhani', sans-serif;
+      font-family: 'Noto Sans JP', sans-serif;
       font-size: .82rem;
       font-weight: 700;
-      color: #e8eef8;
-      line-height: 1.4;
+      color: var(--text);
+      line-height: 1.5;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
     .yt-video-date {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: .62rem;
-      letter-spacing: .08em;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: .68rem;
       color: var(--muted);
       margin-top: .3rem;
     }
@@ -755,9 +756,7 @@
       grid-column: 1/-1;
       text-align: center;
       padding: 2rem;
-      font-family: 'Rajdhani', sans-serif;
       font-size: .78rem;
-      letter-spacing: .1em;
       color: var(--muted);
     }
     @media (max-width: 960px) {
