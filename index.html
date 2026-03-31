@@ -282,7 +282,76 @@
       height: 500px;
     }
 
-    /* ── BEGINNER GUIDE ── */
+    /* ── LANE GUIDE ── */
+    .lane-section {
+      padding: 1rem 2rem 2rem;
+      max-width: calc(var(--max-w) + 4rem);
+      margin: 0 auto;
+      width: 100%;
+    }
+    .lane-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: .8rem;
+      margin-top: 1.2rem;
+    }
+    .lane-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem .8rem;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .4rem;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .lane-card:hover { box-shadow: 0 4px 12px rgba(74,108,247,.12); transform: translateY(-2px); }
+    .lane-icon { font-size: 1.4rem; }
+    .lane-name { font-size: .82rem; font-weight: 700; color: var(--accent); }
+    .lane-desc { font-size: .72rem; color: var(--muted); line-height: 1.4; }
+
+    /* ── LATEST ARTICLES ── */
+    .latest-section {
+      padding: 1rem 2rem 2rem;
+      max-width: calc(var(--max-w) + 4rem);
+      margin: 0 auto;
+      width: 100%;
+    }
+    .latest-list {
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+      margin-top: 1.2rem;
+    }
+    .latest-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.4rem;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .latest-item:hover { box-shadow: 0 4px 12px rgba(74,108,247,.1); transform: translateY(-2px); }
+    .latest-item:hover .latest-arrow { color: var(--accent); transform: translateX(4px); }
+    .latest-left { display: flex; flex-direction: column; gap: .3rem; }
+    .latest-cat { font-size: .72rem; font-weight: 700; color: var(--accent); }
+    .latest-title { font-size: .9rem; font-weight: 700; color: var(--text); line-height: 1.5; }
+    .latest-date { font-size: .72rem; color: var(--muted); }
+    .latest-arrow { font-size: .9rem; color: var(--muted); transition: color .2s, transform .2s; flex-shrink: 0; }
+
+    @media (max-width: 700px) {
+      .lane-grid { grid-template-columns: repeat(3, 1fr); }
+      .lane-section, .latest-section { padding: 1rem 1.2rem 1.5rem; }
+    }
     .beginner-section {
       padding: 1rem 2rem 2rem;
       border-bottom: 1px solid var(--border);
@@ -735,6 +804,7 @@
   <a class="logo" href="index.html">MariGura <span>Hub</span></a>
   <nav>
     <a href="#" class="active">TOP</a>
+    <a href="articles.html">記事一覧</a>
   </nav>
   <div class="nav-icons">
     <button class="search-btn" onclick="document.querySelector('.search-overlay').classList.add('open')">
@@ -784,10 +854,6 @@
         <a class="beginner-link" href="lol-mistakes.html">LoL初心者が絶対やるミス5選</a>
         <a class="beginner-link" href="lol-beginner.html">LoLで覚えておきたい専門用語20選</a>
         <a class="beginner-link" href="lol-top.html">初心者におすすめのTOPチャンピオン5選</a>
-        <a class="beginner-link" href="lol-mid.html">初心者におすすめのMIDチャンピオン5選</a>
-        <a class="beginner-link" href="lol-bot.html">初心者におすすめのBOTチャンピオン5選</a>
-        <a class="beginner-link" href="lol-sup.html">初心者におすすめのSUPチャンピオン5選</a>
-        <a class="beginner-link" href="lol-jg.html">初心者におすすめのJGチャンピオン5選</a>
       </div>
     </div>
 
@@ -799,12 +865,46 @@
   </div>
 </section>
 
-<section class="cards" id="latest-cards"></section>
 
-<section class="ranking">
-  <div class="section-head" style="padding:0 0 0 0;"><h2>おすすめランキング</h2></div>
-  <div class="ranking-grid" id="ranking-grid"></div>
-</section>
+
+
+<!-- LANE GUIDE -->
+<div class="section-head"><h2>レーン別ガイド</h2></div>
+<div class="lane-section">
+  <div class="lane-grid">
+    <a class="lane-card" href="lol-lane-top.html">
+      <span class="lane-icon">🗡️</span>
+      <span class="lane-name">TOP</span>
+      <span class="lane-desc">耐久力の高いファイター系</span>
+    </a>
+    <a class="lane-card" href="lol-lane-jg.html">
+      <span class="lane-icon">🌲</span>
+      <span class="lane-name">JG</span>
+      <span class="lane-desc">マップ全体を動き回るジャングラー</span>
+    </a>
+    <a class="lane-card" href="lol-lane-mid.html">
+      <span class="lane-icon">✨</span>
+      <span class="lane-name">MID</span>
+      <span class="lane-desc">高火力の魔法・暗殺者系</span>
+    </a>
+    <a class="lane-card" href="lol-lane-bot.html">
+      <span class="lane-icon">🏹</span>
+      <span class="lane-name">BOT</span>
+      <span class="lane-desc">遠距離から攻撃するADC</span>
+    </a>
+    <a class="lane-card" href="lol-lane-sup.html">
+      <span class="lane-icon">🛡️</span>
+      <span class="lane-name">SUP</span>
+      <span class="lane-desc">味方を守るサポート</span>
+    </a>
+  </div>
+</div>
+
+<!-- LATEST ARTICLES -->
+<div class="section-head"><h2>最新記事</h2></div>
+<div class="latest-section">
+  <div class="latest-list" id="latest-list"></div>
+</div>
 
 <script>
   // ============================================================
@@ -884,33 +984,23 @@
     },
   ];
 
-  // 最新記事カード（先頭3件を自動表示）
-  document.getElementById('latest-cards').innerHTML = ARTICLES.slice(0, 3).map(a => `
-    <a class="card" href="${a.url}">
-      <span class="card-cat">${a.cat}</span>
-      <h2 class="card-title">${a.title}</h2>
-      <p class="card-excerpt">${a.excerpt}</p>
-      <div class="card-meta">
-        <span class="card-date">${a.date}</span>
-        <span class="card-read">Read →</span>
-      </div>
-    </a>
-  `).join('');
-
-  // おすすめランキング（全記事を自動表示）
-  document.getElementById('ranking-grid').innerHTML = ARTICLES.slice(0, 5).map((a, i) => `
-    <a class="rank-item" href="${a.url}">
-      <span class="rank-num">${String(i + 1).padStart(2, '0')}</span>
-      <span class="rank-title">${a.title}</span>
-      <span class="rank-tag">${a.cat}</span>
-    </a>
-  `).join('');
-
   // よく読まれている記事（先頭5件）
   document.getElementById('popular-list').innerHTML = ARTICLES.slice(0, 5).map((a, i) => `
     <a class="popular-item" href="${a.url}">
       <span class="popular-num">${String(i + 1).padStart(2, '0')}</span>
       <span class="popular-title">${a.title}</span>
+    </a>
+  `).join('');
+
+  // 最新記事（先頭5件）
+  document.getElementById('latest-list').innerHTML = ARTICLES.slice(0, 5).map(a => `
+    <a class="latest-item" href="${a.url}">
+      <div class="latest-left">
+        <span class="latest-cat">${a.cat}</span>
+        <span class="latest-title">${a.title}</span>
+        <span class="latest-date">${a.date}</span>
+      </div>
+      <span class="latest-arrow">→</span>
     </a>
   `).join('');
 </script>
@@ -934,7 +1024,7 @@
 
 <script>
   // ⚠️ 以下の YOUR_API_KEY をあなたのAPIキーに置き換えてください
-  const YT_API_KEY     = 'YOUR_API_KEY';
+  const YT_API_KEY     = 'AIzaSyC4gPV6gmtcp1GwIZ7z7KJ3tHG-934V3n8';
   const YT_CHANNEL_ID  = 'UCNIQTigIQXtUQtB3td0AIrg';
 
   async function loadYouTubeVideos() {
