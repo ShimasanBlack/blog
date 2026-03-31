@@ -779,7 +779,9 @@
     <div class="beginner-box">
       <p class="beginner-box-title">🔰 初心者はまずここから</p>
       <div class="beginner-links">
-        <a class="beginner-link" href="lol-reasons.html">LoL初心者が勝てない理由3つ【これだけやればOK】</a>
+        <a class="beginner-link" href="lol-start.html">LoL初心者が最初にやるべきこと3つ</a>
+        <a class="beginner-link" href="lol-reasons.html">LoL初心者が勝てない理由3つ</a>
+        <a class="beginner-link" href="lol-mistakes.html">LoL初心者が絶対やるミス5選</a>
         <a class="beginner-link" href="lol-beginner.html">LoLで覚えておきたい専門用語20選</a>
         <a class="beginner-link" href="lol-top.html">初心者におすすめのTOPチャンピオン5選</a>
         <a class="beginner-link" href="lol-mid.html">初心者におすすめのMIDチャンピオン5選</a>
@@ -810,6 +812,27 @@
   //    配列の先頭が最新記事として自動表示されます。
   // ============================================================
   const ARTICLES = [
+    {
+      url:     'lol-lose.html',
+      cat:     'League of Legends',
+      title:   'LoLで勝てない理由3つ【初心者はこれ】',
+      excerpt: 'スキルの無駄撃ち・有利不利の判断ミス・考えないプレイ。この3つを直すだけで勝率は確実に変わります。',
+      date:    '2026.03.31',
+    },
+    {
+      url:     'lol-mistakes.html',
+      cat:     'League of Legends',
+      title:   'LoL初心者が絶対やるミス5選【やると勝てない】',
+      excerpt: '無駄ファイト・CS無視・視界見ない・引かない・チャンプ変えすぎ。この5つをやめるだけで勝率は確実に上がります。',
+      date:    '2026.03.31',
+    },
+    {
+      url:     'lol-start.html',
+      cat:     'League of Legends',
+      title:   'LoL初心者が最初にやるべきこと3つ【これだけでOK】',
+      excerpt: 'LoLを始めたばかりの人がやるべきことはたった3つ。操作・チャンプ固定・ミニオン意識だけ押さえれば、確実に上達できます。',
+      date:    '2026.03.31',
+    },
     {
       url:     'lol-reasons.html',
       cat:     'League of Legends',
@@ -911,7 +934,7 @@
 
 <script>
   // ⚠️ 以下の YOUR_API_KEY をあなたのAPIキーに置き換えてください
-  const YT_API_KEY     = 'AIzaSyC4gPV6gmtcp1GwIZ7z7KJ3tHG-934V3n8';
+  const YT_API_KEY     = 'YOUR_API_KEY';
   const YT_CHANNEL_ID  = 'UCNIQTigIQXtUQtB3td0AIrg';
 
   async function loadYouTubeVideos() {
