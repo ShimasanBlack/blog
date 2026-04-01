@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JGレーン攻略まとめ【初心者向け】— MariGura Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f8f9fa; --surface: #ffffff; --border: #e2e6ea;
+      --accent: #4a6cf7; --text: #1a1a2e; --muted: #6c757d;
+      --red: #e05555; --max-w: 760px;
+    }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Noto Sans JP', sans-serif; font-weight: 400; min-height: 100vh; overflow-x: hidden; }
+    header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(255,255,255,.95); backdrop-filter: blur(12px); z-index: 100; }
+    .logo { font-size: 1.1rem; font-weight: 700; text-decoration: none; color: var(--accent); }
+    .logo span { color: var(--text); }
+    nav { display: flex; gap: 2rem; }
+    nav a { font-size: .85rem; color: var(--muted); text-decoration: none; transition: color .2s; }
+    nav a:hover { color: var(--accent); }
+    .nav-icons { display: flex; align-items: center; gap: 1rem; }
+    .nav-icon { color: var(--muted); text-decoration: none; transition: color .2s; display: flex; align-items: center; }
+    .nav-icon:hover { color: var(--accent); }
+    .nav-icon svg { width: 18px; height: 18px; fill: currentColor; }
+    .search-btn { display: flex; align-items: center; gap: .5rem; font-size: .82rem; color: var(--muted); background: none; border: 1px solid var(--border); border-radius: 6px; padding: .45rem 1rem; cursor: pointer; transition: color .2s, border-color .2s; }
+    .search-btn svg { width: 16px; height: 16px; }
+    .search-btn:hover { color: var(--accent); border-color: var(--accent); }
+    .search-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 200; align-items: flex-start; justify-content: center; padding-top: 8rem; }
+    .search-overlay.open { display: flex; }
+    .search-box { background: #fff; border: 1px solid var(--border); border-radius: 8px; width: 100%; max-width: 560px; padding: 1.2rem; display: flex; gap: .8rem; align-items: center; }
+    .search-input { flex: 1; background: none; border: none; outline: none; font-family: 'Noto Sans JP', sans-serif; font-size: 1rem; color: var(--text); }
+    .search-input::placeholder { color: var(--muted); }
+    .search-close { background: none; border: none; color: var(--muted); font-size: 1.2rem; cursor: pointer; line-height: 1; }
+    .article-wrap { max-width: var(--max-w); margin: 0 auto; padding: 3rem 2rem 6rem; animation: fadeUp .6s ease both; }
+    .article-meta { display: flex; align-items: center; gap: .8rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .cat-badge { font-size: .72rem; color: var(--accent); border: 1px solid var(--accent); border-radius: 4px; padding: .2rem .8rem; font-weight: 700; }
+    .article-date { font-size: .75rem; color: var(--muted); }
+    h1.article-title { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 700; line-height: 1.4; color: var(--text); margin-bottom: 1rem; }
+    h1.article-title .hl { color: var(--accent); }
+    .intro-box { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 1.6rem 1.8rem; margin: 2rem 0; }
+    .intro-lead { font-size: .95rem; line-height: 1.9; color: var(--text); margin-bottom: .6rem; font-weight: 700; }
+    .intro-desc { font-size: .9rem; line-height: 1.9; color: var(--muted); }
+    .section-block { margin: 2.5rem 0; }
+    .section-header { background: var(--accent); color: #fff; border-radius: 8px 8px 0 0; padding: 1rem 1.4rem; font-size: 1rem; font-weight: 700; }
+    .section-body { background: #fff; border: 1px solid var(--border); border-top: none; border-radius: 0 0 8px 8px; padding: 1.4rem 1.6rem; display: flex; flex-direction: column; gap: .8rem; }
+    .point-list { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+    .point-list li { font-size: .88rem; color: var(--text); padding-left: 1.6rem; position: relative; line-height: 1.8; }
+    .point-list li::before { content: '✔'; position: absolute; left: 0; color: var(--accent); font-size: .8rem; top: .15rem; }
+    .article-link-list { display: flex; flex-direction: column; gap: .6rem; }
+    .article-link { display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-size: .88rem; font-weight: 700; color: var(--text); text-decoration: none; padding: .8rem 1rem; border-radius: 6px; background: #f8f9ff; border: 1px solid #dde3ff; transition: border-color .2s, color .2s; }
+    .article-link:hover { border-color: var(--accent); color: var(--accent); }
+    .article-link-arrow { font-size: .9rem; color: var(--muted); flex-shrink: 0; }
+    .empty-note { font-size: .85rem; color: var(--muted); padding: .5rem 0; }
+    .next-action { margin: 2.5rem 0 1rem; padding: 1.4rem 1.6rem; background: #f8f9ff; border: 1px solid #dde3ff; border-radius: 8px; }
+    .next-action-title { font-size: .78rem; font-weight: 700; color: var(--accent); margin-bottom: 1rem; }
+    .next-action-links { display: flex; flex-direction: column; gap: .6rem; }
+    .next-action-link { display: flex; align-items: center; gap: .6rem; font-size: .88rem; font-weight: 700; color: var(--text); text-decoration: none; padding: .5rem .8rem; border-radius: 6px; background: #ffffff; border: 1px solid var(--border); transition: border-color .2s, color .2s; }
+    .next-action-link:hover { border-color: var(--accent); color: var(--accent); }
+    .share-section { margin: 3rem 0 1rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+    .share-label { font-size: .78rem; color: var(--muted); margin-bottom: 1rem; font-weight: 700; }
+    .share-buttons { display: flex; gap: .8rem; flex-wrap: wrap; }
+    .share-btn { display: inline-flex; align-items: center; gap: .5rem; font-size: .82rem; font-weight: 700; padding: .5rem 1.2rem; text-decoration: none; transition: opacity .2s; color: #fff; border: none; cursor: pointer; border-radius: 6px; }
+    .share-btn:hover { opacity: .8; }
+    .share-btn.x { background: #000; }
+    .share-btn.copy { background: var(--accent); }
+    .riot-notice { font-size: .72rem; line-height: 1.7; color: var(--muted); border-top: 1px solid var(--border); padding: 1.2rem 2rem; text-align: center; opacity: .8; }
+    footer { border-top: 1px solid var(--border); padding: 2rem; display: flex; justify-content: space-between; align-items: center; max-width: calc(var(--max-w) + 4rem); margin: 0 auto; width: 100%; }
+    .footer-logo { font-size: .88rem; font-weight: 700; color: var(--accent); opacity: .7; }
+    .footer-copy { font-size: .75rem; color: var(--muted); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 700px) {
+      header { padding: 1rem 1.2rem; } nav { gap: 1rem; }
+      .article-wrap { padding: 2rem 1.2rem 5rem; }
+      .riot-notice { padding: 1rem 1.2rem; }
+      .section-body { padding: 1.2rem 1rem; }
+    }
+  </style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KMJYZL6Y3Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KMJYZL6Y3Z');
+  </script>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">MariGura <span>Hub</span></a>
+  <nav>
+    <a href="index.html">TOP</a>
+    <a href="articles.html" class="active">記事一覧</a>
+  </nav>
+  <div class="nav-icons">
+    <button class="search-btn" onclick="document.querySelector('.search-overlay').classList.add('open')">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>検索
+    </button>
+    <a class="nav-icon" href="https://www.youtube.com/channel/UCNIQTigIQXtUQtB3td0AIrg" target="_blank" rel="noopener" title="YouTube">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
+    </a>
+  </div>
+</header>
+
+<div class="search-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="search-box">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--muted);flex-shrink:0"><circle cx="11" cy="11" r="6"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input class="search-input" type="text" placeholder="記事を検索する...">
+    <button class="search-close" onclick="document.querySelector('.search-overlay').classList.remove('open')">✕</button>
+  </div>
+</div>
+
+<main class="article-wrap">
+
+  <div class="article-meta">
+    <span class="cat-badge">JGレーン</span>
+    <span class="article-date">2026.03.31</span>
+  </div>
+
+  <h1 class="article-title">🌲 <span class="hl">JGレーン</span>攻略まとめ<br>【初心者向け】</h1>
+
+  <div class="intro-box">
+    <p class="intro-lead">JGレーンってどんなポジション？👇</p>
+    <p class="intro-desc">マップ全体を動き回り、モンスターを狩りながら味方のレーンを支援するポジション。</p>
+  </div>
+
+  <!-- 特徴 -->
+  <div class="section-block">
+    <div class="section-header">📌 JGレーンの特徴</div>
+    <div class="section-body">
+      <ul class="point-list">
+          <li>レーンを持たずジャングル（森）でモンスターを狩る</li>
+          <li>ガンク（奇襲）で味方レーンを有利にする</li>
+          <li>バロン・ドラゴンなどの重要オブジェクトを管理</li>
+          <li>マップ全体への影響力が大きい</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 立ち回り -->
+  <div class="section-block">
+    <div class="section-header">🎯 初心者が意識すべき立ち回りのポイント</div>
+    <div class="section-body">
+      <ul class="point-list">
+          <li>まずジャングルルートを覚える（モンスターを効率よく狩る順番）</li>
+          <li>ガンクはミニマップで敵の位置を確認してから行う</li>
+          <li>バロン・ドラゴンのタイマーを常に意識する</li>
+          <li>味方レーンのCSを奪わないように注意</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 関連記事 -->
+  <div class="section-block">
+    <div class="section-header">📖 JGレーン関連記事</div>
+    <div class="section-body">
+      <div class="article-link-list">
+        <a class="article-link" href="lol-jg.html">
+          <span>JGレーン おすすめチャンピオン5選</span>
+          <span class="article-link-arrow">→</span>
+        </a>
+        <p class="empty-note">※ 今後記事を追加予定です。お楽しみに！</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 次のステップ -->
+  <div class="next-action">
+    <p class="next-action-title">📖 次のステップ</p>
+    <div class="next-action-links">
+      <a class="next-action-link" href="lol-lane-mid.html">
+        <span>👉</span> MIDレーン攻略まとめを見る
+      </a>
+      <a class="next-action-link" href="lol-start.html">
+        <span>👉</span> 初心者が最初にやるべきこと3つ
+      </a>
+      <a class="next-action-link" href="articles.html">
+        <span>👉</span> 初心者まとめページ
+      </a>
+      <a class="next-action-link" href="https://www.youtube.com/channel/UCNIQTigIQXtUQtB3td0AIrg" target="_blank" rel="noopener">
+        <span>👉</span> YouTube で動画を見る
+      </a>
+    </div>
+  </div>
+
+  <div class="share-section">
+    <p class="share-label">この記事をシェア</p>
+    <div class="share-buttons">
+      <a class="share-btn x" href="https://twitter.com/intent/tweet?text=JGレーン攻略まとめ【初心者向け】&url=https://marigura.com/lol-lane-jg.html&hashtags=LoL,LoL初心者" target="_blank" rel="noopener">𝕏 でシェア</a>
+      <button class="share-btn copy" onclick="navigator.clipboard.writeText(location.href).then(()=>alert('URLをコピーしました'))">🔗 URLをコピー</button>
+    </div>
+  </div>
+
+</main>
+
+<div class="riot-notice">
+  本サイトはRiot Gamesが公式承認するものではありません。League of Legends © Riot Games, Inc.
+</div>
+
+<footer>
+  <span class="footer-logo">MariGura Hub</span>
+  <span class="footer-copy">© 2026 MariGura Hub — ゲーム攻略・レビュー</span>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoLで覚えておきたい専門用語20選｜初心者向け完全ガイド — MariGura Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:      #f8f9fa;
+      --surface: #ffffff;
+      --border:  #e2e6ea;
+      --accent:  #4a6cf7;
+      --accent2: #7c3aed;
+      --text:    #1a1a2e;
+      --muted:   #6c757d;
+      --gold:    #4a6cf7;
+      --gold2:   #7c3aed;
+      --blue:    #4a6cf7;
+      --red:     #e05555;
+      --max-w:   760px;
+    }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Noto Sans JP', sans-serif; font-weight: 400; min-height: 100vh; overflow-x: hidden; }
+    header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(255,255,255,.95); backdrop-filter: blur(12px); z-index: 100; }
+    .logo { font-family: 'Noto Sans JP', sans-serif; font-size: 1.1rem; font-weight: 700; letter-spacing: .02em; text-decoration: none; color: var(--accent); }
+    .logo span { color: var(--text); }
+    nav { display: flex; gap: 2rem; }
+    nav a { font-size: .85rem; color: var(--muted); text-decoration: none; transition: color .2s; font-family: 'Noto Sans JP', sans-serif; font-weight: 400; }
+    nav a:hover { color: var(--accent); }
+    .nav-icons { display: flex; align-items: center; gap: 1rem; }
+    .nav-icon { color: var(--muted); text-decoration: none; transition: color .2s; display: flex; align-items: center; }
+    .nav-icon:hover { color: var(--accent); }
+    .nav-icon svg { width: 18px; height: 18px; fill: currentColor; }
+    .search-btn { display: flex; align-items: center; gap: .5rem; font-family: 'Noto Sans JP', sans-serif; font-size: .82rem; color: var(--muted); background: none; border: 1px solid var(--border); border-radius: 6px; padding: .45rem 1rem; cursor: pointer; transition: color .2s, border-color .2s; }
+    .search-btn svg { width: 16px; height: 16px; }
+    .search-btn:hover { color: var(--accent); border-color: var(--accent); }
+    .article-wrap { max-width: var(--max-w); margin: 0 auto; padding: 3rem 2rem 6rem; animation: fadeUp .6s ease both; }
+    .article-meta { display: flex; align-items: center; gap: .8rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .cat-badge { font-family: 'Noto Sans JP', sans-serif; font-size: .72rem; color: var(--accent); border: 1px solid var(--accent); border-radius: 4px; padding: .2rem .8rem; font-weight: 700; }
+    .article-date, .article-updated { font-family: 'Noto Sans JP', sans-serif; font-size: .75rem; color: var(--muted); }
+    h1.article-title { font-family: 'Noto Sans JP', sans-serif; font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 700; line-height: 1.4; color: var(--text); margin-bottom: 1rem; }
+    h1.article-title .hl { color: var(--accent); }
+    .article-lead { font-size: .95rem; line-height: 2; color: var(--muted); border-left: 3px solid var(--accent); padding-left: 1.2rem; margin: 2rem 0; }
+    .learn-box { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 8px; padding: 1.4rem 1.8rem; margin: 2rem 0; }
+    .learn-box-title { font-family: 'Noto Sans JP', sans-serif; font-size: .82rem; color: var(--accent); margin-bottom: .8rem; font-weight: 700; }
+    .learn-box ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+    .learn-box li { font-size: .88rem; color: var(--text); line-height: 1.7; padding-left: 1.2rem; position: relative; }
+    .learn-box li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: .7rem; top: .2rem; }
+    .article-body { font-size: .95rem; line-height: 2; color: var(--text); }
+    .article-body p { margin-bottom: 1.6rem; }
+    .article-body h2 { font-family: 'Noto Sans JP', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text); margin: 3rem 0 1rem; padding-bottom: .6rem; border-bottom: 2px solid var(--accent); display: flex; align-items: center; gap: .8rem; }
+    .article-body h2::before { content: ''; display: block; width: 4px; height: 1.2em; background: var(--accent); flex-shrink: 0; border-radius: 2px; }
+    .champ-list { display: flex; flex-direction: column; gap: 1.2rem; margin: 1.5rem 0; }
+    .champ-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.4rem 1.6rem; display: grid; grid-template-columns: auto 1fr; gap: 1rem 1.4rem; align-items: start; transition: box-shadow .2s, transform .2s; }
+    .champ-card:hover { box-shadow: 0 4px 16px rgba(74,108,247,.1); transform: translateY(-2px); }
+    .champ-num { font-family: 'Noto Sans JP', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--border); line-height: 1; padding-top: .2rem; }
+    .champ-card:nth-child(1) .champ-num { color: var(--accent); }
+    .champ-card:nth-child(2) .champ-num, .champ-card:nth-child(3) .champ-num { color: #a0a0b0; }
+    .champ-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; object-position: top; border: 1px solid var(--border); border-radius: 6px; margin-bottom: .6rem; display: block; }
+    .champ-name { font-family: 'Noto Sans JP', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: .3rem; }
+    .champ-role { font-family: 'Noto Sans JP', sans-serif; font-size: .72rem; color: var(--accent); margin-bottom: .6rem; font-weight: 700; }
+    .champ-desc { font-size: .85rem; line-height: 1.8; color: var(--muted); }
+    .champ-tags { display: flex; gap: .5rem; margin-top: .6rem; flex-wrap: wrap; }
+    .tag { font-family: 'Noto Sans JP', sans-serif; font-size: .72rem; color: var(--muted); border: 1px solid var(--border); border-radius: 4px; padding: .1rem .5rem; }
+    .champ-counter { margin-top: .8rem; padding-top: .8rem; border-top: 1px solid var(--border); }
+    .champ-counter-label { font-family: 'Noto Sans JP', sans-serif; font-size: .72rem; color: var(--red); margin-bottom: .4rem; font-weight: 700; }
+    .champ-counter-list { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .counter-tag { font-family: 'Noto Sans JP', sans-serif; font-size: .72rem; color: var(--red); border: 1px solid rgba(224,85,85,.4); border-radius: 4px; padding: .15rem .6rem; background: rgba(224,85,85,.06); }
+    .champ-build { margin-top: .8rem; padding-top: .8rem; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: .6rem; }
+    .champ-build-row { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+    .champ-build-label { font-family: 'Noto Sans JP', sans-serif; font-size: .72rem; color: var(--accent); font-weight: 700; white-space: nowrap; min-width: 90px; }
+    .champ-build-value { font-family: 'Noto Sans JP', sans-serif; font-size: .82rem; color: var(--text); }
+    .item-icons-wrap { display: flex; flex-direction: column; gap: .3rem; }
+    .item-icons { display: flex; align-items: center; gap: .4rem; flex-wrap: wrap; margin-bottom: .2rem; }
+    .item-icon { width: 28px; height: 28px; border: 1px solid var(--border); border-radius: 4px; object-fit: cover; }
+    .item-arrow { font-size: .7rem; color: var(--muted); }
+    .tbd-notice { background: rgba(74,108,247,.05); border: 1px dashed var(--accent); border-radius: 8px; padding: 1.4rem 1.6rem; display: flex; align-items: center; gap: 1rem; color: var(--accent); font-family: 'Noto Sans JP', sans-serif; font-size: .85rem; }
+    .tbd-icon { font-size: 1.4rem; flex-shrink: 0; opacity: .6; }
+    .info-box { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1.4rem 1.8rem; margin: 1.5rem 0; }
+    .info-box-title { font-family: 'Noto Sans JP', sans-serif; font-size: .82rem; color: var(--accent); margin-bottom: 1rem; font-weight: 700; }
+    .info-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    .info-table th { text-align: left; font-family: 'Noto Sans JP', sans-serif; color: var(--muted); padding: .5rem .8rem .5rem 0; border-bottom: 1px solid var(--border); font-size: .78rem; font-weight: 700; }
+    .info-table td { padding: .6rem .8rem .6rem 0; border-bottom: 1px solid var(--border); color: var(--text); line-height: 1.7; }
+    .info-table tr:last-child td { border-bottom: none; }
+    .summary-box { background: var(--surface); border: 1px solid var(--accent); border-radius: 8px; padding: 1.8rem 2rem; margin: 3rem 0 1rem; }
+    .summary-box-title { font-family: 'Noto Sans JP', sans-serif; font-size: .82rem; color: var(--accent); margin-bottom: 1rem; font-weight: 700; }
+    .summary-box ul { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+    .summary-box li { font-size: .88rem; color: var(--text); line-height: 1.8; padding-left: 1.4rem; position: relative; }
+    .summary-box li::before { content: '✓'; position: absolute; left: 0; color: var(--accent); font-size: .8rem; }
+    .article-closing { margin-top: 3rem; padding: 1.5rem; border: 1px solid var(--border); border-left: 3px solid var(--blue); border-radius: 8px; font-size: .95rem; line-height: 2; color: var(--muted); }
+    /* ── NEXT ACTION ── */
+    .next-action {
+      margin: 2.5rem 0 1rem;
+      padding: 1.4rem 1.6rem;
+      background: #f8f9ff;
+      border: 1px solid #dde3ff;
+      border-radius: 8px;
+    }
+    .next-action-title {
+      font-size: .78rem;
+      font-weight: 700;
+      color: #4a6cf7;
+      letter-spacing: .08em;
+      margin-bottom: 1rem;
+    }
+    .next-action-links {
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+    }
+    .next-action-link {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .88rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      text-decoration: none;
+      padding: .5rem .8rem;
+      border-radius: 6px;
+      background: #ffffff;
+      border: 1px solid #e2e6ea;
+      transition: border-color .2s, color .2s;
+    }
+    .next-action-link:hover { border-color: #4a6cf7; color: #4a6cf7; }
+    .next-action-link .icon { font-size: .9rem; }
+
+    .share-section { margin: 3rem 0 1rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+    .share-label { font-family: 'Noto Sans JP', sans-serif; font-size: .78rem; color: var(--muted); margin-bottom: 1rem; font-weight: 700; }
+    .share-buttons { display: flex; gap: .8rem; flex-wrap: wrap; }
+    .share-btn { display: inline-flex; align-items: center; gap: .5rem; font-family: 'Noto Sans JP', sans-serif; font-size: .82rem; font-weight: 700; padding: .5rem 1.2rem; text-decoration: none; transition: opacity .2s; color: #fff; border: none; cursor: pointer; border-radius: 6px; }
+    .share-btn:hover { opacity: .8; }
+    .share-btn.x    { background: #000; }
+    .share-btn.line { background: #06c755; }
+    .share-btn.copy { background: var(--accent); color: #fff; }
+    .references { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+    .references-title { font-family: 'Noto Sans JP', sans-serif; font-size: .78rem; color: var(--muted); margin-bottom: 1rem; font-weight: 700; }
+    .references ol { padding-left: 1.2rem; }
+    .references li { font-size: .82rem; line-height: 2; color: var(--muted); margin-bottom: .3rem; }
+    .references a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+    footer { border-top: 1px solid var(--border); padding: 2rem; display: flex; justify-content: space-between; align-items: center; max-width: calc(var(--max-w) + 4rem); margin: 0 auto; width: 100%; }
+    .footer-logo { font-family: 'Noto Sans JP', sans-serif; font-size: .88rem; font-weight: 700; color: var(--accent); opacity: .7; }
+    .footer-copy { font-family: 'Noto Sans JP', sans-serif; font-size: .75rem; color: var(--muted); }
+    .doujin-link { margin-bottom: 2rem; text-align: center; }
+    .doujin-link-btn { display: inline-block; font-family: 'Noto Sans JP', sans-serif; font-size: .82rem; color: var(--muted); border: 1px solid var(--border); border-radius: 6px; padding: .5rem 1.4rem; text-decoration: none; transition: color .2s, border-color .2s; }
+    .doujin-link-btn:hover { color: var(--accent); border-color: var(--accent); }
+    .riot-notice { font-size: .72rem; line-height: 1.7; color: var(--muted); border-top: 1px solid var(--border); padding: 1.2rem 2rem; text-align: center; opacity: .8; }
+    /* beginner page specific */
+    .champ-card.doujin { border-left: 3px solid var(--gold); }
+    .term-img { width: 100%; height: 180px; object-fit: cover; border: 1px solid var(--border); border-radius: 6px; display: block; margin-top: .6rem; }
+    .term-with-img { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; align-items: start; }
+    .term-img-wrap { grid-column: 1 / -1; }
+    @media (min-width: 600px) { .term-img-wrap { grid-column: auto; } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 700px) {
+      header { padding: 1rem 1.5rem; }
+      nav { gap: 1rem; }
+      .article-wrap { padding: 2rem 1.2rem 4rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: .5rem; text-align: center; }
+      .riot-notice { padding: 1rem 1.2rem; }
+      .champ-card { grid-template-columns: 1fr; }
+      .champ-build-label { min-width: 80px; font-size: .65rem; }
+      .champ-build-value { font-size: .78rem; }
+      .item-icon { width: 24px; height: 24px; }
+      .info-table { font-size: .78rem; }
+      .info-table th, .info-table td { padding: .4rem .4rem .4rem 0; }
+      .article-title { font-size: clamp(1.4rem, 6vw, 2rem); }
+      .summary-box { padding: 1.2rem 1.2rem; }
+      .learn-box { padding: 1.2rem 1.2rem; }
+      .term-with-img { grid-template-columns: 1fr; }
+    }
+  </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KMJYZL6Y3Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KMJYZL6Y3Z');
+  </script>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">MariGura <span>Hub</span></a>
+  <nav>
+    <a href="index.html">TOP</a>
+    <a href="#">おすすめランキング</a>
+  </nav>
+</header>
+
+<article class="article-wrap">
+
+  <div class="article-meta">
+    <span class="cat-badge">League of Legends</span>
+    <span class="article-date">2026.03.27</span>
+    <span class="article-updated">最終更新：2026年3月27日</span>
+  </div>
+
+  <h1 class="article-title">
+    LoLで覚えておきたい<br>
+    <span class="hl">専門用語20選</span>
+  </h1>
+
+  <p class="article-lead">
+    LoLを始めたばかりの頃、チームメイトのチャットや攻略サイトに見慣れない単語が飛び交って困った経験はありませんか？この記事では初心者が最初に覚えておくべき専門用語を20個厳選して解説します。
+  </p>
+
+  <div class="learn-box">
+    <p class="learn-box-title">この記事でわかること</p>
+    <ul>
+      <li>試合中によく使われる基本用語の意味</li>
+      <li>チームメイトとのコミュニケーションに必要な用語</li>
+      <li>攻略サイトや配信で頻出する20の専門用語</li>
+      <li>用語を覚えることで試合の流れがわかるようになる</li>
+    </ul>
+  </div>
+
+  <div class="article-body">
+
+    <h2>基本ゲームプレイ用語</h2>
+
+    <div class="info-box">
+      <p class="info-box-title">01〜07：まず覚えるべき基本用語</p>
+      <table class="info-table">
+        <thead>
+          <tr><th>用語</th><th>意味</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>CS（クリープスコア）</td><td>ミニオンにトドメを刺して獲得するゴールドの数。序盤の資金源で、1分あたり6〜8CSが初心者の目安。</td></tr>
+          <tr><td>ファーム</td><td>ミニオンや中立モンスターを倒してゴールドと経験値を稼ぐ行為。序盤の基本行動。</td></tr>
+          <tr><td>プッシュ</td><td>ミニオンを素早く処理して、タワーへ向けてウェーブを押し込むこと。</td></tr>
+          <tr><td>ポーク</td><td>相手に近づかず、遠距離から一方的にダメージを与えて体力を削ること。</td></tr>
+          <tr><td>エンゲージ</td><td>戦闘を開始すること。タンクやファイターが敵に飛び込んで戦いの引き金を引く行為。</td></tr>
+          <tr><td>ディスエンゲージ</td><td>戦闘を避けること・逃げること。不利な状況での離脱や相手のエンゲージを拒否すること。</td></tr>
+          <tr><td>オールイン</td><td>全スキルを使って全力で戦闘すること。リスクは高いがキルを狙うときに使う。</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>マップ・戦略用語</h2>
+
+    <div class="info-box">
+      <p class="info-box-title">09〜14：試合の流れに関わる用語</p>
+      <table class="info-table">
+        <thead>
+          <tr><th>用語</th><th>意味</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>ガンク</td><td>ジャングラーや他レーンのプレイヤーが奇襲すること。成功するとキルや有利を取りやすい。</td></tr>
+          <tr><td>ローム</td><td>レーンを離れて他レーンを支援すること。主にMIDやサポートが行う。</td></tr>
+          <tr><td>スプリットプッシュ</td><td>チームとは別のレーンを1人で攻め続けること。相手の戦力を分散させる戦術。</td></tr>
+          <tr><td>
+            ワード<br>
+            <img src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/ward.png" alt="ワード" style="width:200px;height:130px;object-fit:cover;border:1px solid var(--border);border-radius:4px;margin-top:.4rem;display:block;">
+          </td><td>視界を確保するアイテム。置くことで敵の動きを把握しガンクを警戒できる。</td></tr>
+          <tr><td>オブジェクト</td><td>ドラゴン・バロン・タワーなどゲームを有利に進めるための重要な目標のこと。</td></tr>
+          <tr><td>スノーボール</td><td>序盤のキルや有利をそのまま試合終盤まで広げていくこと。有利を転がすイメージ。</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>マップオブジェクト用語</h2>
+
+    <div class="info-box">
+      <p class="info-box-title">15〜18：マップ上の重要オブジェクト</p>
+      <div style="display:grid; grid-template-columns: repeat(2,1fr); gap:1rem; margin-top:.8rem;">
+
+        <div style="background:var(--bg); border:1px solid var(--border); border-radius:6px; overflow:hidden;">
+          <img src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/baron.png" alt="バロン" style="width:100%;height:160px;object-fit:cover;display:block;">
+          <div style="padding:.8rem;">
+            <p style="font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:.4rem;">バロン</p>
+            <p style="font-size:.82rem;line-height:1.7;color:var(--muted);">マップ最強の中立モンスター。倒すとチーム全体が強化されミニオンも強くなる。試合終盤の最重要オブジェクト。</p>
+          </div>
+        </div>
+
+        <div style="background:var(--bg); border:1px solid var(--border); border-radius:6px; overflow:hidden;">
+          <img src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/dragon.png" alt="ドラゴン" style="width:100%;height:160px;object-fit:cover;display:block;">
+          <div style="padding:.8rem;">
+            <p style="font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:.4rem;">ドラゴン</p>
+            <p style="font-size:.82rem;line-height:1.7;color:var(--muted);">序盤から取り続けることでスタックが貯まり、強力なバフを得られるオブジェクト。4スタックで「魂」を取得。</p>
+          </div>
+        </div>
+
+        <div style="background:var(--bg); border:1px solid var(--border); border-radius:6px; overflow:hidden;">
+          <img src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/voidgrub.png" alt="ヴォイドグラブ" style="width:100%;height:160px;object-fit:cover;display:block;">
+          <div style="padding:.8rem;">
+            <p style="font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:.4rem;">ヴォイドグラブ</p>
+            <p style="font-size:.82rem;line-height:1.7;color:var(--muted);">バロンと並ぶマップの強力な中立モンスター。倒すとジャングルとレーンに強力なミニオンを召喚できる。</p>
+          </div>
+        </div>
+
+        <div style="background:var(--bg); border:1px solid var(--border); border-radius:6px; overflow:hidden;">
+          <img src="https://raw.githubusercontent.com/ShimasanBlack/blog/main/images/riftherald.png" alt="リフトヘラルド" style="width:100%;height:160px;object-fit:cover;display:block;">
+          <div style="padding:.8rem;">
+            <p style="font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:.4rem;">リフトヘラルド</p>
+            <p style="font-size:.82rem;line-height:1.7;color:var(--muted);">ジャングルに出現する大型モンスター。倒すと召喚アイテムを入手でき、タワーを破壊するのに役立てられる。</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <h2>戦闘・ステータス用語</h2>
+
+    <div class="info-box">
+      <p class="info-box-title">19〜21：戦闘で使われる頻出用語</p>
+      <table class="info-table">
+        <thead>
+          <tr><th>用語</th><th>意味</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>CC（クラウドコントロール）</td><td>スタン・スロウ・ノックアップなど相手の行動を妨害するスキル効果の総称。</td></tr>
+          <tr><td>AD / AP</td><td>AD＝物理攻撃力、AP＝魔法攻撃力。チャンピオンのダメージの種類を示す。</td></tr>
+          <tr><td>AR / MR</td><td>AR＝物理防御力、MR＝魔法防御力。ARは物理ダメージを、MRは魔法ダメージを軽減する。アイテム選びの基本。</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>用語を覚えると何が変わる？</h2>
+
+    <p>
+      専門用語を知っているだけで、試合中のチームメイトの発言が理解できるようになり、攻略サイトや配信を見たときの理解度が大幅に上がります。特に「ガンク」「CS」「オブジェクト」の3つは試合の勝敗に直結する概念なので、最優先で覚えることをおすすめします。
+    </p>
+    <p>
+      最初は全部覚えようとしなくて大丈夫です。プレイ中に「あ、これ見たことある」と感じる場面が増えるにつれて、自然に用語は身についていきます。この記事をブックマークして、気になった時に見返すのが効率的です。
+    </p>
+
+    <div class="summary-box">
+      <p class="summary-box-title">まとめ</p>
+      <ul>
+        <li>CS・ファーム・ガンクは試合の基本。まずこの3つを覚えよう</li>
+        <li>ワードを置く習慣をつけると視野が広がりガンク被害が減る</li>
+        <li>CC・AD/APを理解するとチャンピオン選びとビルドの意味がわかるようになる</li>
+        <li>バロン・ドラゴン・リフトヘラルドはゲームの勝敗を決める重要オブジェクト</li>
+        <li>全部一度に覚えなくてOK。プレイしながら少しずつ身につけよう</li>
+      </ul>
+    </div>
+
+    <p class="article-closing">
+      LoLの専門用語は最初こそ多く感じますが、プレイを続けるうちに自然と覚えられます。まずは今日紹介した20個を頭の片隅に置いておくだけで、試合の流れが見えてくるはずです。
+    </p>
+
+
+        <div class="next-action">
+      <p class="next-action-title">📖 次のステップ</p>
+      <div class="next-action-links">
+        <a class="next-action-link" href="lol-top.html">
+          <span class="icon">👉</span> 次に読むべき記事
+        </a>
+        <a class="next-action-link" href="articles.html">
+          <span class="icon">👉</span> 初心者まとめページ
+        </a>
+        <a class="next-action-link" href="https://www.youtube.com/channel/UCNIQTigIQXtUQtB3td0AIrg" target="_blank" rel="noopener">
+          <span class="icon">👉</span> YouTube で動画を見る
+        </a>
+      </div>
+    </div>
+
+    <div class="share-section">
+      <p class="share-label">この記事をシェアする</p>
+      <div class="share-buttons">
+        <a class="share-btn x" href="https://twitter.com/intent/tweet?text=LoLで覚えておきたい専門用語20選&url=https://marigura.com/lol-beginner.html" target="_blank" rel="noopener">𝕏 でシェア</a>
+        <a class="share-btn line" href="https://social-plugins.line.me/lineit/share?url=https://marigura.com/lol-beginner.html" target="_blank" rel="noopener">LINE でシェア</a>
+        <button class="share-btn copy" onclick="navigator.clipboard.writeText(location.href).then(()=>alert('URLをコピーしました'))">リンクをコピー</button>
+      </div>
+    </div>
+</div>
+</article>
+
+  <div class="riot-notice">
+    MariGura Hubは、ライアットゲームズが公式承認するものではなく、ライアットゲームズ又はリーグ・オブ・レジェンドの製作・管理に正式に関与したいかなる者の見解・意見に基づくものではありません。リーグ・オブ・レジェンド及びライアットゲームズは、Riot Games, Inc.の商標又は登録商標です。リーグ・オブ・レジェンド © Riot Games, Inc.
+  </div>
+
+<footer>
+  <span class="footer-logo">MariGura Hub</span>
+  <span class="footer-copy">© 2026 MariGura Hub — ゲーム攻略・レビュー</span>
+</footer>
+
+</body>
+</html>

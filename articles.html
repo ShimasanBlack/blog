@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>記事一覧 — MariGura Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #f8f9fa;
+      --surface: #ffffff;
+      --border:  #e2e6ea;
+      --accent:  #4a6cf7;
+      --accent2: #7c3aed;
+      --text:    #1a1a2e;
+      --muted:   #6c757d;
+      --gold:    #4a6cf7;
+      --blue:    #4a6cf7;
+      --max-w:   760px;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,.95);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      animation: fadeDown .5s ease both;
+    }
+
+    .logo {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--accent);
+    }
+    .logo span { color: var(--text); }
+
+    nav { display: flex; gap: 2rem; align-items: center; }
+    nav a {
+      font-size: .85rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 400;
+    }
+    nav a:hover { color: var(--accent); }
+    nav a.active { color: var(--accent); }
+
+    .nav-icons { display: flex; align-items: center; gap: 1rem; }
+    .nav-icon {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+      display: flex;
+      align-items: center;
+    }
+    .nav-icon:hover { color: var(--accent); }
+    .nav-icon svg { width: 18px; height: 18px; fill: currentColor; }
+
+    .search-btn {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: .82rem;
+      color: var(--muted);
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: .45rem 1rem;
+      cursor: pointer;
+      transition: color .2s, border-color .2s;
+    }
+    .search-btn svg { width: 16px; height: 16px; }
+    .search-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+    .search-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.5);
+      z-index: 200;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 8rem;
+    }
+    .search-overlay.open { display: flex; }
+    .search-box {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 100%;
+      max-width: 560px;
+      padding: 1.2rem;
+      display: flex;
+      gap: .8rem;
+      align-items: center;
+    }
+    .search-input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 1rem;
+      color: var(--text);
+    }
+    .search-input::placeholder { color: var(--muted); }
+    .search-close {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.2rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      max-width: calc(var(--max-w) + 4rem);
+      margin: 0 auto;
+      padding: 2.5rem 2rem 1.5rem;
+      animation: fadeUp .6s .1s ease both;
+    }
+    .page-eyebrow {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: .78rem;
+      color: var(--accent);
+      margin-bottom: .6rem;
+      font-weight: 700;
+    }
+    .page-title {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .page-count {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: .78rem;
+      color: var(--muted);
+      margin-top: .4rem;
+    }
+
+    /* ── CATEGORY TABS ── */
+    .cat-tabs {
+      display: flex;
+      gap: 0;
+      padding: 0 2rem;
+      border-bottom: 1px solid var(--border);
+      animation: fadeUp .6s .15s ease both;
+      overflow-x: auto;
+      max-width: calc(var(--max-w) + 4rem);
+      margin: 0 auto;
+    }
+    .cat-tab {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: .82rem;
+      color: var(--muted);
+      padding: .8rem 1.2rem;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+      white-space: nowrap;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      font-weight: 400;
+    }
+    .cat-tab:hover { color: var(--text); }
+    .cat-tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 700; }
+
+    /* ── ARTICLE LIST ── */
+    .articles-wrap {
+      max-width: calc(var(--max-w) + 4rem);
+      margin: 0 auto;
+      padding: 1.5rem 2rem 3rem;
+      animation: fadeUp .7s .2s ease both;
+    }
+
+    .cat-section { margin-bottom: 2.5rem; }
+    .cat-section.hidden { display: none; }
+
+    .cat-label {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: .78rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+    }
+    .cat-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .article-list {
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+    }
+
+    .article-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.2rem 1.6rem;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .article-item:hover { box-shadow: 0 4px 16px rgba(74,108,247,.1); transform: translateY(-2px); }
+    .article-item:hover .article-arrow { color: var(--accent); transform: translateX(4px); }
+
+    .article-left { display: flex; flex-direction: column; gap: .4rem; }
+
+    .article-cat {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: .72rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .article-title {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      flex-wrap: wrap;
+    }
+    .article-date {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: .72rem;
+      color: var(--muted);
+    }
+    .article-tag {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: .7rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: .1rem .5rem;
+    }
+
+    .article-arrow {
+      font-size: .9rem;
+      color: var(--muted);
+      transition: color .2s, transform .2s;
+    }
+
+    /* ── PAGINATION ── */
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      padding: 2rem 0 1rem;
+    }
+    .page-btn {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: .78rem;
+      color: var(--muted);
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: .4rem .9rem;
+      cursor: pointer;
+      transition: color .2s, border-color .2s;
+    }
+    .page-btn:hover { color: var(--accent); border-color: var(--accent); }
+    .page-btn.active { color: var(--accent); border-color: var(--accent); background: rgba(74,108,247,.06); font-weight: 700; }
+    .page-btn:disabled { opacity: .3; cursor: default; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: calc(var(--max-w) + 4rem);
+      margin: 0 auto;
+      width: 100%;
+    }
+    .footer-logo {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: .88rem;
+      font-weight: 700;
+      color: var(--accent);
+      opacity: .7;
+    }
+    .footer-copy {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: .75rem;
+      color: var(--muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      header { padding: 1rem 1.5rem; }
+      nav { gap: 1rem; }
+      .page-header { padding: 1.5rem 1.2rem 1rem; }
+      .cat-tabs { padding: 0 1.2rem; }
+      .articles-wrap { padding: 1.2rem 1.2rem 3rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: .5rem; text-align: center; }
+    }
+  </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KMJYZL6Y3Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KMJYZL6Y3Z');
+  </script>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">MariGura <span>Hub</span></a>
+  <nav>
+    <a href="index.html">TOP</a>
+    <a href="articles.html" class="active">記事一覧</a>
+  </nav>
+  <div class="nav-icons">
+    <button class="search-btn" onclick="document.querySelector('.search-overlay').classList.add('open')">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      検索
+    </button>
+    <a class="nav-icon" href="https://www.youtube.com/channel/UCNIQTigIQXtUQtB3td0AIrg" target="_blank" rel="noopener" title="YouTube">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"/></svg>
+    </a>
+  </div>
+</header>
+
+<!-- SEARCH MODAL -->
+<div class="search-overlay" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="search-box">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--muted);flex-shrink:0"><circle cx="11" cy="11" r="6"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input class="search-input" type="text" placeholder="記事を検索する...">
+    <button class="search-close" onclick="document.querySelector('.search-overlay').classList.remove('open')">✕</button>
+  </div>
+</div>
+
+<div class="page-header">
+  <p class="page-eyebrow">Article List</p>
+  <h1 class="page-title">記事一覧</h1>
+  <p class="page-count" id="article-count">全7記事</p>
+</div>
+
+<!-- CATEGORY TABS -->
+<div class="cat-tabs">
+  <button class="cat-tab active" onclick="filterCat('all', this)">すべて</button>
+  <button class="cat-tab" onclick="filterCat('lol', this)">League of Legends</button>
+</div>
+
+<div class="articles-wrap">
+  <div id="articles-inner"></div>
+  <div id="pagination" class="pagination"></div>
+</div>
+
+<footer>
+  <span class="footer-logo">MariGura Hub</span>
+  <span class="footer-copy">© 2026 MariGura Hub — ゲーム攻略・レビュー</span>
+</footer>
+
+<script>
+  const PER_PAGE = 10;
+  let currentCat = 'all';
+  let currentPage = 1;
+
+  // 全記事データ
+  const articles = [
+    { cat: 'lol', href: 'lol-teamfight.html', title: '集団戦で何すればいい？初心者向け解説',              date: '2026.03.31', tags: ['初心者向け', '集団戦'] },
+    { cat: 'lol', href: 'lol-lose.html',     title: 'LoLで勝てない理由3つ【初心者はこれ】',              date: '2026.03.31', tags: ['初心者向け', '立ち回り'] },
+    { cat: 'lol', href: 'lol-mistakes.html', title: 'LoL初心者が絶対やるミス5選【やると勝てない】',      date: '2026.03.31', tags: ['初心者向け', 'ミス'] },
+    { cat: 'lol', href: 'lol-start.html',   title: 'LoL初心者が最初にやるべきこと3つ【これだけでOK】', date: '2026.03.31', tags: ['初心者向け', '始め方'] },
+    { cat: 'lol', href: 'lol-reasons.html',  title: 'LoL初心者が勝てない理由3つ【これだけやればOK】', date: '2026.03.31', tags: ['初心者向け', '立ち回り'] },
+    { cat: 'lol', href: 'lol-beginner.html', title: 'LoLで覚えておきたい専門用語20選', date: '2026.03.27', tags: ['初心者向け', '用語集'] },
+    { cat: 'lol', href: 'lol-top.html',      title: 'LoL TOP おすすめチャンピオン5選', date: '2026.03.27', tags: ['TOPレーン', 'チャンピオン'] },
+    { cat: 'lol', href: 'lol-jg.html',       title: 'LoL JG おすすめチャンピオン5選',  date: '2026.03.27', tags: ['ジャングル', 'チャンピオン'] },
+    { cat: 'lol', href: 'lol-mid.html',      title: 'LoL MID おすすめチャンピオン5選', date: '2026.03.27', tags: ['MIDレーン', 'チャンピオン'] },
+    { cat: 'lol', href: 'lol-bot.html',      title: 'LoL BOT おすすめチャンピオン5選', date: '2026.03.27', tags: ['BOTレーン', 'チャンピオン'] },
+    { cat: 'lol', href: 'lol-sup.html',      title: 'LoL SUP おすすめチャンピオン5選', date: '2026.03.27', tags: ['サポート', 'チャンピオン'] },
+  ];
+
+  const catLabels = { lol: 'League of Legends' };
+  const catColors = { lol: 'lol' };
+
+  function getFiltered() {
+    return currentCat === 'all' ? articles : articles.filter(a => a.cat === currentCat);
+  }
+
+  function render() {
+    const filtered = getFiltered();
+    const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
+    currentPage = Math.min(currentPage, totalPages);
+
+    const start = (currentPage - 1) * PER_PAGE;
+    const pageItems = filtered.slice(start, start + PER_PAGE);
+
+    // グループ化（カテゴリー別）
+    const groups = {};
+    pageItems.forEach(a => {
+      if (!groups[a.cat]) groups[a.cat] = [];
+      groups[a.cat].push(a);
+    });
+
+    // 記事エリア描画
+    const wrap = document.getElementById('articles-inner');
+    wrap.innerHTML = Object.entries(groups).map(([cat, items]) => `
+      <div class="cat-section">
+        <p class="cat-label">${catLabels[cat]}</p>
+        <div class="article-list">
+          ${items.map(a => `
+            <a class="article-item" href="${a.href}">
+              <div class="article-left">
+                <span class="article-cat ${catColors[a.cat]}">${catLabels[a.cat]}</span>
+                <span class="article-title">${a.title}</span>
+                <div class="article-meta">
+                  <span class="article-date">${a.date}</span>
+                  ${a.tags.map(t => `<span class="article-tag">${t}</span>`).join('')}
+                </div>
+              </div>
+              <span class="article-arrow">READ →</span>
+            </a>
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
+
+    // 記事数更新
+    document.getElementById('article-count').textContent = `全${filtered.length}記事`;
+
+    // ページネーション描画
+    const pager = document.getElementById('pagination');
+    if (totalPages <= 1) {
+      pager.innerHTML = '';
+      return;
+    }
+    let html = `<button class="page-btn" onclick="goPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>← PREV</button>`;
+    for (let i = 1; i <= totalPages; i++) {
+      html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goPage(${i})">${i}</button>`;
+    }
+    html += `<button class="page-btn" onclick="goPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>NEXT →</button>`;
+    pager.innerHTML = html;
+  }
+
+  function filterCat(cat, btn) {
+    currentCat = cat;
+    currentPage = 1;
+    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    render();
+  }
+
+  function goPage(page) {
+    const filtered = getFiltered();
+    const totalPages = Math.ceil(filtered.length / PER_PAGE);
+    if (page < 1 || page > totalPages) return;
+    currentPage = page;
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // 初回描画
+  render();
+</script>
+
+</body>
+</html>
