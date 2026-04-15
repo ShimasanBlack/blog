@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>sitemap.xml ジェネレーター — MariGura Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f0f2f5;--surface:#fff;--border:#e2e6ea;
+  --accent:#4a6cf7;--text:#1a1a2e;--muted:#6c757d;
+  --green:#22c55e;--radius:10px;--shadow:0 2px 12px rgba(0,0,0,.08);
+}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans JP',sans-serif;min-height:100vh}
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.header-title{font-size:1rem;font-weight:700;color:var(--accent)}
+.header-title span{color:var(--text)}
+.badge{font-size:.72rem;background:#eef2ff;color:var(--accent);border-radius:20px;padding:.2rem .8rem;font-weight:700}
+.container{max-width:860px;margin:0 auto;padding:2rem 1.5rem;display:flex;flex-direction:column;gap:1.5rem}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.panel-head{padding:.9rem 1.4rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.6rem}
+.panel-head h2{font-size:.85rem;font-weight:700}
+.panel-icon{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.8rem}
+.panel-icon.blue{background:#eef2ff;color:var(--accent)}
+.panel-icon.green{background:#f0fdf4;color:var(--green)}
+.panel-body{padding:1.4rem}
+
+/* STEP */
+.step-label{font-size:.75rem;font-weight:700;color:var(--muted);margin-bottom:.6rem;letter-spacing:.04em}
+.textarea-articles{width:100%;min-height:180px;background:#1e1e2e;border:1px solid #333;border-radius:8px;padding:1rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:#cdd6f4;line-height:1.7;resize:vertical;outline:none}
+.textarea-articles:focus{border-color:var(--accent)}
+.textarea-articles::placeholder{color:#555}
+
+.generate-btn{width:100%;background:linear-gradient(135deg,var(--accent),#7c3aed);color:#fff;border:none;border-radius:8px;padding:.85rem;font-family:'Noto Sans JP',sans-serif;font-size:.92rem;font-weight:700;cursor:pointer;margin-top:1rem;transition:opacity .2s,transform .1s}
+.generate-btn:hover{opacity:.92}
+.generate-btn:active{transform:scale(.99)}
+
+.hint-box{background:#f8f9ff;border:1px solid #c8d4ff;border-radius:8px;padding:1rem 1.2rem;font-size:.8rem;color:var(--muted);line-height:1.8;margin-top:.8rem}
+.hint-box code{font-family:'JetBrains Mono',monospace;background:#eef2ff;color:var(--accent);padding:.1rem .4rem;border-radius:4px;font-size:.76rem}
+
+/* OUTPUT */
+.xml-output{width:100%;min-height:200px;background:#1e1e2e;border:1px solid #333;border-radius:8px;padding:1rem;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:#cdd6f4;line-height:1.7;resize:vertical;outline:none;white-space:pre}
+.copy-btn{width:100%;background:#f8f9fa;border:1px solid var(--border);border-radius:7px;padding:.65rem;font-family:'Noto Sans JP',sans-serif;font-size:.85rem;font-weight:700;color:var(--text);cursor:pointer;margin-top:.8rem;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.copy-btn:hover{background:#eef2ff;color:var(--accent);border-color:var(--accent)}
+.copy-btn.copied{background:#f0fdf4;color:var(--green);border-color:var(--green)}
+
+/* STATUS */
+.status{font-size:.78rem;color:var(--muted);margin-top:.6rem;display:flex;align-items:center;gap:.4rem}
+.dot{width:7px;height:7px;border-radius:50%;background:#d1d5db;flex-shrink:0}
+.dot.ok{background:var(--green)}
+
+/* FIXED PAGES */
+.fixed-list{display:flex;flex-direction:column;gap:.4rem}
+.fixed-item{display:flex;align-items:center;gap:.8rem;padding:.5rem .8rem;background:#f8f9fa;border:1px solid var(--border);border-radius:6px;font-size:.8rem}
+.fixed-url{font-family:'JetBrains Mono',monospace;color:var(--accent);flex:1}
+.fixed-priority{font-size:.72rem;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-title">sitemap.xml <span>ジェネレーター</span></div>
+  <div class="badge">MariGura Hub ツール</div>
+</div>
+
+<div class="container">
+
+  <!-- STEP1: 固定ページ確認 -->
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-icon blue">①</div>
+      <h2>固定ページ（自動で含まれます）</h2>
+    </div>
+    <div class="panel-body">
+      <div class="fixed-list" id="fixed-list"></div>
+    </div>
+  </div>
+
+  <!-- STEP2: ARTICLES貼り付け -->
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-icon blue">②</div>
+      <h2>index.html の ARTICLES 配列を貼り付け</h2>
+    </div>
+    <div class="panel-body">
+      <div class="step-label">index.html の ARTICLES = [ ... ] の中身をそのままコピペしてください</div>
+      <textarea class="textarea-articles" id="articles-input" placeholder="    {
+      url:     'lol-lose.html',
+      cat:     'League of Legends',
+      title:   'LoLで勝てない理由3つ【初心者はこれ】',
+      ...
+    },
+    {
+      url:     'lol-mistakes.html',
+      ...
+    },
+    ..."></textarea>
+
+      <div class="hint-box">
+        💡 index.html を開いて <code>const ARTICLES = [</code> から <code>];</code> までの中身をコピーして貼り付けてください。<br>
+        あとはボタンを押すだけで sitemap.xml が完成します！
+      </div>
+
+      <button class="generate-btn" onclick="generate()">▶ sitemap.xml を生成する</button>
+    </div>
+  </div>
+
+  <!-- STEP3: 出力 -->
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-icon green">③</div>
+      <h2>生成された sitemap.xml</h2>
+    </div>
+    <div class="panel-body">
+      <div class="status" id="status">
+        <div class="dot" id="status-dot"></div>
+        <span id="status-text">ARTICLESを貼り付けて生成ボタンを押してください</span>
+      </div>
+      <textarea class="xml-output" id="xml-output" readonly placeholder="ここにsitemap.xmlが生成されます..."></textarea>
+      <button class="copy-btn" id="copy-btn" onclick="copyXML()">📋 sitemap.xml をコピーする</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// =============================================
+// 固定ページ（常に含まれるページ）
+// =============================================
+const BASE_URL = 'https://marigura.com';
+
+const FIXED_PAGES = [
+  { url: '/',             priority: '1.0', changefreq: 'weekly',  label: 'TOPページ' },
+  { url: '/articles.html', priority: '0.9', changefreq: 'weekly',  label: '記事一覧' },
+  { url: '/lol-lane-top.html', priority: '0.7', changefreq: 'monthly', label: 'TOPレーンまとめ' },
+  { url: '/lol-lane-jg.html',  priority: '0.7', changefreq: 'monthly', label: 'JGレーンまとめ' },
+  { url: '/lol-lane-mid.html', priority: '0.7', changefreq: 'monthly', label: 'MIDレーンまとめ' },
+  { url: '/lol-lane-bot.html', priority: '0.7', changefreq: 'monthly', label: 'BOTレーンまとめ' },
+  { url: '/lol-lane-sup.html', priority: '0.7', changefreq: 'monthly', label: 'SUPレーンまとめ' },
+  { url: '/lol-top.html', priority: '0.7', changefreq: 'monthly', label: 'TOPチャンピオン5選' },
+  { url: '/lol-jg.html',  priority: '0.7', changefreq: 'monthly', label: 'JGチャンピオン5選' },
+  { url: '/lol-mid.html', priority: '0.7', changefreq: 'monthly', label: 'MIDチャンピオン5選' },
+  { url: '/lol-bot.html', priority: '0.7', changefreq: 'monthly', label: 'BOTチャンピオン5選' },
+  { url: '/lol-sup.html', priority: '0.7', changefreq: 'monthly', label: 'SUPチャンピオン5選' },
+];
+
+// 固定ページ一覧を表示
+document.getElementById('fixed-list').innerHTML = FIXED_PAGES.map(p => `
+  <div class="fixed-item">
+    <span class="fixed-url">${BASE_URL}${p.url}</span>
+    <span class="fixed-priority">優先度 ${p.priority}</span>
+    <span class="fixed-priority">${p.label}</span>
+  </div>
+`).join('');
+
+// =============================================
+// ARTICLES URLを抽出
+// =============================================
+function extractURLs(text) {
+  const urls = [];
+  const regex = /url\s*:\s*['"]([^'"]+)['"]/g;
+  let m;
+  while ((m = regex.exec(text)) !== null) {
+    urls.push(m[1]);
+  }
+  return urls;
+}
+
+// =============================================
+// 優先度を判定
+// =============================================
+function getPriority(url) {
+  // 初心者ガイド系は0.8
+  if (/lol-start|lol-reasons|lol-mistakes|lol-lose|lol-teamfight|lol-beginner/.test(url)) return '0.8';
+  // チャンピオン・レーン系は0.7
+  return '0.7';
+}
+
+// =============================================
+// sitemap.xml生成
+// =============================================
+function generate() {
+  const input = document.getElementById('articles-input').value.trim();
+
+  if (!input) {
+    setStatus(false, '⚠ ARTICLESの中身を貼り付けてください');
+    return;
+  }
+
+  const articleURLs = extractURLs(input);
+
+  if (!articleURLs.length) {
+    setStatus(false, '⚠ URLが見つかりませんでした。ARTICLES配列の中身を確認してください');
+    return;
+  }
+
+  // 固定ページのURL一覧
+  const fixedURLs = new Set(FIXED_PAGES.map(p => p.url.replace(/^\//, '')));
+
+  // 記事URLから固定ページと重複するものを除外
+  const articleEntries = articleURLs
+    .filter(u => !fixedURLs.has(u))
+    .map(u => ({
+      url: `/${u}`,
+      priority: getPriority(u),
+      changefreq: 'monthly',
+    }));
+
+  // XML生成
+  const today = new Date().toISOString().split('T')[0];
+
+  const urlEntries = [
+    ...FIXED_PAGES,
+    ...articleEntries,
+  ].map(p => `  <url>
+    <loc>${BASE_URL}${p.url}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${p.changefreq}</changefreq>
+    <priority>${p.priority}</priority>
+  </url>`).join('\n\n');
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+${urlEntries}
+
+</urlset>`;
+
+  document.getElementById('xml-output').value = xml;
+  setStatus(true, `✅ ${FIXED_PAGES.length + articleEntries.length}件のURLで生成しました（固定${FIXED_PAGES.length}件 + 記事${articleEntries.length}件）`);
+}
+
+// =============================================
+// コピー
+// =============================================
+function copyXML() {
+  const xml = document.getElementById('xml-output').value;
+  if (!xml.includes('<urlset')) {
+    alert('先に生成ボタンを押してください');
+    return;
+  }
+  navigator.clipboard.writeText(xml).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '✅ コピーしました！';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.innerHTML = '📋 sitemap.xml をコピーする';
+      btn.classList.remove('copied');
+    }, 2500);
+  });
+}
+
+// =============================================
+// ステータス更新
+// =============================================
+function setStatus(ok, msg) {
+  document.getElementById('status-dot').className = 'dot' + (ok ? ' ok' : '');
+  document.getElementById('status-text').textContent = msg;
+}
+</script>
+</body>
+</html>
