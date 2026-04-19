@@ -310,7 +310,7 @@
       transition: box-shadow .2s, transform .2s;
     }
     .lane-card:hover { box-shadow: 0 4px 12px rgba(74,108,247,.12); transform: translateY(-2px); }
-    .lane-icon { font-size: 1.4rem; }
+    .lane-icon { font-size: 1.4rem; display: flex; align-items: center; justify-content: center; }
     .lane-name { font-size: .82rem; font-weight: 700; color: var(--accent); }
     .lane-desc { font-size: .72rem; color: var(--muted); line-height: 1.4; }
 
@@ -872,7 +872,7 @@
 <div class="lane-section">
   <div class="lane-grid">
     <a class="lane-card" href="lol-lane-top.html">
-      span class="lane-icon" style="width:52px;height:52px;background:#eef2ff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#4a6cf7;">TOP</span
+      <span class="lane-icon" style="width:52px;height:52px;background:#eef2ff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#4a6cf7;">TOP</span
       <span class="lane-name">TOP</span>
       <span class="lane-desc">耐久力の高いファイター系</span>
     </a>
@@ -886,8 +886,8 @@
       <span class="lane-name">MID</span>
       <span class="lane-desc">高火力の魔法・暗殺者系</span>
     </a>
-    <a class="lane-card" href="lol-lane-bot.html">
-      <span class="lane-icon">🏹</span>
+  <a class="lane-card" href="lol-lane-bot.html">
+      <span class="lane-icon" style="width:52px;height:52px;background:#fffbeb;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#f59e0b;">BOT</span>
       <span class="lane-name">BOT</span>
       <span class="lane-desc">遠距離から攻撃するADC</span>
     </a>
